@@ -71,7 +71,7 @@ class SignUp : AppCompatActivity() {
             Toast.makeText(this,"Enter all the information",Toast.LENGTH_LONG).show()
         }
 
-      else  if (!TextConfirmPassword.text.toString().trim().equals(TextPassword.text.toString().toString())){
+      else  if (!TextConfirmPassword.text.toString().trim().equals(TextPassword.text.toString())){
           TextConfirmPassword.setError("Password not match")
         }
       else {

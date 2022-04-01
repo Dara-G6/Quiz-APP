@@ -18,7 +18,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 
-class Edit : AppCompatActivity() {
+class EditProfile : AppCompatActivity() {
 
     //Firebase
     private lateinit var auth: FirebaseAuth
@@ -48,7 +48,7 @@ class Edit : AppCompatActivity() {
     private lateinit var dialog:Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit)
+        setContentView(R.layout.activity_edit_profile)
 
         //Firebase
         auth = FirebaseAuth.getInstance()
@@ -198,6 +198,7 @@ class Edit : AppCompatActivity() {
         dialog.window!!.attributes=ip
 
         val TextHeader = dialog.findViewById<TextView>(R.id.TextHeader)
+        val Icon =dialog.findViewById<ImageView>(R.id.IconDialog)
         val BtnNo = dialog.findViewById<Button>(R.id.BtnNo)
         val BtnYes = dialog.findViewById<Button>(R.id.BtnYes)
 

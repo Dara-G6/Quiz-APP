@@ -1,19 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".fragment.Rank">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--   Top bar     -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        android:layout_gravity="center_vertical"
-        android:textColor="@color/black"
-        android:text="Tab Rank"
-        tools:ignore="RtlCompat" />
+        android:background="@color/blue"
+        android:orientation="horizontal"
+        android:layout_height="80dp">
 
-</FrameLayout>
+        <!--      Image Profile      -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="80dp"
+            app:cardCornerRadius="48dp"
+            android:layout_height="80dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:src="@drawable/rank512"
+                android:id="@+id/ProfileImage"
+                android:layout_height="match_parent"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Rank"
+            android:id="@+id/TextDisplayName"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TabMath"
+            android:text="Math" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Science" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="General" />
+    </com.google.android.material.tabs.TabLayout>
+
+
+</LinearLayout>

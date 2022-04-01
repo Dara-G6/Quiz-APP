@@ -12,7 +12,7 @@
         android:textStyle="bold"
         android:textSize="24dp"
         android:id="@+id/TextHeader"
-        android:text="Do you want to edit your profile"
+        android:text="Do you want to Delete your account?"
         android:textColor="@color/white"
         android:background="@color/blue"/>
 
@@ -21,7 +21,46 @@
         android:layout_height="128dp"
         android:layout_gravity="center"
         android:id="@+id/IconDialog"
-        android:src="@drawable/ask"/>
+        android:src="@drawable/warning"/>
+    <!--Input old password-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/email"
+            android:inputType="textEmailAddress"
+            android:padding="18dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <!--Input current password-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Current Password"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:drawableEnd="@drawable/password"
+            android:padding="18dp"
+            android:inputType="textPassword"
+            android:id="@+id/TextPassword"
+            android:layout_height="wrap_content"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"

@@ -2,23 +2,19 @@ package com.example.quizapp.fragment
 
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.example.quizapp.Edit
+import com.example.quizapp.ChangePassword
+import com.example.quizapp.EditProfile
 import com.example.quizapp.R
-import com.example.quizapp.SetProfile
 import com.example.quizapp.SignIN
+import com.example.quizapp.toast.ShowMessage
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -62,9 +58,8 @@ class ProfileTab : Fragment() {
     //View
     private lateinit var Form:View
     private lateinit var ShowProgress:View
-
-
-
+    private lateinit var dialog:Dialog
+    private lateinit var TextLoading:TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,12 +81,13 @@ class ProfileTab : Fragment() {
         //View
         Form = view.findViewById(R.id.Form)
         ShowProgress = view.findViewById(R.id.SHOW_PROGRESS)
-
+        TextLoading  = view.findViewById(R.id.TextLoading)
+        dialog = Dialog(requireContext())
 
         //Button
         BtnEdit = view.findViewById(R.id.BtnEdit)
         BtnEdit.setOnClickListener {
-           startActivity(Intent(activity,Edit::class.java))
+           startActivity(Intent(activity,EditProfile::class.java))
 
         }
 
@@ -100,16 +96,23 @@ class ProfileTab : Fragment() {
                  Logout()
         }
 
+        BtnChangePassword = view.findViewById(R.id.BtnChangePassword)
+        BtnChangePassword.setOnClickListener {
+            startActivity(Intent(activity,ChangePassword::class.java))
+        }
 
+
+        BtnDeleteAccount = view.findViewById(R.id.BtnDeleteAccount)
+        BtnDeleteAccount.setOnClickListener {
+          ShowDialog()
+        }
 
         //Imageview
         ProfileImage = view.findViewById(R.id.ProfileImage)
         ProfileImage.setOnClickListener {
 
-            startActivity(Intent(activity,Edit::class.java))
+            startActivity(Intent(activity,EditProfile::class.java))
         }
-
-
 
 
         return view
@@ -146,10 +149,79 @@ class ProfileTab : Fragment() {
             Form.isVisible = true
             ShowProgress.isVisible = false
                 }
-            ,3000
+            ,1500
         )
 
     }
+
+
+    //Show dialog delete account
+
+    private fun ShowDialog(){
+        dialog.setContentView(R.layout.dialog_delete_account)
+
+        val ip = WindowManager.LayoutParams()
+        ip.copyFrom(dialog.window!!.attributes)
+        ip.width = WindowManager.LayoutParams.MATCH_PARENT
+        ip.height = WindowManager.LayoutParams.WRAP_CONTENT
+        ip.gravity = Gravity.CENTER
+
+
+        dialog.window!!.attributes=ip
+
+
+        val BtnNo = dialog.findViewById<Button>(R.id.BtnNo)
+        val BtnYes = dialog.findViewById<Button>(R.id.BtnYes)
+        val TextEmail = dialog.findViewById<EditText>(R.id.TextEmail)
+        val TextPassword = dialog.findViewById<EditText>(R.id.TextPassword)
+
+        BtnNo.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        BtnYes.setOnClickListener {
+
+            if (TextEmail.text.isEmpty()||TextPassword.text.isEmpty()){
+                Toast(activity).ShowMessage("Please Enter all the the filed", requireActivity()!!,R.drawable.close_red)
+            }else{
+                dialog.dismiss()
+                DeleteUser(TextEmail.text.toString(),TextPassword.text.toString())
+            }
+        }
+
+        dialog.show()
+
+    }
+
+    private fun DeleteUser(email:String,password:String){
+        val user:FirebaseUser= auth.currentUser!!
+        val credential:AuthCredential = EmailAuthProvider.
+        getCredential(email,password)
+        Form.isVisible = false
+        ShowProgress.isVisible = true
+        TextLoading.setText("Delete account..")
+        user.reauthenticate(credential).addOnCompleteListener {
+            if (it.isSuccessful){
+                database.child(auth.uid.toString()).removeValue()
+                storage.child(auth.uid.toString()).delete()
+                auth.currentUser!!.delete()
+                Form.isVisible = true
+                ShowProgress.isVisible = false
+                Toast(activity).ShowMessage("Delete account success", requireActivity()!!,
+                    R.drawable.tick
+                )
+                Handler().postDelayed({
+                    startActivity(Intent(activity,SignIN::class.java))
+                },2000)
+            }else{
+                Form.isVisible = true
+                ShowProgress.isVisible = false
+                Toast(activity).ShowMessage("Error : ${it.exception}", requireActivity()!!,R.drawable.close_red)
+            }
+        }
+
+    }
+
 
 
 
