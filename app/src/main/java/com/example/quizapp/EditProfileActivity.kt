@@ -18,7 +18,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 
-class EditProfile : AppCompatActivity() {
+class EditProfileActivity : AppCompatActivity() {
 
     //Firebase
     private lateinit var auth: FirebaseAuth
@@ -129,6 +129,7 @@ class EditProfile : AppCompatActivity() {
                 map.put("Profile",path.toString())
                 database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>).addOnCompleteListener {
                     if (it.isSuccessful){
+                        UpdatePointMath(name,path)
                         Form.isVisible = true
                         ShowProgress.isVisible =false
                         Toast(this).ShowMessage("Setup new profile success",this, R.drawable.tick)
@@ -160,6 +161,7 @@ class EditProfile : AppCompatActivity() {
                         if (it.isSuccessful){
                             Form.isVisible = true
                             ShowProgress.isVisible =false
+                            UpdatePointMath(name,path)
                             Toast(this).ShowMessage("Setup new profile success",this, R.drawable.tick)
                         }else{
                             Toast.makeText(this,"Error : ${it.exception}",Toast.LENGTH_LONG).show()
@@ -174,6 +176,35 @@ class EditProfile : AppCompatActivity() {
                 ShowProgress.isVisible =false
             }
         }
+    }
+
+    //Update Username and picture
+    private fun UpdatePointMath(Name:String, Path:String){
+        database.child(auth.uid.toString()).get().addOnSuccessListener {
+            if (it.exists()){
+                var  Point =""
+                var Time  = ""
+                val map = HashMap<String,String>()
+                map.put("Name",Name)
+                map.put("Path",Path)
+                map.put("ID",auth.uid.toString())
+
+             database.database.getReference("Math").child(auth.uid.toString()).get().addOnSuccessListener {
+                 if (it.exists()){
+                     Point = it.child("Point").getValue().toString()
+                     Time  = it.child("Time").getValue().toString()
+
+                 }else{
+                     Point =0.toString()
+                     Time  = 0.toString()
+                 }
+                 map.put("Point",Point)
+                 map.put("Time",Time)
+                 database.database.getReference("Math").child(auth.uid.toString()).updateChildren(map as Map<String, Any>)
+             }
+            }
+        }
+
     }
     //Select photo from gellery
     private fun ChooseImage(){
@@ -202,6 +233,7 @@ class EditProfile : AppCompatActivity() {
         val BtnNo = dialog.findViewById<Button>(R.id.BtnNo)
         val BtnYes = dialog.findViewById<Button>(R.id.BtnYes)
 
+
         BtnNo.setOnClickListener {
             dialog.dismiss()
         }
@@ -210,6 +242,7 @@ class EditProfile : AppCompatActivity() {
             CheckInput()
             dialog.dismiss()
         }
+
 
         dialog.show()
 

@@ -12,7 +12,7 @@
         android:textStyle="bold"
         android:textSize="24dp"
         android:id="@+id/TextHeader"
-        android:text="Do you want to edit your profile"
+        android:text="@string/do_you_want_to_edit_your_profile"
         android:textColor="@color/white"
         android:background="@color/blue"/>
 
@@ -38,7 +38,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="NO"
+                android:text="@string/no"
                 android:textSize="16dp"
                 android:drawableLeft="@drawable/close_red"
                 android:textStyle="bold"
@@ -58,7 +58,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Yes"
+                android:text="@string/yes"
                 android:textSize="16dp"
                 android:textStyle="bold"
                 android:drawableRight="@drawable/arrow_right_white"

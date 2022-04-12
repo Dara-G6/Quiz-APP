@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:weightSum="12"
     android:layout_height="match_parent"
-    tools:context=".SignUp">
+    tools:context=".SignUpActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:text="@string/sign_up"
         android:textSize="32dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
@@ -47,7 +47,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="@string/email"
                     android:layout_marginTop="10dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -64,7 +64,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:layout_marginTop="10dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -81,7 +81,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirm Password"
+                    android:hint="@string/confirm_password"
                     android:layout_marginTop="10dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -110,7 +110,7 @@
                         <Button
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Sign up"
+                            android:text="@string/sign_up"
                             android:textAllCaps="false"
                             android:id="@+id/BtnSingUp"
                             android:drawableEnd="@drawable/arrow_right_white"
@@ -131,7 +131,7 @@
                         android:textColor="#24296a"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Already have account?"/>
+                        android:text="@string/already_have_account"/>
 
                     <TextView
                         android:layout_weight="1"
@@ -142,7 +142,7 @@
                         android:textColor="@color/primary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Click here"
+                        android:text="@string/click_here"
                         android:textStyle="bold"/>
 
                 </LinearLayout>
