@@ -12,7 +12,7 @@ import androidx.core.view.isVisible
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.auth.*
 
-class ChangePassword : AppCompatActivity() {
+class ChangePasswordActivity : AppCompatActivity() {
     //Button
     private lateinit var BtnClose:Button
     private lateinit var BtnSetNewPassword:Button

@@ -12,30 +12,36 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizApp">
         <activity
-            android:name=".ChangePassword"
+            android:name=".PlayGameActivity"
             android:exported="false" />
         <activity
-            android:name=".EditProfile"
+            android:name=".test"
+            android:exported="false" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SetProfile"
+            android:name=".SetProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SignUp"
+            android:name=".SignUpActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SignIN"
+            android:name=".SignINActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HomePage"
+            android:name=".HomePageActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".StartApp"
+            android:name=".StartAppActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

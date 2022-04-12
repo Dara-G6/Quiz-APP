@@ -1,23 +1,15 @@
 package com.example.quizapp
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 
-class SignUp : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
     private lateinit var TextEmail:EditText
     private lateinit var TextPassword:EditText
     private lateinit var TextConfirmPassword:EditText
@@ -37,7 +29,7 @@ class SignUp : AppCompatActivity() {
         //Text view
         TextAlready = findViewById(R.id.TextAllready)
         TextAlready.setOnClickListener {
-            startActivity(Intent(this,SignIN::class.java))
+            startActivity(Intent(this,SignINActivity::class.java))
         }
 
         TextEmail = findViewById(R.id.TextEmail)
@@ -90,7 +82,7 @@ class SignUp : AppCompatActivity() {
                        Form.isVisible =true
                        ShowProgress.isVisible = false
                        Toast(this).ShowMessage("Create account success",this, R.drawable.tick)
-                       var i : Intent = Intent(this,SetProfile::class.java)
+                       var i : Intent = Intent(this,SetProfileActivity::class.java)
                        i.putExtra("Email",email)
                        startActivity(i)
                    }else{

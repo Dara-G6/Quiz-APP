@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class SignIN : AppCompatActivity() {
+class SignINActivity : AppCompatActivity() {
     private lateinit var TextRegister :TextView
 
 
@@ -43,7 +43,7 @@ class SignIN : AppCompatActivity() {
         // Text view
         TextRegister = findViewById(R.id.TextRegister)
         TextRegister.setOnClickListener {
-            startActivity(Intent(this,SignUp::class.java))
+            startActivity(Intent(this,SignUpActivity::class.java))
         }
 
         Form = findViewById(R.id.Form)
@@ -57,7 +57,7 @@ class SignIN : AppCompatActivity() {
             if (it.exists()) {
                 var l = it.child("Login").getValue().toString()
                 if (l.equals("Yes")){
-                    startActivity(Intent(this,HomePage::class.java))
+                    startActivity(Intent(this,HomePageActivity::class.java))
                 }
             }
         }
@@ -80,7 +80,7 @@ class SignIN : AppCompatActivity() {
                     Form.isVisible = true
                     ShowProgress.isVisible = false
                     database.child(auth.uid.toString()).child("Login").setValue("Yes")
-                    startActivity(Intent(this,HomePage::class.java))
+                    startActivity(Intent(this,HomePageActivity::class.java))
                     Toast(this).ShowMessage("Login Success",this,R.drawable.tick)
                 }else {
                     Form.isVisible = true

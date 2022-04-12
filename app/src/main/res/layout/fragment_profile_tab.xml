@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="12"
-    tools:context=".fragment.ProfileTab">
+    tools:context=".fragment.ProfileTabFragment">
 
 
     <!-- Profile  -->
@@ -31,7 +31,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:text="User Name"
+            android:text="@string/user_name"
             android:id="@+id/TextDisplayName"
             android:layout_marginTop="12dp"
             android:textColor="@color/black"
@@ -41,7 +41,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:text="Email"
+            android:text="@string/email"
             android:id="@+id/TextEmail"
             android:layout_marginTop="6dp"
             android:textColor="#707280"
@@ -59,7 +59,7 @@
             <Button
                 android:id="@+id/BtnEdit"
                 style="@android:style/Widget.Holo.Button.Borderless"
-                android:text="Edit Profile"
+                android:text="@string/edit_profile"
                 android:textSize="20dp"
                 android:textAlignment="center"
                 android:textColor="@color/white"
@@ -89,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
                     android:background="#e6f6f6f6"
-                    android:text="Personal"
+                    android:text="@string/personal"
                     android:textSize="24dp"
                     android:textColor="#bcbcbc"
                     android:gravity="center_vertical"/>
@@ -97,7 +97,7 @@
                     android:layout_width="match_parent"
                     android:backgroundTint="@color/white"
                     android:textColor="@color/black"
-                    android:text="Rank"
+                    android:text="@string/rank"
                     android:padding="6dp"
                     android:textSize="18dp"
                     style="@style/Widget.AppCompat.Button.Borderless"
@@ -111,7 +111,7 @@
                     android:layout_width="match_parent"
                     android:backgroundTint="@color/white"
                     android:textColor="@color/black"
-                    android:text="Change Password"
+                    android:text="@string/change_password"
                     android:padding="6dp"
                     android:textSize="18dp"
                     style="@style/Widget.AppCompat.Button.Borderless"
@@ -126,7 +126,7 @@
                     android:layout_width="match_parent"
                     android:backgroundTint="@color/white"
                     android:textColor="@color/black"
-                    android:text="Delete Account"
+                    android:text="@string/delete_account"
                     android:padding="6dp"
                     android:textSize="18dp"
                     style="@style/Widget.AppCompat.Button.Borderless"
@@ -141,7 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
                     android:background="#e6f6f6f6"
-                    android:text="Setting"
+                    android:text="@string/setting"
                     android:textSize="24dp"
                     android:textColor="#bcbcbc"
                     android:gravity="center_vertical"/>
@@ -150,7 +150,7 @@
                     android:layout_width="match_parent"
                     android:backgroundTint="@color/white"
                     android:textColor="@color/black"
-                    android:text="Language"
+                    android:text="@string/language"
                     android:padding="6dp"
                     android:textSize="18dp"
                     style="@style/Widget.AppCompat.Button.Borderless"
@@ -165,7 +165,7 @@
                     android:layout_width="match_parent"
                     android:backgroundTint="@color/white"
                     android:textColor="@color/black"
-                    android:text="Logout"
+                    android:text="@string/logout"
                     android:padding="6dp"
                     android:textSize="18dp"
                     style="@style/Widget.AppCompat.Button.Borderless"

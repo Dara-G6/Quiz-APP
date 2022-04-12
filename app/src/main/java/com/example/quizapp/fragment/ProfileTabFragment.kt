@@ -8,10 +8,10 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.*
 import androidx.core.view.isVisible
-import com.example.quizapp.ChangePassword
-import com.example.quizapp.EditProfile
+import com.example.quizapp.ChangePasswordActivity
+import com.example.quizapp.EditProfileActivity
 import com.example.quizapp.R
-import com.example.quizapp.SignIN
+import com.example.quizapp.SignINActivity
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.EmailAuthProvider
@@ -24,7 +24,7 @@ import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 
 
-class ProfileTab : Fragment() {
+class ProfileTabFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,7 +87,7 @@ class ProfileTab : Fragment() {
         //Button
         BtnEdit = view.findViewById(R.id.BtnEdit)
         BtnEdit.setOnClickListener {
-           startActivity(Intent(activity,EditProfile::class.java))
+           startActivity(Intent(activity,EditProfileActivity::class.java))
 
         }
 
@@ -98,7 +98,7 @@ class ProfileTab : Fragment() {
 
         BtnChangePassword = view.findViewById(R.id.BtnChangePassword)
         BtnChangePassword.setOnClickListener {
-            startActivity(Intent(activity,ChangePassword::class.java))
+            startActivity(Intent(activity,ChangePasswordActivity::class.java))
         }
 
 
@@ -111,7 +111,7 @@ class ProfileTab : Fragment() {
         ProfileImage = view.findViewById(R.id.ProfileImage)
         ProfileImage.setOnClickListener {
 
-            startActivity(Intent(activity,EditProfile::class.java))
+            startActivity(Intent(activity,EditProfileActivity::class.java))
         }
 
 
@@ -145,7 +145,7 @@ class ProfileTab : Fragment() {
         Form.isVisible = false
         ShowProgress.isVisible = true
         Handler().postDelayed({
-                  startActivity(Intent(activity,SignIN::class.java))
+                  startActivity(Intent(activity,SignINActivity::class.java))
             Form.isVisible = true
             ShowProgress.isVisible = false
                 }
@@ -203,6 +203,7 @@ class ProfileTab : Fragment() {
         user.reauthenticate(credential).addOnCompleteListener {
             if (it.isSuccessful){
                 database.child(auth.uid.toString()).removeValue()
+                database.database.getReference("Math").child(auth.uid!!).removeValue()
                 storage.child(auth.uid.toString()).delete()
                 auth.currentUser!!.delete()
                 Form.isVisible = true
@@ -211,7 +212,7 @@ class ProfileTab : Fragment() {
                     R.drawable.tick
                 )
                 Handler().postDelayed({
-                    startActivity(Intent(activity,SignIN::class.java))
+                    startActivity(Intent(activity,SignINActivity::class.java))
                 },2000)
             }else{
                 Form.isVisible = true

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".fragment.Rank">
+    tools:context=".fragment.RankFragment">
 
     <!--   Top bar     -->
     <LinearLayout
@@ -29,7 +29,7 @@
         <TextView
             android:layout_marginLeft="16dp"
             android:layout_marginTop="24dp"
-            android:text="Rank"
+            android:text="@string/rank"
             android:id="@+id/TextDisplayName"
             android:textSize="16dp"
             android:textColor="@color/white"
@@ -37,26 +37,73 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <com.google.android.material.tabs.TabLayout
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/menu"
+        android:layout_height="wrap_content"
+        android:elevation="24dp"
+        app:menu="@menu/menu_rank"/>
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:weightSum="6">
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/TabMath"
-            android:text="Math" />
+            android:layout_weight="1"
+            android:text="No"
+            android:textColor="@color/blue"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Science" />
+            android:layout_weight="2.4"
+            android:text="Name"
+            android:textColor="@color/blue"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="General" />
-    </com.google.android.material.tabs.TabLayout>
+            android:layout_weight="1"
+            android:text="Point"
+            android:textColor="@color/blue"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="Time"
+            android:textAlignment="textStart"
+            android:textColor="@color/blue"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ListMath" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ListScience"
+        android:visibility="gone"
+        />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ListGeneral"
+        android:visibility="gone"
+        />
 
 
 </LinearLayout>

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
@@ -17,7 +16,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.util.*
 
-class SetProfile : AppCompatActivity() {
+class SetProfileActivity : AppCompatActivity() {
 
     private lateinit var Form:View
     private lateinit var ShowProgress:View
@@ -119,7 +118,7 @@ class SetProfile : AppCompatActivity() {
                     Form.isVisible = true
                     ShowProgress.isVisible = false
                     Toast(this).ShowMessage("Setup profile Success",this,R.drawable.tick)
-                    startActivity(Intent(this, SignIN::class.java))
+                    startActivity(Intent(this, SignINActivity::class.java))
                 } else {
                     Form.isVisible = true
                     ShowProgress.isVisible = false
@@ -153,7 +152,7 @@ class SetProfile : AppCompatActivity() {
                             Form.isVisible = true
                             ShowProgress.isVisible = false
                             Toast(this).ShowMessage("Setup profile Success",this,R.drawable.tick)
-                            startActivity(Intent(this, SignIN::class.java))
+                            startActivity(Intent(this, SignINActivity::class.java))
                         } else {
                             Form.isVisible = true
                             ShowProgress.isVisible = false
@@ -194,7 +193,7 @@ class SetProfile : AppCompatActivity() {
                     Form.isVisible = true
                     ShowProgress.isVisible =false
                     Toast(this).ShowMessage("Setup profile Success",this,R.drawable.tick)
-                    startActivity(Intent(this,SignIN::class.java))
+                    startActivity(Intent(this,SignINActivity::class.java))
                 }else{
                     Form.isVisible = true
                     ShowProgress.isVisible =false

@@ -1,12 +1,15 @@
 package com.example.quizapp.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.quizapp.PlayGameActivity
 import com.example.quizapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -17,14 +20,7 @@ import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 
 
-class Home : Fragment() {
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
+class HomeFragment : Fragment() {
 
 
     private lateinit var ProfileImage:ImageView
@@ -36,7 +32,19 @@ class Home : Fragment() {
     private lateinit var database:DatabaseReference
     private lateinit var storage:StorageReference
 
+    private lateinit var BtnMath:Button
+    private lateinit var BtnScience:Button
+    private lateinit var BtnGeneral:Button
 
+
+
+    //Intent
+    private lateinit var intent:Intent
+
+    //Cast to  next screen
+    private lateinit var Name:String
+    private lateinit var ID:String
+    private lateinit var Path:String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,20 +57,57 @@ class Home : Fragment() {
         database = FirebaseDatabase.getInstance().getReference("Users")
         storage = FirebaseStorage.getInstance().getReference("Profile")
 
-        setProfile()
+
+        BtnMath = view.findViewById(R.id.BtnMath)
+        BtnMath.setOnClickListener {
+             intent = Intent(activity,PlayGameActivity::class.java)
+             intent.putExtra("TypeGame","Math")
+             intent.putExtra("Name",Name)
+             intent.putExtra("ID",ID)
+             intent.putExtra("Path",Path)
+            startActivity(intent)
+        }
+
+        BtnScience = view.findViewById(R.id.BtnScience)
+        BtnScience.setOnClickListener {
+            intent = Intent(activity,PlayGameActivity::class.java)
+            intent.putExtra("TypeGame","Science")
+            intent.putExtra("Name",Name)
+            intent.putExtra("ID",ID)
+            intent.putExtra("Path",Path)
+            startActivity(intent)
+        }
+
+        BtnGeneral = view.findViewById(R.id.BtnGeneral)
+        BtnGeneral.setOnClickListener {
+            intent = Intent(activity,PlayGameActivity::class.java)
+            intent.putExtra("TypeGame","General Knowledge")
+            intent.putExtra("Name",Name)
+            intent.putExtra("ID",ID)
+            intent.putExtra("Path",Path)
+            startActivity(intent)
+        }
+
 
         return view
     }
 
+    override fun onStart() {
+        super.onStart()
+        setProfile()
+    }
+
 
     private fun setProfile(){
-        var Path =""
+
         if (auth.uid!=null){
             database.child(auth.uid.toString()).get().addOnSuccessListener {
                 if (it.exists()){
                    var name = it.child("Name").value.toString()
-                   var Post =it.child("Post").value.toString()
-                   Path = it.child("Profile").value.toString()
+                   var Path = it.child("Profile").value.toString()
+                    Name = name
+                    ID = auth.uid.toString()
+                    this.Path = Path
                     TextDisplayName.setText(name)
                     Picasso.get().load(Path).into(ProfileImage)
                 }
