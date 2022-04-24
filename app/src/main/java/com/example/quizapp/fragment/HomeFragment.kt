@@ -80,12 +80,12 @@ class HomeFragment : Fragment() {
 
         BtnGeneral = view.findViewById(R.id.BtnGeneral)
         BtnGeneral.setOnClickListener {
-            intent = Intent(activity,PlayGameActivity::class.java)
-            intent.putExtra("TypeGame","General Knowledge")
-            intent.putExtra("Name",Name)
-            intent.putExtra("ID",ID)
-            intent.putExtra("Path",Path)
-            startActivity(intent)
+//            intent = Intent(activity,PlayGameActivity::class.java)
+//            intent.putExtra("TypeGame","General Knowledge")
+//            intent.putExtra("Name",Name)
+//            intent.putExtra("ID",ID)
+//            intent.putExtra("Path",Path)
+//            startActivity(intent)
         }
 
 

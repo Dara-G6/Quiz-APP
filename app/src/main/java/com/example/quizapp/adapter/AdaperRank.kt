@@ -2,12 +2,16 @@ package com.example.quizapp.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
+import com.example.quizapp.HomePageActivity
 import com.example.quizapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
@@ -34,7 +38,7 @@ class AdaperRank(context: Context, resource: Int, objects:ArrayList<Rank>) :
         TextName.setText(List.get(position).Name)
 
         val TextPoint = RankView.findViewById<TextView>(R.id.TextPoint)
-        TextPoint.setText(List.get(position).Point)
+        TextPoint.setText(List.get(position).Point.toString())
 
         val TextTime = RankView.findViewById<TextView>(R.id.TextTime)
         TextTime.setText(List.get(position).Time)
@@ -50,7 +54,7 @@ class AdaperRank(context: Context, resource: Int, objects:ArrayList<Rank>) :
         }else if (position==2){
             ImageMedal.setImageResource(R.drawable.medal3)
         }else{
-            ImageMedal.setImageResource(R.drawable.medal)
+            ImageMedal.isVisible=false
         }
 
         val ProfileImage = RankView.findViewById<ImageView>(R.id.ProfileImage)
@@ -59,6 +63,10 @@ class AdaperRank(context: Context, resource: Int, objects:ArrayList<Rank>) :
         if(List.get(position).ID ==auth.uid.toString()){
             TextName.setText("You")
         }
+
+
+
+
 
         return RankView
     }

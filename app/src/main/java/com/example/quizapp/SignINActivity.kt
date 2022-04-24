@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
+import com.example.quizapp.extensions.hideKeyboard
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -24,6 +25,7 @@ class SignINActivity : AppCompatActivity() {
 
     private lateinit var Form:View
     private lateinit var ShowProgress:View
+    private lateinit var view:View
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
@@ -48,6 +50,10 @@ class SignINActivity : AppCompatActivity() {
 
         Form = findViewById(R.id.Form)
         ShowProgress = findViewById(R.id.SHOW_PROGRESS)
+        view = findViewById(R.id.Layout_SignIN)
+        view.setOnClickListener {
+            hideKeyboard(view)
+        }
     }
 
 

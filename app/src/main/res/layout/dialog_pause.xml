@@ -24,14 +24,14 @@
      app:srcCompat="@drawable/pause" />
  <androidx.cardview.widget.CardView
      android:layout_width="match_parent"
-     android:elevation="24dp"
-     android:layout_margin="12dp"
+     app:cardElevation="12dp"
+     android:layout_margin="10dp"
      app:cardCornerRadius="16dp"
      app:cardBackgroundColor="@color/primary"
      android:layout_height="wrap_content">
   <Button
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="match_parent"
       android:text="@string/restart_game"
       android:drawableLeft="@drawable/restart"
       android:textSize="18dp"
@@ -40,21 +40,23 @@
       android:textAllCaps="false"
       style="@style/Widget.AppCompat.Button.Borderless"/>
  </androidx.cardview.widget.CardView>
+
  <LinearLayout
      android:layout_width="match_parent"
      android:orientation="horizontal"
      android:weightSum="2"
-     android:padding="16dp"
      android:layout_height="wrap_content">
   <androidx.cardview.widget.CardView
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:elevation="24dp"
+      app:cardElevation="12dp"
+      android:layout_margin="10dp"
       app:cardCornerRadius="16dp"
+      android:layout_marginRight="12dp"
       android:layout_weight="1">
    <Button
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
+       android:layout_height="match_parent"
        android:text="@string/no"
        android:id="@+id/BtnNo"
        android:textSize="18dp"
@@ -66,13 +68,14 @@
   <androidx.cardview.widget.CardView
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:elevation="24dp"
+      app:cardElevation="12dp"
+      android:layout_margin="10dp"
       app:cardCornerRadius="16dp"
       app:cardBackgroundColor="@color/primary"
       android:layout_weight="1">
    <Button
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
+       android:layout_height="match_parent"
        android:text="@string/yes"
        android:textSize="18dp"
        android:id="@+id/BtnYes"

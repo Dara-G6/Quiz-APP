@@ -19,6 +19,7 @@ import com.example.quizapp.Question.ScienceQuestion
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlin.properties.Delegates
 import kotlin.random.Random as Random
 
 class PlayGameActivity : AppCompatActivity() {
@@ -53,7 +54,7 @@ class PlayGameActivity : AppCompatActivity() {
     private var count:Long=0
     private var Newpoint:Long=0
     private lateinit var r :Random
-    private  var index:Int=0
+    private var index by Delegates.notNull<Int>()
     private var Answer :String= ""
     private lateinit var ListQuestion:ArrayList<Question>
     private lateinit var  currentQuestion:Question
@@ -86,19 +87,19 @@ class PlayGameActivity : AppCompatActivity() {
         CardA = findViewById(R.id.CardA)
         CardA.setOnClickListener{
            OnClickcardA()
-            Log.d("Answer ",Answer)
+
         }
 
         CardB = findViewById(R.id.CardB)
         CardB.setOnClickListener{
              OnClickcardB()
-            Log.d("Answer ",Answer)
+
         }
 
         CardC = findViewById(R.id.CardC)
         CardC.setOnClickListener{
            OnClickcardC()
-            Log.d("Answer ",Answer)
+
         }
 
         //Button
@@ -109,20 +110,8 @@ class PlayGameActivity : AppCompatActivity() {
 
 
         r= Random
-        ListQuestion = ArrayList<Question>()
-        if (intent.getStringExtra("TypeGame").toString().equals("Math")){
-            var m = MathQuestion()
-            ListQuestion = m.getAllQuestions()
-        }else if(intent.getStringExtra("TypeGame").toString().equals("Science")){
-            var s = ScienceQuestion()
-            ListQuestion = s.getAllQuestions()
-        }else{
-            var g = GeneralQuestion()
-            ListQuestion = g.getAllQuestions()
 
-        }
-        currentQuestion = ListQuestion.get(index)
-        Log.d("Size ",ListQuestion.size.toString())
+        getQuestion()
         ShowQuestion()
 
         BtnNext = findViewById(R.id.BtnNext)
@@ -153,7 +142,27 @@ class PlayGameActivity : AppCompatActivity() {
     }
 
 
+    // get question
+    private fun getQuestion(){
+        ListQuestion = ArrayList<Question>()
+        if (intent.getStringExtra("TypeGame").toString().equals("Math")){
+            var m = MathQuestion()
+            index =r.nextInt(m.getAllQuestions().size-10)
+            ListQuestion = m.getAllQuestions()
+        }else if(intent.getStringExtra("TypeGame").toString().equals("Science")){
+            var s = ScienceQuestion()
+            index=r.nextInt(s.getAllQuestions().size-10)
+            ListQuestion = s.getAllQuestions()
+        }else{
+            var g = GeneralQuestion()
+            ListQuestion = g.getAllQuestions()
 
+        }
+        currentQuestion = ListQuestion.get(index)
+    }
+
+
+    //play game
     private fun PlayGame(){
         if (Answer.equals("")){
             Toast(this).ShowMessage("សូមជ្រើសរើសចម្លើយ",this, R.drawable.close_red)
@@ -177,12 +186,13 @@ class PlayGameActivity : AppCompatActivity() {
         TextCountPoint.setText("Point :$Newpoint/100")
     }
 
+    //set question to text view
     private fun ShowQuestion(){
-        var random = r.nextInt(3)
+        var random = r.nextInt(6)
 
+         Log.d("Random ",random.toString())
          TextCountQuesion.setText("Question : ${count+1}/10")
          TextQuestion.setText( currentQuestion.Question)
-         Log.d("Answer : ",currentQuestion.Answer)
          if (random==0){
              //C B A
              TextOptionA.setText( currentQuestion.OptionC)
@@ -201,11 +211,32 @@ class PlayGameActivity : AppCompatActivity() {
              TextOptionB.setText( currentQuestion.OptionB)
              TextOptionC.setText( currentQuestion.OptionC)
         }
+
+        if (random ==3){
+            //C A B
+            TextOptionA.setText( currentQuestion.OptionC)
+            TextOptionB.setText( currentQuestion.OptionA)
+            TextOptionC.setText( currentQuestion.OptionB)
+        }
+        if (random == 4){
+            // B C A
+            TextOptionA.setText( currentQuestion.OptionB)
+            TextOptionB.setText( currentQuestion.OptionC)
+            TextOptionC.setText( currentQuestion.OptionA)
+        }
+
+        if (random == 5){
+            // B A C
+            TextOptionA.setText( currentQuestion.OptionB)
+            TextOptionB.setText( currentQuestion.OptionA)
+            TextOptionC.setText( currentQuestion.OptionC)
+        }
         count++
         index++
     }
 
 
+    //show result game
     private fun ShowResult(){
         Pause()
         dialog.setContentView(R.layout.dialog_result)
@@ -231,7 +262,7 @@ class PlayGameActivity : AppCompatActivity() {
         TextScore.setText("Score : $Newpoint/100")
 
         var TextTime = dialog.findViewById<TextView>(R.id.TextTime)
-        TextTime.setText("Time completed : ${NewTime/1000}sec")
+        TextTime.setText("Time completed : ${(NewTime/1000).toDouble()}sec")
 
         dialog.show()
 
@@ -239,6 +270,7 @@ class PlayGameActivity : AppCompatActivity() {
 
 
 
+    //dialog pause game
     private fun ShowDialogPauseGame(){
         dialog.setContentView(R.layout.dialog_pause)
 
@@ -279,12 +311,15 @@ class PlayGameActivity : AppCompatActivity() {
         TimePause=0
         NewTime=0
         Newpoint=0
-        index =0
+        TextCountPoint.setText("Point : $Newpoint/100")
+        getQuestion()
         currentQuestion = ListQuestion.get(index)
         ShowQuestion()
         StartCountTime()
+        AfterClick()
     }
 
+    //Show correct answer
     private fun ShowIncorrect(){
         Pause()
         dialog.setContentView(R.layout.dialog_incorrect)

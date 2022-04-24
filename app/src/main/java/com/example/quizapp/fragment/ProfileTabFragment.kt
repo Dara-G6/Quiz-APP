@@ -1,17 +1,19 @@
 package com.example.quizapp.fragment
 
+import android.app.Activity
 import android.app.Dialog
+import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import android.widget.*
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
-import com.example.quizapp.ChangePasswordActivity
-import com.example.quizapp.EditProfileActivity
-import com.example.quizapp.R
-import com.example.quizapp.SignINActivity
+import com.example.quizapp.*
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.EmailAuthProvider
@@ -46,7 +48,7 @@ class ProfileTabFragment : Fragment() {
     //Button
     private lateinit var BtnEdit :Button
     private lateinit var BtnLogout:Button
-    private lateinit var BtnLanguage:Button
+    private lateinit var BtnSetting:Button
     private lateinit var BtnChangePassword:Button
     private lateinit var BtnRank:Button
     private lateinit var BtnDeleteAccount:Button
@@ -107,10 +109,14 @@ class ProfileTabFragment : Fragment() {
           ShowDialog()
         }
 
+        BtnSetting = view.findViewById(R.id.BtnSetting)
+        BtnSetting.setOnClickListener {
+            startActivity(Intent(activity, SettingActivity::class.java))
+        }
+
         //Imageview
         ProfileImage = view.findViewById(R.id.ProfileImage)
         ProfileImage.setOnClickListener {
-
             startActivity(Intent(activity,EditProfileActivity::class.java))
         }
 
@@ -156,7 +162,6 @@ class ProfileTabFragment : Fragment() {
 
 
     //Show dialog delete account
-
     private fun ShowDialog(){
         dialog.setContentView(R.layout.dialog_delete_account)
 
@@ -180,7 +185,6 @@ class ProfileTabFragment : Fragment() {
         }
 
         BtnYes.setOnClickListener {
-
             if (TextEmail.text.isEmpty()||TextPassword.text.isEmpty()){
                 Toast(activity).ShowMessage("Please Enter all the the filed", requireActivity()!!,R.drawable.close_red)
             }else{
@@ -189,9 +193,19 @@ class ProfileTabFragment : Fragment() {
             }
         }
 
+        val view = dialog.findViewById<View>(R.id.Layout_DeleteAccount)
+        view.setOnClickListener {
+           val input = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            input.hideSoftInputFromWindow(view.windowToken,0)
+        }
+
+
         dialog.show()
 
     }
+
+
+
 
     private fun DeleteUser(email:String,password:String){
         val user:FirebaseUser= auth.currentUser!!
@@ -203,7 +217,9 @@ class ProfileTabFragment : Fragment() {
         user.reauthenticate(credential).addOnCompleteListener {
             if (it.isSuccessful){
                 database.child(auth.uid.toString()).removeValue()
-                database.database.getReference("Math").child(auth.uid!!).removeValue()
+                database.database.getReference("General Knowledge").child(auth.uid.toString()).removeValue()
+                database.database.getReference("Science").child(auth.uid.toString()).removeValue()
+                database.database.getReference("Math").child(auth.uid.toString()).removeValue()
                 storage.child(auth.uid.toString()).delete()
                 auth.currentUser!!.delete()
                 Form.isVisible = true
