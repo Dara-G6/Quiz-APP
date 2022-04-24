@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
+import com.example.quizapp.extensions.hideKeyboard
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -20,6 +21,7 @@ class SetProfileActivity : AppCompatActivity() {
 
     private lateinit var Form:View
     private lateinit var ShowProgress:View
+    private lateinit var view:View
 
     private lateinit var BtnSet :Button
     private lateinit var ProfileImage:ImageView
@@ -63,6 +65,10 @@ class SetProfileActivity : AppCompatActivity() {
 
         Form = findViewById(R.id.Form)
         ShowProgress = findViewById(R.id.SHOW_PROGRESS)
+        view = findViewById(R.id.Layout_SetProfile)
+        view.setOnClickListener {
+            hideKeyboard(view)
+        }
     }
 
     //Load Image to Profile view
@@ -113,6 +119,7 @@ class SetProfileActivity : AppCompatActivity() {
             map.put("Name", Name)
             map.put("Profile", Url.toString())
             map.put("Login", Login)
+            map.put("Language","English")
             database.child(ID!!).setValue(map).addOnCompleteListener {
                 if (it.isSuccessful) {
                     Form.isVisible = true
@@ -147,6 +154,7 @@ class SetProfileActivity : AppCompatActivity() {
                     map.put("Name", Name)
                     map.put("Profile", Url.toString())
                     map.put("Login", Login)
+                    map.put("Language","English")
                     database.child(ID!!).setValue(map).addOnCompleteListener {
                         if (it.isSuccessful) {
                             Form.isVisible = true
@@ -188,6 +196,7 @@ class SetProfileActivity : AppCompatActivity() {
             map.put("Name",Name)
             map.put("Profile",Url.toString())
             map.put("Login",Login)
+            map.put("Language","English")
             database.child(ID!!).setValue(map).addOnCompleteListener {
                 if (it.isSuccessful){
                     Form.isVisible = true

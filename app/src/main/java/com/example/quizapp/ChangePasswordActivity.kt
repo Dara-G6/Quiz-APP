@@ -1,5 +1,6 @@
 package com.example.quizapp
 
+import android.app.Activity
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.core.view.isVisible
+import com.example.quizapp.extensions.hideKeyboard
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.auth.*
 
@@ -30,10 +32,12 @@ class ChangePasswordActivity : AppCompatActivity() {
     private lateinit var Form:View
     private lateinit var ShowProgress:View
     private lateinit var dialog:Dialog
+    private lateinit var view: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_password)
+
 
         //Button
         BtnClose = findViewById(R.id.BtnClose)
@@ -49,6 +53,10 @@ class ChangePasswordActivity : AppCompatActivity() {
         //View
         Form = findViewById(R.id.Form)
         ShowProgress = findViewById(R.id.SHOW_PROGRESS)
+        view = findViewById(R.id.Layout_ChangePassword)
+        view.setOnClickListener {
+            hideKeyboard(view)
+        }
 
         auth = FirebaseAuth.getInstance()
 

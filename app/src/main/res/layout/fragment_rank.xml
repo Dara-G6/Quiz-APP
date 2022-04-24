@@ -17,12 +17,13 @@
         <!--      Image Profile      -->
         <androidx.cardview.widget.CardView
             android:layout_width="80dp"
-            app:cardCornerRadius="48dp"
+            app:cardCornerRadius="40dp"
             android:layout_height="80dp">
             <ImageView
                 android:layout_width="match_parent"
                 android:src="@drawable/rank512"
-                android:id="@+id/ProfileImage"
+                android:id="@+id/TypeRank"
+                android:scaleType="fitCenter"
                 android:layout_height="match_parent"/>
         </androidx.cardview.widget.CardView>
 
@@ -31,7 +32,8 @@
             android:layout_marginTop="24dp"
             android:text="@string/rank"
             android:id="@+id/TextDisplayName"
-            android:textSize="16dp"
+            android:textSize="22dp"
+            android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

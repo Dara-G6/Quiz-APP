@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.example.quizapp.extensions.hideKeyboard
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.auth.FirebaseAuth
 
@@ -15,6 +16,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var TextConfirmPassword:EditText
     private lateinit var Form:View
     private lateinit var ShowProgress:View
+    private lateinit var view:View
     private lateinit var BtnSignUp:Button
     private lateinit var TextAlready:TextView
 
@@ -44,6 +46,10 @@ class SignUpActivity : AppCompatActivity() {
 
         Form = findViewById(R.id.Form)
         ShowProgress = findViewById(R.id.SHOW_PROGRESS)
+        view = findViewById(R.id.Layput_SignUP)
+        view.setOnClickListener {
+            hideKeyboard(view)
+        }
 
 
         auth = FirebaseAuth.getInstance()
@@ -75,8 +81,8 @@ class SignUpActivity : AppCompatActivity() {
     private fun CreateUser(){
          val email = TextEmail.text.toString().trim()
          val password = TextConfirmPassword.text.toString().trim()
-        Form.isVisible =false
-        ShowProgress.isVisible = true
+         Form.isVisible =false
+         ShowProgress.isVisible = true
                auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener{
                    if (it.isSuccessful){
                        Form.isVisible =true

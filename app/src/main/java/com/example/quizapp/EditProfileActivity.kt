@@ -10,6 +10,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.core.view.isVisible
+import com.example.quizapp.extensions.hideKeyboard
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -28,6 +29,7 @@ class EditProfileActivity : AppCompatActivity() {
     //View
     private lateinit var Form:View
     private lateinit var ShowProgress:View
+    private lateinit var view:View
 
     //Button
     private lateinit var BtnSet:Button
@@ -69,6 +71,10 @@ class EditProfileActivity : AppCompatActivity() {
         //View
         Form = findViewById(R.id.Form)
         ShowProgress = findViewById(R.id.SHOW_PROGRESS)
+        view = findViewById(R.id.Layput_EditProfile)
+        view.setOnClickListener {
+            hideKeyboard(view)
+        }
 
         //Image view
         ProfileImage = findViewById(R.id.ProfileImage)
@@ -130,6 +136,8 @@ class EditProfileActivity : AppCompatActivity() {
                 database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>).addOnCompleteListener {
                     if (it.isSuccessful){
                         UpdatePointMath(name,path)
+                        UpdatePointScience(name,path)
+                        UpdatePointGeneral(name,path)
                         Form.isVisible = true
                         ShowProgress.isVisible =false
                         Toast(this).ShowMessage("Setup new profile success",this, R.drawable.tick)
@@ -162,6 +170,8 @@ class EditProfileActivity : AppCompatActivity() {
                             Form.isVisible = true
                             ShowProgress.isVisible =false
                             UpdatePointMath(name,path)
+                            UpdatePointScience(name,path)
+                            UpdatePointGeneral(name,path)
                             Toast(this).ShowMessage("Setup new profile success",this, R.drawable.tick)
                         }else{
                             Toast.makeText(this,"Error : ${it.exception}",Toast.LENGTH_LONG).show()
@@ -178,34 +188,104 @@ class EditProfileActivity : AppCompatActivity() {
         }
     }
 
-    //Update Username and picture
+    //Update Username and picture in rank math
     private fun UpdatePointMath(Name:String, Path:String){
+        val map = HashMap<String,String>()
+        map.put("Name",Name)
+        map.put("Path",Path)
+        map.put("ID",auth.uid.toString())
+
+        var Point =0
+        var Time = 0
+
+        val database = FirebaseDatabase.getInstance().getReference("Math")
+
         database.child(auth.uid.toString()).get().addOnSuccessListener {
             if (it.exists()){
-                var  Point =""
-                var Time  = ""
-                val map = HashMap<String,String>()
-                map.put("Name",Name)
-                map.put("Path",Path)
-                map.put("ID",auth.uid.toString())
-
-             database.database.getReference("Math").child(auth.uid.toString()).get().addOnSuccessListener {
-                 if (it.exists()){
-                     Point = it.child("Point").getValue().toString()
-                     Time  = it.child("Time").getValue().toString()
-
-                 }else{
-                     Point =0.toString()
-                     Time  = 0.toString()
-                 }
-                 map.put("Point",Point)
-                 map.put("Time",Time)
-                 database.database.getReference("Math").child(auth.uid.toString()).updateChildren(map as Map<String, Any>)
-             }
+                Point = it.child("Point").getValue().toString().toInt()
+                Time = it.child("Time").getValue().toString().toInt()
+                map.put("Point",Point.toString())
+                map.put("Time",Time.toString())
+                database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>)
+            }else{
+                Point = 0
+                Time = 0
+                map.put("Point",Point.toString())
+                map.put("Time",Time.toString())
+                database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>)
             }
+
+        }
+
+
+
+
+    }
+
+    //Update Username and picture in rank science
+    private fun UpdatePointScience(Name:String, Path:String){
+        val map = HashMap<String,String>()
+        map.put("Name",Name)
+        map.put("Path",Path)
+        map.put("ID",auth.uid.toString())
+
+        var Point =0
+        var Time = 0
+
+        val database = FirebaseDatabase.getInstance().getReference("Science")
+
+        database.child(auth.uid.toString()).get().addOnSuccessListener {
+            if (it.exists()){
+                Point = it.child("Point").getValue().toString().toInt()
+                Time = it.child("Time").getValue().toString().toInt()
+                map.put("Point",Point.toString())
+                map.put("Time",Time.toString())
+                database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>)
+            }else{
+                Point = 0
+                Time = 0
+                map.put("Point",Point.toString())
+                map.put("Time",Time.toString())
+                database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>)
+            }
+
+        }
+
+
+    }
+
+    //Update Username and picture in rank general
+    private fun UpdatePointGeneral(Name:String, Path:String){
+        val map = HashMap<String,String>()
+        map.put("Name",Name)
+        map.put("Path",Path)
+        map.put("ID",auth.uid.toString())
+
+        var Point =0
+        var Time = 0
+
+        val database = FirebaseDatabase.getInstance().getReference("General Knowledge")
+
+        database.child(auth.uid.toString()).get().addOnSuccessListener {
+            if (it.exists()){
+                Point = it.child("Point").getValue().toString().toInt()
+                Time = it.child("Time").getValue().toString().toInt()
+                map.put("Point",Point.toString())
+                map.put("Time",Time.toString())
+                database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>)
+            }else{
+                Point = 0
+                Time = 0
+                map.put("Point",Point.toString())
+                map.put("Time",Time.toString())
+                database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>)
+            }
+
         }
 
     }
+
+
     //Select photo from gellery
     private fun ChooseImage(){
         var i : Intent = Intent(Intent.ACTION_PICK);
@@ -218,7 +298,6 @@ class EditProfileActivity : AppCompatActivity() {
     //Ask user first
     private fun ShowDialog(){
         dialog.setContentView(R.layout.dialog_ask)
-
         val ip = WindowManager.LayoutParams()
         ip.copyFrom(dialog.window!!.attributes)
         ip.width = WindowManager.LayoutParams.MATCH_PARENT
