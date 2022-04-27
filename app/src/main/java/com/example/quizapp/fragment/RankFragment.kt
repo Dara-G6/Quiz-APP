@@ -15,6 +15,7 @@ import com.example.quizapp.Question.MathQuestion
 import com.example.quizapp.R
 import com.example.quizapp.adapter.AdaperRank
 import com.example.quizapp.adapter.Rank
+import com.example.quizapp.databinding.FragmentRankBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
@@ -23,27 +24,20 @@ import com.google.firebase.ktx.Firebase
 class RankFragment : Fragment() {
 
 
-    //Menu
-    private lateinit var menu: BottomNavigationView
 
 
-    //List view
-    private lateinit var ListMath: ListView
-    private lateinit var ListScience: ListView
-    private lateinit var ListGeneral: ListView
-
-    //Imageview
-    private lateinit var TypeRank:ImageView
-
+    //
+    private lateinit var binding: FragmentRankBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_rank, container, false)
+        val layoutInflater = inflater.inflate(R.layout.fragment_rank, container, false) as LayoutInflater
+        binding = FragmentRankBinding.inflate(layoutInflater)
 
-        menu = view.findViewById(R.id.menu)
-        menu.setOnNavigationItemSelectedListener {
+        binding.menu.selectedItemId = R.id.TabMath
+        binding.menu.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.TabMath -> {
                     OnSelectMath()
@@ -58,24 +52,17 @@ class RankFragment : Fragment() {
             true
         }
 
-        //Image View
-        TypeRank = view.findViewById(R.id.TypeRank)
 
-
-        //List view
-        ListMath = view.findViewById(R.id.ListMath)
-        ListGeneral = view.findViewById(R.id.ListGeneral)
-        ListScience = view.findViewById(R.id.ListScience)
         OnSelectMath()
 
-        return view
+        return binding.root
     }
 
     private fun OnSelectMath() {
-        ListScience.isVisible = false
-        ListGeneral.isVisible = false
-        ListMath.isVisible = true
-        TypeRank.setImageResource(R.drawable.math_rank)
+       binding.ListScience.isVisible = false
+       binding.ListGeneral.isVisible = false
+       binding.ListMath.isVisible = true
+       binding.TypeRank.setImageResource(R.drawable.math_rank)
         val l = ArrayList<Rank>()
         val database = FirebaseDatabase.getInstance().getReference("Math")
         database.orderByChild("Point").get().addOnSuccessListener {
@@ -110,17 +97,17 @@ class RankFragment : Fragment() {
 
 
                 val adapter = AdaperRank(requireContext(), R.layout.adapter_rank, l)
-                ListMath.adapter = adapter
+               binding.ListMath.adapter = adapter
             }
         }
 
     }
 
     private fun OnSelectScience() {
-        ListScience.isVisible = true
-        ListGeneral.isVisible = false
-        ListMath.isVisible = false
-        TypeRank.setImageResource(R.drawable.chemist_rank)
+       binding.ListScience.isVisible = true
+       binding.ListGeneral.isVisible = false
+       binding.ListMath.isVisible = false
+       binding.TypeRank.setImageResource(R.drawable.chemist_rank)
         val l = ArrayList<Rank>()
         val database = FirebaseDatabase.getInstance().getReference("Science")
         database.get().addOnSuccessListener {
@@ -155,16 +142,16 @@ class RankFragment : Fragment() {
 
 
                 val adapter = AdaperRank(requireContext(), R.layout.adapter_rank, l)
-                ListScience.adapter = adapter
+                binding.ListScience.adapter = adapter
             }
         }
     }
 
     private fun OnSelectGeneral() {
-        ListScience.isVisible = false
-        ListGeneral.isVisible = true
-        ListMath.isVisible = false
-        TypeRank.setImageResource(R.drawable.general_rank)
+        binding.ListScience.isVisible = false
+        binding.ListGeneral.isVisible = true
+        binding.ListMath.isVisible = false
+        binding.TypeRank.setImageResource(R.drawable.general_rank)
         val l = ArrayList<Rank>()
         val database = FirebaseDatabase.getInstance().getReference("General Knowledge")
         database.get().addOnSuccessListener {
@@ -200,7 +187,7 @@ class RankFragment : Fragment() {
 
 
                 val adapter = AdaperRank(requireContext(), R.layout.adapter_rank, l)
-                ListGeneral.adapter = adapter
+               binding.ListGeneral.adapter = adapter
             }
 
 

@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.quizapp.PlayGameActivity
 import com.example.quizapp.R
+import com.example.quizapp.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -23,43 +24,39 @@ import com.squareup.picasso.Picasso
 class HomeFragment : Fragment() {
 
 
-    private lateinit var ProfileImage:ImageView
-    private lateinit var TextDisplayName:TextView
 
 
+
+    //Firebase
     private lateinit var auth:FirebaseAuth
-    private lateinit var user:FirebaseUser
     private lateinit var database:DatabaseReference
     private lateinit var storage:StorageReference
 
-    private lateinit var BtnMath:Button
-    private lateinit var BtnScience:Button
-    private lateinit var BtnGeneral:Button
-
-
-
-    //Intent
-    private lateinit var intent:Intent
-
-    //Cast to  next screen
+    //Cast Intent to  next screen
     private lateinit var Name:String
     private lateinit var ID:String
     private lateinit var Path:String
+    private lateinit var intent:Intent
+
+    //binding
+    private lateinit var binding:FragmentHomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       val view = inflater.inflate(R.layout.fragment_home, container, false)
-        ProfileImage = view.findViewById(R.id.ProfileImage)
-        TextDisplayName = view.findViewById(R.id.TextDisplayName)
+
+
+        val layoutInflater= inflater.inflate(R.layout.fragment_home, container, false) as
+                LayoutInflater
+        binding = FragmentHomeBinding.inflate(layoutInflater)
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
         storage = FirebaseStorage.getInstance().getReference("Profile")
 
 
-        BtnMath = view.findViewById(R.id.BtnMath)
-        BtnMath.setOnClickListener {
+
+        binding.BtnMath.setOnClickListener {
              intent = Intent(activity,PlayGameActivity::class.java)
              intent.putExtra("TypeGame","Math")
              intent.putExtra("Name",Name)
@@ -68,8 +65,8 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        BtnScience = view.findViewById(R.id.BtnScience)
-        BtnScience.setOnClickListener {
+
+       binding.BtnScience.setOnClickListener {
             intent = Intent(activity,PlayGameActivity::class.java)
             intent.putExtra("TypeGame","Science")
             intent.putExtra("Name",Name)
@@ -78,8 +75,8 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        BtnGeneral = view.findViewById(R.id.BtnGeneral)
-        BtnGeneral.setOnClickListener {
+
+       binding.BtnGeneral.setOnClickListener {
 //            intent = Intent(activity,PlayGameActivity::class.java)
 //            intent.putExtra("TypeGame","General Knowledge")
 //            intent.putExtra("Name",Name)
@@ -89,7 +86,7 @@ class HomeFragment : Fragment() {
         }
 
 
-        return view
+        return binding.root
     }
 
     override fun onStart() {
@@ -99,7 +96,6 @@ class HomeFragment : Fragment() {
 
 
     private fun setProfile(){
-
         if (auth.uid!=null){
             database.child(auth.uid.toString()).get().addOnSuccessListener {
                 if (it.exists()){
@@ -108,8 +104,8 @@ class HomeFragment : Fragment() {
                     Name = name
                     ID = auth.uid.toString()
                     this.Path = Path
-                    TextDisplayName.setText(name)
-                    Picasso.get().load(Path).into(ProfileImage)
+                   binding.TextDisplayName.setText(name)
+                    Picasso.get().load(Path).into(binding.ProfileImage)
                 }
             }
         }

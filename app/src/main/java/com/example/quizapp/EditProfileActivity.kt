@@ -1,5 +1,6 @@
 package com.example.quizapp
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.core.view.isVisible
+import com.example.quizapp.databinding.ActivityEditProfileBinding
 import com.example.quizapp.extensions.hideKeyboard
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.auth.FirebaseAuth
@@ -26,20 +28,7 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var storage:StorageReference
 
-    //View
-    private lateinit var Form:View
-    private lateinit var ShowProgress:View
-    private lateinit var view:View
 
-    //Button
-    private lateinit var BtnSet:Button
-    private lateinit var BtnClose:Button
-
-    //Image view
-    private lateinit var ProfileImage:ImageView
-
-    //Edit Text
-    private lateinit var TextUserName:EditText
 
 
     private var Path:Uri?=null
@@ -48,44 +37,39 @@ class EditProfileActivity : AppCompatActivity() {
 
     //Dialog
     private lateinit var dialog:Dialog
+
+    private lateinit var binding:ActivityEditProfileBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_profile)
+        binding = ActivityEditProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //Firebase
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
         storage =FirebaseStorage.getInstance().getReference("Profile")
 
-        view = findViewById(R.id.Layput_EditProfile)
-        view.setOnClickListener {
-            hideKeyboard(view)
-        }
-        //Button
-        BtnSet = findViewById(R.id.BtnSet)
-        BtnSet.setOnClickListener {
+
+
+       binding.BtnSet.setOnClickListener {
             ShowDialog()
-            hideKeyboard(view)
+            hideKeyboard(binding.root)
         }
 
-        BtnClose = findViewById(R.id.BtnClose)
-        BtnClose.setOnClickListener {
+
+       binding.BtnClose.setOnClickListener {
             finish()
         }
 
-        //View
-        Form = findViewById(R.id.Form)
-        ShowProgress = findViewById(R.id.SHOW_PROGRESS)
 
 
-        //Image view
-        ProfileImage = findViewById(R.id.ProfileImage)
-        ProfileImage.setOnClickListener {
+
+
+       binding.ProfileImage.setOnClickListener {
             ChooseImage()
         }
 
-        //Edit Text
-        TextUserName = findViewById(R.id.TextUserName)
+
 
         dialog = Dialog(this)
 
@@ -96,18 +80,23 @@ class EditProfileActivity : AppCompatActivity() {
 
 
     private fun CheckInput(){
-        if (TextUserName.text.isEmpty()){
-            TextUserName.setError("Please enter name")
-        }else if (TextUserName.text.length<4){
-            TextUserName.setError("Please enter full name at least have 4 alphabets")
-        }else if (Path==null){
-            Form.isVisible = false
-            ShowProgress.isVisible =true
-            NoPhoto()
-        }else{
-            Form.isVisible = false
-            ShowProgress.isVisible =true
-            WithPhoto()
+        when {
+            binding.TextUserName.text.toString().isEmpty() -> {
+                binding.TextUserName.setError("Please enter name")
+            }
+            binding.TextUserName.text.toString().length<4 -> {
+                binding.TextUserName.setError("Please enter full name at least have 4 alphabets")
+            }
+            Path==null -> {
+                binding.Form.isVisible = false
+                binding.SHOWPROGRESS.isVisible =true
+                NoPhoto()
+            }
+            else -> {
+                binding.Form.isVisible = false
+                binding.SHOWPROGRESS.isVisible=true
+                WithPhoto()
+            }
         }
     }
 
@@ -118,8 +107,8 @@ class EditProfileActivity : AppCompatActivity() {
             if (it.exists()){
                 val name = it.child("Name").value.toString()
                 val path = it.child("Profile").value.toString()
-                TextUserName.setText(name)
-                Picasso.get().load(path).into(ProfileImage)
+                binding.TextUserName.setText(name)
+                Picasso.get().load(path).into(binding.ProfileImage)
             }
         }
     }
@@ -128,9 +117,9 @@ class EditProfileActivity : AppCompatActivity() {
     private fun NoPhoto(){
         database.child(auth.uid.toString()).get().addOnSuccessListener {
             if (it.exists()){
-                Form.isVisible = false
-                ShowProgress.isVisible =true
-                val name = TextUserName.text.toString()
+                binding.Form.isVisible = false
+                binding.SHOWPROGRESS.isVisible =true
+                val name = binding.TextUserName.text.toString()
                 val path = it.child("Profile").value.toString()
                 var map:HashMap<String,String> = HashMap<String,String>()
                 map.put("Name",name)
@@ -140,14 +129,14 @@ class EditProfileActivity : AppCompatActivity() {
                         UpdatePointMath(name,path)
                         UpdatePointScience(name,path)
                         UpdatePointGeneral(name,path)
-                        Form.isVisible = true
-                        ShowProgress.isVisible =false
+                        binding.Form.isVisible = true
+                        binding.SHOWPROGRESS.isVisible =false
                         Toast(this).ShowMessage("Setup new profile success",this, R.drawable.tick)
 
                     }else{
                         Toast(this).ShowMessage("Error : ${it.exception}",this,R.drawable.x_mark)
-                        Form.isVisible = true
-                        ShowProgress.isVisible =false
+                        binding.Form.isVisible = true
+                        binding.SHOWPROGRESS.isVisible =false
                     }
                 }
             }
@@ -156,36 +145,36 @@ class EditProfileActivity : AppCompatActivity() {
     //Update Photo
     private fun WithPhoto(){
         storage.child(auth.uid.toString()).putFile(Path!!).addOnCompleteListener {
-            Form.isVisible = false
-            ShowProgress.isVisible =true
+            binding.Form.isVisible = false
+            binding.SHOWPROGRESS.isVisible =true
             if (it.isSuccessful){
-                Form.isVisible = true
-                ShowProgress.isVisible =false
+                binding.Form.isVisible = true
+                binding.SHOWPROGRESS.isVisible =false
                 storage.child(auth.uid.toString()).downloadUrl.addOnSuccessListener {
-                    val name = TextUserName.text.toString()
+                    val name =binding.TextUserName.text.toString()
                     val path = it.toString()
                     var map:HashMap<String,String> = HashMap<String,String>()
                     map.put("Name",name)
                     map.put("Profile",path.toString())
                     database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>).addOnCompleteListener {
                         if (it.isSuccessful){
-                            Form.isVisible = true
-                            ShowProgress.isVisible =false
+                            binding.Form.isVisible = true
+                            binding.SHOWPROGRESS.isVisible =false
                             UpdatePointMath(name,path)
                             UpdatePointScience(name,path)
                             UpdatePointGeneral(name,path)
                             Toast(this).ShowMessage("Setup new profile success",this, R.drawable.tick)
                         }else{
                             Toast.makeText(this,"Error : ${it.exception}",Toast.LENGTH_LONG).show()
-                            Form.isVisible = true
-                            ShowProgress.isVisible =false
+                            binding.Form.isVisible = true
+                            binding.SHOWPROGRESS.isVisible =false
                         }
                     }
                 }
             }else{
                 Toast(this).ShowMessage("Error : ${it.exception}",this,R.drawable.x_mark)
-                Form.isVisible = true
-                ShowProgress.isVisible =false
+                    binding.Form.isVisible = true
+                    binding.SHOWPROGRESS.isVisible =false
             }
         }
     }
@@ -335,7 +324,7 @@ class EditProfileActivity : AppCompatActivity() {
         if (data != null) {
             if (requestCode == PICK_IMAGE && resultCode == AppCompatActivity.RESULT_OK){
                 Path = data.data
-                ProfileImage.setImageURI(Path)
+                binding.ProfileImage.setImageURI(Path)
             }
         }
     }

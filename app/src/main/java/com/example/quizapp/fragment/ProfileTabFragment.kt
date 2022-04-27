@@ -1,9 +1,7 @@
 package com.example.quizapp.fragment
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -11,9 +9,9 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import android.widget.*
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import com.example.quizapp.*
+import com.example.quizapp.databinding.FragmentProfileTabBinding
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.EmailAuthProvider
@@ -38,37 +36,18 @@ class ProfileTabFragment : Fragment() {
     private lateinit var database: DatabaseReference
     private lateinit var storage: StorageReference
 
-    //Text view
-    private lateinit var TextEmail:TextView
-    private lateinit var TextDisplayName:TextView
 
 
-
-
-    //Button
-    private lateinit var BtnEdit :Button
-    private lateinit var BtnLogout:Button
-    private lateinit var BtnSetting:Button
-    private lateinit var BtnChangePassword:Button
-    private lateinit var BtnRank:Button
-    private lateinit var BtnDeleteAccount:Button
-
-
-    //Imageview
-    private lateinit var ProfileImage:ImageView
-
-    //View
-    private lateinit var Form:View
-    private lateinit var ShowProgress:View
+    //binding
     private lateinit var dialog:Dialog
-    private lateinit var TextLoading:TextView
+    private lateinit var binding:FragmentProfileTabBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_profile_tab, container, false)
-
+        val layoutInflater = inflater.inflate(R.layout.fragment_profile_tab, container, false) as LayoutInflater
+        binding = FragmentProfileTabBinding.inflate(layoutInflater)
         //Firebase
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
@@ -76,52 +55,40 @@ class ProfileTabFragment : Fragment() {
 
 
 
-        //Text view
-        TextDisplayName = view.findViewById(R.id.TextDisplayName)
-        TextEmail = view.findViewById(R.id.TextEmail)
 
-        //View
-        Form = view.findViewById(R.id.Form)
-        ShowProgress = view.findViewById(R.id.SHOW_PROGRESS)
-        TextLoading  = view.findViewById(R.id.TextLoading)
-        dialog = Dialog(requireContext())
-
-        //Button
-        BtnEdit = view.findViewById(R.id.BtnEdit)
-        BtnEdit.setOnClickListener {
+       binding.BtnEdit.setOnClickListener {
            startActivity(Intent(activity,EditProfileActivity::class.java))
 
         }
 
-        BtnLogout = view.findViewById(R.id.BtnLogout)
-        BtnLogout.setOnClickListener {
+
+       binding.BtnLogout.setOnClickListener {
                  Logout()
         }
 
-        BtnChangePassword = view.findViewById(R.id.BtnChangePassword)
-        BtnChangePassword.setOnClickListener {
+
+       binding.BtnChangePassword.setOnClickListener {
             startActivity(Intent(activity,ChangePasswordActivity::class.java))
         }
 
 
-        BtnDeleteAccount = view.findViewById(R.id.BtnDeleteAccount)
-        BtnDeleteAccount.setOnClickListener {
+
+       binding.BtnDeleteAccount.setOnClickListener {
           ShowDialog()
         }
 
-        BtnSetting = view.findViewById(R.id.BtnSetting)
-        BtnSetting.setOnClickListener {
+
+       binding.BtnSetting.setOnClickListener {
             startActivity(Intent(activity, SettingActivity::class.java))
         }
 
         //Imageview
-        ProfileImage = view.findViewById(R.id.ProfileImage)
-        ProfileImage.setOnClickListener {
+       binding.ProfileImage.setOnClickListener {
             startActivity(Intent(activity,EditProfileActivity::class.java))
         }
 
 
-        return view
+        return binding.root
     }
 
 
@@ -137,9 +104,9 @@ class ProfileTabFragment : Fragment() {
                 val name =it.child("Name").value.toString()
                 val path = it.child("Profile").value.toString()
                 val email=it.child("Email").value.toString()
-                Picasso.get().load(path).into(ProfileImage)
-                TextEmail.setText(email)
-                TextDisplayName.setText(name)
+                Picasso.get().load(path).into(binding.ProfileImage)
+                binding.TextEmail.setText(email)
+                binding.TextDisplayName.setText(name)
             }
         }
     }
@@ -148,12 +115,12 @@ class ProfileTabFragment : Fragment() {
     private fun Logout(){
         database.child(auth.uid.toString()).child("Login").setValue("No")
         auth.signOut()
-        Form.isVisible = false
-        ShowProgress.isVisible = true
+        binding.Form.isVisible = false
+        binding.SHOWPROGRESS.isVisible = true
         Handler().postDelayed({
                   startActivity(Intent(activity,SignINActivity::class.java))
-            Form.isVisible = true
-            ShowProgress.isVisible = false
+            binding.Form.isVisible = true
+            binding.SHOWPROGRESS.isVisible = false
                 }
             ,1500
         )
@@ -211,9 +178,9 @@ class ProfileTabFragment : Fragment() {
         val user:FirebaseUser= auth.currentUser!!
         val credential:AuthCredential = EmailAuthProvider.
         getCredential(email,password)
-        Form.isVisible = false
-        ShowProgress.isVisible = true
-        TextLoading.setText("Delete account..")
+        binding.Form.isVisible = false
+        binding.SHOWPROGRESS.isVisible = true
+        binding.TextLoading.setText("Delete account..")
         user.reauthenticate(credential).addOnCompleteListener {
             if (it.isSuccessful){
                 database.child(auth.uid.toString()).removeValue()
@@ -222,8 +189,8 @@ class ProfileTabFragment : Fragment() {
                 database.database.getReference("Math").child(auth.uid.toString()).removeValue()
                 storage.child(auth.uid.toString()).delete()
                 auth.currentUser!!.delete()
-                Form.isVisible = true
-                ShowProgress.isVisible = false
+                binding.Form.isVisible = true
+                binding.SHOWPROGRESS.isVisible = false
                 Toast(activity).ShowMessage("Delete account success", requireActivity()!!,
                     R.drawable.tick
                 )
@@ -231,8 +198,8 @@ class ProfileTabFragment : Fragment() {
                     startActivity(Intent(activity,SignINActivity::class.java))
                 },2000)
             }else{
-                Form.isVisible = true
-                ShowProgress.isVisible = false
+                binding.Form.isVisible = true
+                binding.SHOWPROGRESS.isVisible = false
                 Toast(activity).ShowMessage("Error : ${it.exception}", requireActivity()!!,R.drawable.close_red)
             }
         }

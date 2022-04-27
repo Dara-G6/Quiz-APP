@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
+import com.example.quizapp.databinding.ActivitySetProfileBinding
 import com.example.quizapp.extensions.hideKeyboard
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.auth.FirebaseAuth
@@ -19,14 +20,6 @@ import java.util.*
 
 class SetProfileActivity : AppCompatActivity() {
 
-    private lateinit var Form:View
-    private lateinit var ShowProgress:View
-    private lateinit var view:View
-
-    private lateinit var BtnSet :Button
-    private lateinit var ProfileImage:ImageView
-    private lateinit var TextUserName:EditText
-    private lateinit var TextSkip :TextView
 
     private var Path:Uri?=null
     private val PICK_IMAGE =1
@@ -37,42 +30,40 @@ class SetProfileActivity : AppCompatActivity() {
     private lateinit var storage: StorageReference
     private lateinit var user: FirebaseUser
 
+    //binding
+    private lateinit var binding: ActivitySetProfileBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_set_profile)
-        view = findViewById(R.id.Layout_SetProfile)
-        view.setOnClickListener {
-            hideKeyboard(view)
+        binding = ActivitySetProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+       binding.root.setOnClickListener {
+            hideKeyboard(binding.root)
         }
+
         auth = FirebaseAuth.getInstance()
         user = auth.currentUser!!
         database = FirebaseDatabase.getInstance().getReference("Users")
         storage = FirebaseStorage.getInstance().getReference("Profile")
 
-        ProfileImage = findViewById(R.id.ProfileImage)
-        ProfileImage.setOnClickListener {
-            hideKeyboard(view)
+
+       binding.ProfileImage.setOnClickListener {
+            hideKeyboard(binding.root)
           ChooseImage()
         }
 
-        BtnSet = findViewById(R.id.BtnSet)
-        BtnSet.setOnClickListener {
+
+       binding.BtnSet.setOnClickListener {
             CheckInput()
         }
 
-        TextSkip = findViewById(R.id.TextSkip)
-        TextSkip.setOnClickListener {
+
+       binding.TextSkip.setOnClickListener {
              SkipProfile()
         }
 
-        TextUserName = findViewById(R.id.TextUserName)
 
-        Form = findViewById(R.id.Form)
-        ShowProgress = findViewById(R.id.SHOW_PROGRESS)
-        view = findViewById(R.id.Layout_SetProfile)
-        view.setOnClickListener {
-            hideKeyboard(view)
-        }
     }
 
     //Load Image to Profile view
@@ -81,7 +72,7 @@ class SetProfileActivity : AppCompatActivity() {
         if (data != null) {
             if (requestCode == PICK_IMAGE && resultCode == RESULT_OK ){
                 Path = data.data
-                ProfileImage.setImageURI(Path)
+               binding.ProfileImage.setImageURI(Path)
             }
         }
     }
@@ -95,24 +86,27 @@ class SetProfileActivity : AppCompatActivity() {
 
     //Check Input User name
     private fun CheckInput(){
-        if (TextUserName.text.isEmpty()){
-            TextUserName.setError("Please Enter your name")
-        }else if (TextUserName.text.length<4){
-            TextUserName.setError("Please Enter your full name")
-        }else if (Path==null){
+        if (binding.TextUserName.text.toString().isEmpty()){
+            binding.TextUserName.setError("Please Enter your name")
+        }
+        else if (binding.TextUserName.text.toString().length<4){
+            binding.TextUserName.setError("Please Enter your full name")
+        }
+        else if (Path==null){
               NoPhoto()
-        }else{
+        }
+        else{
             WithPhoto()
         }
     }
 
     // case user just set name
     private fun NoPhoto() {
-        Form.isVisible = false
-        ShowProgress.isVisible = true
+        binding.Form.isVisible = false
+        binding.SHOWPROGRESS.isVisible = true
         storage.child("avatar.png").downloadUrl.addOnSuccessListener {
             var Url = ""
-            var Name = TextUserName.text.toString()
+            var Name =binding.TextUserName.text.toString()
             var Email = user.email
             var ID = auth.uid
             var Login = "Yes"
@@ -126,13 +120,13 @@ class SetProfileActivity : AppCompatActivity() {
             map.put("Language","English")
             database.child(ID!!).setValue(map).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    Form.isVisible = true
-                    ShowProgress.isVisible = false
+                    binding.Form.isVisible = true
+                    binding.SHOWPROGRESS.isVisible = false
                     Toast(this).ShowMessage("Setup profile Success",this,R.drawable.tick)
                     startActivity(Intent(this,HomePageActivity::class.java))
                 } else {
-                    Form.isVisible = true
-                    ShowProgress.isVisible = false
+                    binding.Form.isVisible = true
+                    binding.SHOWPROGRESS.isVisible = false
                     Toast.makeText(this, "Error : {${it.exception}}", Toast.LENGTH_LONG).show()
                 }
             }
@@ -141,14 +135,14 @@ class SetProfileActivity : AppCompatActivity() {
     }
     //case user set name and photo
     private fun WithPhoto(){
-        var ID = auth.uid
-        Form.isVisible = false
-        ShowProgress.isVisible = true
+        val ID = auth.uid
+       binding.Form.isVisible = false
+        binding.SHOWPROGRESS.isVisible = true
         storage.child(ID!!).putFile(Path!!).addOnCompleteListener {
             if (it.isSuccessful){
                 storage.child(ID!!).downloadUrl.addOnSuccessListener {
                     var Url = ""
-                    var Name = TextUserName.text.toString()
+                    var Name = binding.TextUserName.text.toString()
                     var Email = user.email
                     var Login = "Yes"
                     Url = it.toString()
@@ -161,20 +155,20 @@ class SetProfileActivity : AppCompatActivity() {
                     map.put("Language","English")
                     database.child(ID!!).setValue(map).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            Form.isVisible = true
-                            ShowProgress.isVisible = false
+                            binding.Form.isVisible = true
+                            binding.SHOWPROGRESS.isVisible = false
                             Toast(this).ShowMessage("Setup profile Success",this,R.drawable.tick)
                             startActivity(Intent(this,HomePageActivity::class.java))
                         } else {
-                            Form.isVisible = true
-                            ShowProgress.isVisible = false
+                            binding.Form.isVisible = true
+                            binding.SHOWPROGRESS.isVisible = false
                             Toast(this).ShowMessage("Error : ${it.exception}",this,R.drawable.x_mark)
                         }
                     }
                 }
             }else{
-                Form.isVisible = true
-                ShowProgress.isVisible = false
+                binding.Form.isVisible = true
+                binding.SHOWPROGRESS.isVisible = false
                 Toast(this).ShowMessage("Error : ${it.exception}",this,R.drawable.x_mark)
 
             }
@@ -184,12 +178,12 @@ class SetProfileActivity : AppCompatActivity() {
 
     //Case User skip set up profile
     private fun SkipProfile(){
-        Form.isVisible = false
-        ShowProgress.isVisible = true
+        binding.Form.isVisible = false
+        binding.SHOWPROGRESS.isVisible = true
         storage.child("avatar.png").downloadUrl.addOnSuccessListener {
             var r : Random = Random()
             var Url=""
-            var Name="player_"+r.nextInt(1000000000)
+            var Name="player_"+r.nextInt(1000)
             var Email =user.email
             var ID = auth.uid
             var Login = "Yes"
@@ -203,13 +197,13 @@ class SetProfileActivity : AppCompatActivity() {
             map.put("Language","English")
             database.child(ID!!).setValue(map).addOnCompleteListener {
                 if (it.isSuccessful){
-                    Form.isVisible = true
-                    ShowProgress.isVisible =false
+                    binding.Form.isVisible = true
+                    binding.SHOWPROGRESS.isVisible =false
                     Toast(this).ShowMessage("Setup profile Success",this,R.drawable.tick)
                     startActivity(Intent(this,HomePageActivity::class.java))
                 }else{
-                    Form.isVisible = true
-                    ShowProgress.isVisible =false
+                    binding.Form.isVisible = true
+                    binding.SHOWPROGRESS.isVisible =false
                     Toast(this).ShowMessage("Error : ${it.exception}",this,R.drawable.x_mark)
 
                 }
