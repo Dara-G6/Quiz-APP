@@ -30,15 +30,15 @@ class ChangePasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChangePasswordBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_change_password)
+        setContentView(binding.root)
 
         binding.root.setOnClickListener {
             hideKeyboard(binding.root)
         }
 
         //Button
-
        binding.BtnClose.setOnClickListener {
+            Log.d("Hi","")
             finish()
         }
 
