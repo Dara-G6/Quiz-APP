@@ -10,72 +10,63 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.core.view.isVisible
+import com.example.quizapp.databinding.ActivityChangePasswordBinding
 import com.example.quizapp.extensions.hideKeyboard
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.auth.*
 
 class ChangePasswordActivity : AppCompatActivity() {
-    //Button
-    private lateinit var BtnClose:Button
-    private lateinit var BtnSetNewPassword:Button
+
 
     //Firebase
     private lateinit var auth: FirebaseAuth
     private lateinit var user:FirebaseUser
 
-    //Edit Text
-    private lateinit var TextOldPassword:EditText
-    private lateinit var TextNewPassword:EditText
-    private lateinit var TextNewConfirmPassword:EditText
 
-    //View
-    private lateinit var Form:View
-    private lateinit var ShowProgress:View
+
+    //binding
+    private lateinit var binding:ActivityChangePasswordBinding
     private lateinit var dialog:Dialog
-    private lateinit var view: View
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityChangePasswordBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_change_password)
-        view = findViewById(R.id.Layout_ChangePassword)
-        view.setOnClickListener {
-            hideKeyboard(view)
+
+        binding.root.setOnClickListener {
+            hideKeyboard(binding.root)
         }
 
         //Button
-        BtnClose = findViewById(R.id.BtnClose)
-        BtnClose.setOnClickListener {
+
+       binding.BtnClose.setOnClickListener {
             finish()
         }
 
-        BtnSetNewPassword = findViewById(R.id.BtnSetNewPassword)
-        BtnSetNewPassword.setOnClickListener {
-            hideKeyboard(view)
+       binding.BtnSetNewPassword.setOnClickListener {
+            hideKeyboard(binding.root)
             CheckInput()
         }
 
-        //View
-        Form = findViewById(R.id.Form)
-        ShowProgress = findViewById(R.id.SHOW_PROGRESS)
+
+
 
 
         auth = FirebaseAuth.getInstance()
-
-        //Edit text
-        TextOldPassword = findViewById(R.id.TextOldPassword)
-        TextNewPassword = findViewById(R.id.TextNewPassword)
-        TextNewConfirmPassword = findViewById(R.id.TextNewConfirmPassword)
-
         dialog = Dialog(this)
 
     }
 
     private fun CheckInput() {
-        if (TextOldPassword.text.isEmpty() || TextNewPassword.text.isEmpty()||TextNewConfirmPassword.text.isEmpty()){
+        if (binding.TextOldPassword.text.toString().isEmpty()
+            || binding.TextNewPassword.text.toString().isEmpty()
+            ||binding.TextNewConfirmPassword.text.toString().isEmpty()){
             Toast(this).ShowMessage("Please Enter all the filed",this, R.drawable.close_red)
-        }else if (!TextNewConfirmPassword.text.toString().equals(TextNewPassword.text.toString())){
-            TextNewConfirmPassword.setError("Confirm Password not match New Password")
-        }else {
+        }
+        else if (!binding.TextNewConfirmPassword.text.toString().equals(binding.TextNewPassword.text.toString())){
+           binding.TextNewConfirmPassword.setError("Confirm Password not match New Password")
+        }
+        else
+        {
             ShowDialog()
         }
     }
@@ -115,33 +106,33 @@ class ChangePasswordActivity : AppCompatActivity() {
     }
 
     private fun ChangePassword(){
-        Form.isVisible = false
-        ShowProgress.isVisible = true
+      binding.Form.isVisible = false
+      binding.SHOWPROGRESS.isVisible = true
         user = auth.currentUser!!
         var credential: AuthCredential =
             EmailAuthProvider.getCredential(
                 auth.currentUser!!.email
-                    .toString(),TextOldPassword.text.toString())
+                    .toString(),binding.TextOldPassword.text.toString())
 
         user.reauthenticate(credential).addOnCompleteListener {
             if (it.isSuccessful){
-                Form.isVisible = true
-                ShowProgress.isVisible = false
-                user.updatePassword(TextNewConfirmPassword.text.toString()).addOnCompleteListener {
+                binding.Form.isVisible = true
+                binding.SHOWPROGRESS.isVisible = false
+                user.updatePassword(binding.TextNewConfirmPassword.text.toString()).addOnCompleteListener {
                     if (it.isSuccessful){
                         Toast(this).ShowMessage("Change Password success",this, R.drawable.tick)
 
-                        Form.isVisible = true
-                        ShowProgress.isVisible = false
+                       binding.Form.isVisible = true
+                       binding.SHOWPROGRESS.isVisible = false
                     }else{
                         Toast(this).ShowMessage("Error :${it.exception}",this, R.drawable.close_red)
-                        Form.isVisible = true
-                        ShowProgress.isVisible = false
+                        binding.Form.isVisible = true
+                        binding.SHOWPROGRESS.isVisible = false
                     }
                 }
             }else{
-                Form.isVisible = true
-                ShowProgress.isVisible = false
+                binding.Form.isVisible = true
+                binding.SHOWPROGRESS.isVisible = false
                 Toast(this).ShowMessage("Error :${it.exception}",this, R.drawable.close_red)
             }
 

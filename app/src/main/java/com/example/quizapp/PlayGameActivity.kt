@@ -16,6 +16,7 @@ import com.example.quizapp.Question.GeneralQuestion
 import com.example.quizapp.Question.MathQuestion
 import com.example.quizapp.Question.Question
 import com.example.quizapp.Question.ScienceQuestion
+import com.example.quizapp.databinding.ActivityPlayGameBinding
 import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -23,39 +24,18 @@ import kotlin.properties.Delegates
 import kotlin.random.Random as Random
 
 class PlayGameActivity : AppCompatActivity() {
-    //Text view
-    private lateinit var TextType:TextView
-    private lateinit var TextCountQuesion:TextView
-    private lateinit var TextCountPoint:TextView
-    private lateinit var TextQuestion:TextView
-    private lateinit var TextOptionA:TextView
-    private lateinit var TextOptionB:TextView
-    private lateinit var TextOptionC:TextView
-
-    //Time
-    private lateinit var TimeStart:Chronometer
-    private  var TimePause:Long=0
-    private var NewTime:Long=0;
-
-    //Button
-    private lateinit var BtnClose:Button
-    private lateinit var BtnNext:Button
-
-    //View
-    private lateinit var CardA:View
-    private lateinit var CardB:View
-    private lateinit var CardC:View
 
 
 
     //dialog
     private lateinit var dialog:Dialog
-
     private var count:Long=0
     private var Newpoint:Long=0
+    private var NewTime:Long=0
     private lateinit var r :Random
     private var index by Delegates.notNull<Int>()
     private var Answer :String= ""
+    private var TimePause=0
     private lateinit var ListQuestion:ArrayList<Question>
     private lateinit var  currentQuestion:Question
 
@@ -65,46 +45,37 @@ class PlayGameActivity : AppCompatActivity() {
     private lateinit var Path:String
     private  var OldTime:Long = 0
     private  var OldPoint:Long=0
-
     private lateinit var database:DatabaseReference
 
+    //binding
+    private lateinit var binding: ActivityPlayGameBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_play_game)
+        binding = ActivityPlayGameBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         //Dialog
         dialog = Dialog(this)
-        //Text View
-        TextType = findViewById(R.id.TextType)
-        TimeStart = findViewById(R.id.TextTime)
-        TextCountQuesion = findViewById(R.id.TextCountQuestion)
-        TextCountPoint = findViewById(R.id.TextCountPoint)
-        TextQuestion =findViewById(R.id.TextQuestion)
-        TextOptionA  =findViewById(R.id.TextOptionA)
-        TextOptionB  = findViewById(R.id.TextOptionB)
-        TextOptionC  = findViewById(R.id.TextOptionC)
 
-        //View
-        CardA = findViewById(R.id.CardA)
-        CardA.setOnClickListener{
+
+        //card View
+       binding.CardA.setOnClickListener{
            OnClickcardA()
 
         }
 
-        CardB = findViewById(R.id.CardB)
-        CardB.setOnClickListener{
+       binding.CardB.setOnClickListener{
              OnClickcardB()
 
         }
 
-        CardC = findViewById(R.id.CardC)
-        CardC.setOnClickListener{
+
+       binding.CardC.setOnClickListener{
            OnClickcardC()
 
         }
 
-        //Button
-        BtnClose = findViewById(R.id.BtnClose)
-        BtnClose.setOnClickListener{
+
+       binding.BtnClose.setOnClickListener{
            ShowDialogPauseGame()
         }
 
@@ -114,8 +85,8 @@ class PlayGameActivity : AppCompatActivity() {
         getQuestion()
         ShowQuestion()
 
-        BtnNext = findViewById(R.id.BtnNext)
-        BtnNext.setOnClickListener {
+
+       binding.BtnNext.setOnClickListener {
             PlayGame()
         }
 
@@ -124,12 +95,12 @@ class PlayGameActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         StartCountTime()
-        TextType.setText(intent.getStringExtra("TypeGame"))
+        binding.TextType.setText(intent.getStringExtra("TypeGame"))
         Name = intent.getStringExtra("Name").toString()
         ID   = intent.getStringExtra("ID").toString()
         Path = intent.getStringExtra("Path").toString()
 
-        database = FirebaseDatabase.getInstance().getReference(TextType.text.toString())
+        database = FirebaseDatabase.getInstance().getReference(binding.TextType.text.toString())
         database.child(ID).get().addOnSuccessListener {
             if (it.exists()){
                 OldPoint = it.child("Point").getValue().toString().toLong()
@@ -183,7 +154,7 @@ class PlayGameActivity : AppCompatActivity() {
             }
             AfterClick()
         }
-        TextCountPoint.setText("Point :$Newpoint/100")
+        binding.TextCountPoint.setText("Point :$Newpoint/100")
     }
 
     //set question to text view
@@ -191,45 +162,45 @@ class PlayGameActivity : AppCompatActivity() {
         var random = r.nextInt(6)
 
          Log.d("Random ",random.toString())
-         TextCountQuesion.setText("Question : ${count+1}/10")
-         TextQuestion.setText( currentQuestion.Question)
+         binding.TextCountQuestion.setText("Question : ${count+1}/10")
+         binding.TextQuestion.setText( currentQuestion.Question)
          if (random==0){
              //C B A
-             TextOptionA.setText( currentQuestion.OptionC)
-             TextOptionB.setText( currentQuestion.OptionB)
-             TextOptionC.setText( currentQuestion.OptionA)
+             binding.TextOptionA.setText( currentQuestion.OptionC)
+             binding.TextOptionB.setText( currentQuestion.OptionB)
+             binding.TextOptionC.setText( currentQuestion.OptionA)
          }
          if (random==1){
              //A C B
-             TextOptionA.setText( currentQuestion.OptionA)
-             TextOptionB.setText( currentQuestion.OptionC)
-             TextOptionC.setText( currentQuestion.OptionB)
+             binding.TextOptionA.setText( currentQuestion.OptionA)
+             binding.TextOptionB.setText( currentQuestion.OptionC)
+             binding.TextOptionC.setText( currentQuestion.OptionB)
         }
          if (random==2){
              //A B C
-             TextOptionA.setText( currentQuestion.OptionA)
-             TextOptionB.setText( currentQuestion.OptionB)
-             TextOptionC.setText( currentQuestion.OptionC)
+             binding.TextOptionA.setText( currentQuestion.OptionA)
+             binding.TextOptionB.setText( currentQuestion.OptionB)
+             binding.TextOptionC.setText( currentQuestion.OptionC)
         }
 
         if (random ==3){
             //C A B
-            TextOptionA.setText( currentQuestion.OptionC)
-            TextOptionB.setText( currentQuestion.OptionA)
-            TextOptionC.setText( currentQuestion.OptionB)
+            binding.TextOptionA.setText( currentQuestion.OptionC)
+            binding.TextOptionB.setText( currentQuestion.OptionA)
+            binding.TextOptionC.setText( currentQuestion.OptionB)
         }
         if (random == 4){
             // B C A
-            TextOptionA.setText( currentQuestion.OptionB)
-            TextOptionB.setText( currentQuestion.OptionC)
-            TextOptionC.setText( currentQuestion.OptionA)
+            binding.TextOptionA.setText( currentQuestion.OptionB)
+            binding.TextOptionB.setText( currentQuestion.OptionC)
+            binding.TextOptionC.setText( currentQuestion.OptionA)
         }
 
         if (random == 5){
             // B A C
-            TextOptionA.setText( currentQuestion.OptionB)
-            TextOptionB.setText( currentQuestion.OptionA)
-            TextOptionC.setText( currentQuestion.OptionC)
+            binding.TextOptionA.setText( currentQuestion.OptionB)
+            binding.TextOptionB.setText( currentQuestion.OptionA)
+            binding.TextOptionC.setText( currentQuestion.OptionC)
         }
         count++
         index++
@@ -311,7 +282,7 @@ class PlayGameActivity : AppCompatActivity() {
         TimePause=0
         NewTime=0
         Newpoint=0
-        TextCountPoint.setText("Point : $Newpoint/100")
+        binding.TextCountPoint.setText("Point : $Newpoint/100")
         getQuestion()
         currentQuestion = ListQuestion.get(index)
         ShowQuestion()
@@ -346,16 +317,16 @@ class PlayGameActivity : AppCompatActivity() {
 
     //Start Count Time
     private fun StartCountTime(){
-        TimeStart.format="Time : %s"
-        TimeStart.base = SystemClock.elapsedRealtime()-TimePause
-        TimeStart.start()
+        binding.TextTime.format="Time : %s"
+        binding.TextTime.base = SystemClock.elapsedRealtime()-TimePause
+        binding.TextTime.start()
     }
 
     //Pause count time
     private fun Pause(){
-        TimeStart.stop()
-        TimePause = SystemClock.elapsedRealtime() - TimeStart.base
-        NewTime = (SystemClock.elapsedRealtime() - TimeStart.base )
+        binding.TextTime.stop()
+        TimePause = (SystemClock.elapsedRealtime() - binding.TextTime.base.toLong()).toInt()
+        NewTime = (SystemClock.elapsedRealtime() - binding.TextTime.base )
     }
 
 
@@ -381,49 +352,49 @@ class PlayGameActivity : AppCompatActivity() {
     }
 
     private fun OnClickcardA(){
-        CardA.setBackgroundColor(getColor(R.color.primary))
-        CardB.setBackgroundColor(getColor(R.color.white))
-        CardC.setBackgroundColor(getColor(R.color.white))
+        binding.CardA.setBackgroundColor(getColor(R.color.primary))
+        binding.CardB.setBackgroundColor(getColor(R.color.white))
+        binding.CardC.setBackgroundColor(getColor(R.color.white))
 
-        TextOptionA.setTextColor(getColor(R.color.white))
-        TextOptionB.setTextColor(getColor(R.color.black))
-        TextOptionC.setTextColor(getColor(R.color.black))
+        binding.TextOptionA.setTextColor(getColor(R.color.white))
+        binding.TextOptionB.setTextColor(getColor(R.color.black))
+        binding.TextOptionC.setTextColor(getColor(R.color.black))
 
-        Answer = TextOptionA.text.toString()
+        Answer = binding.TextOptionA.text.toString()
     }
 
     private fun OnClickcardB(){
-        CardB.setBackgroundColor(getColor(R.color.primary))
-        CardA.setBackgroundColor(getColor(R.color.white))
-        CardC.setBackgroundColor(getColor(R.color.white))
+        binding.CardB.setBackgroundColor(getColor(R.color.primary))
+        binding.CardA.setBackgroundColor(getColor(R.color.white))
+        binding.CardC.setBackgroundColor(getColor(R.color.white))
 
-        TextOptionB.setTextColor(getColor(R.color.white))
-        TextOptionA.setTextColor(getColor(R.color.black))
-        TextOptionC.setTextColor(getColor(R.color.black))
+        binding.TextOptionB.setTextColor(getColor(R.color.white))
+        binding.TextOptionA.setTextColor(getColor(R.color.black))
+        binding.TextOptionC.setTextColor(getColor(R.color.black))
 
-        Answer = TextOptionB.text.toString()
+        Answer = binding.TextOptionB.text.toString()
     }
 
     private fun OnClickcardC(){
-        CardC.setBackgroundColor(getColor(R.color.primary))
-        CardB.setBackgroundColor(getColor(R.color.white))
-        CardA.setBackgroundColor(getColor(R.color.white))
+        binding.CardC.setBackgroundColor(getColor(R.color.primary))
+        binding.CardB.setBackgroundColor(getColor(R.color.white))
+        binding.CardA.setBackgroundColor(getColor(R.color.white))
 
-        TextOptionC.setTextColor(getColor(R.color.white))
-        TextOptionB.setTextColor(getColor(R.color.black))
-        TextOptionA.setTextColor(getColor(R.color.black))
+        binding.TextOptionC.setTextColor(getColor(R.color.white))
+        binding.TextOptionB.setTextColor(getColor(R.color.black))
+        binding.TextOptionA.setTextColor(getColor(R.color.black))
 
-        Answer = TextOptionC.text.toString()
+        Answer = binding.TextOptionC.text.toString()
     }
 
     private fun AfterClick(){
-        CardC.setBackgroundColor(getColor(R.color.white))
-        CardB.setBackgroundColor(getColor(R.color.white))
-        CardA.setBackgroundColor(getColor(R.color.white))
+        binding.CardC.setBackgroundColor(getColor(R.color.white))
+        binding.CardB.setBackgroundColor(getColor(R.color.white))
+        binding.CardA.setBackgroundColor(getColor(R.color.white))
 
-        TextOptionC.setTextColor(getColor(R.color.black))
-        TextOptionB.setTextColor(getColor(R.color.black))
-        TextOptionA.setTextColor(getColor(R.color.black))
+        binding.TextOptionC.setTextColor(getColor(R.color.black))
+        binding.TextOptionB.setTextColor(getColor(R.color.black))
+        binding.TextOptionA.setTextColor(getColor(R.color.black))
         Answer = ""
     }
 

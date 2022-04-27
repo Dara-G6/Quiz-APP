@@ -6,54 +6,49 @@ import android.util.Log
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import com.example.quizapp.databinding.ActivitySettingBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 
 class SettingActivity : AppCompatActivity() {
 
-    //button
-    private lateinit var BtnClose:Button
-    private lateinit var BtnSetSetting:Button
 
-    //Radio group
-    private lateinit var GetLanguage:RadioGroup
-    private lateinit var BtnEnglish:RadioButton
-    private lateinit var BtnKhmer:RadioButton
 
     //
     private  var Language :String=""
     val auth = FirebaseAuth.getInstance()
     val database = FirebaseDatabase.getInstance().getReference("Users")
+
+    //binding
+    private lateinit var binding: ActivitySettingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setting)
+        binding = ActivitySettingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        //Radio button
-        GetLanguage = findViewById(R.id.Language)
 
-        BtnEnglish = findViewById(R.id.English)
-        BtnEnglish.setOnClickListener {
-            Language = BtnEnglish.text.toString()
-        }
-
-        BtnKhmer = findViewById(R.id.Khmer)
-        BtnKhmer.setOnClickListener {
-            Language = BtnKhmer.text.toString()
+       binding.English
+           .setOnClickListener {
+            Language = binding.English.text.toString()
         }
 
 
+        binding.Khmer.setOnClickListener {
+            Language = binding.Khmer.text.toString()
+        }
 
 
 
-        //Button
-        BtnClose = findViewById(R.id.BtnClose)
-        BtnClose.setOnClickListener {
+
+
+
+        binding.BtnClose.setOnClickListener {
             finish()
         }
 
-        BtnSetSetting = findViewById(R.id.BtnSetting)
-        BtnSetSetting.setOnClickListener {
+
+       binding.BtnSetting.setOnClickListener {
           SetSetting()
         }
 
@@ -67,9 +62,9 @@ class SettingActivity : AppCompatActivity() {
             if (it.exists()){
                 Language = it.child("Language").getValue().toString()
                 if (Language.equals("English")){
-                    GetLanguage.check(R.id.English)
+                    binding.Language.check(R.id.English)
                 }else{
-                    GetLanguage.check(R.id.Khmer)
+                    binding.Language.check(R.id.Khmer)
                 }
             }
         }

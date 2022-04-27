@@ -64,10 +64,6 @@ class AdaperRank(context: Context, resource: Int, objects:ArrayList<Rank>) :
             TextName.setText("You")
         }
 
-
-
-
-
         return RankView
     }
 }
