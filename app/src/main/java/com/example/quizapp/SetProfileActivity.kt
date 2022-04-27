@@ -40,7 +40,10 @@ class SetProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_profile)
-
+        view = findViewById(R.id.Layout_SetProfile)
+        view.setOnClickListener {
+            hideKeyboard(view)
+        }
         auth = FirebaseAuth.getInstance()
         user = auth.currentUser!!
         database = FirebaseDatabase.getInstance().getReference("Users")
@@ -48,6 +51,7 @@ class SetProfileActivity : AppCompatActivity() {
 
         ProfileImage = findViewById(R.id.ProfileImage)
         ProfileImage.setOnClickListener {
+            hideKeyboard(view)
           ChooseImage()
         }
 
@@ -111,7 +115,7 @@ class SetProfileActivity : AppCompatActivity() {
             var Name = TextUserName.text.toString()
             var Email = user.email
             var ID = auth.uid
-            var Login = "No"
+            var Login = "Yes"
             Url = it.toString()
             var map: HashMap<String, String> = HashMap<String, String>()
             map.put("ID", ID.toString())
@@ -125,7 +129,7 @@ class SetProfileActivity : AppCompatActivity() {
                     Form.isVisible = true
                     ShowProgress.isVisible = false
                     Toast(this).ShowMessage("Setup profile Success",this,R.drawable.tick)
-                    startActivity(Intent(this, SignINActivity::class.java))
+                    startActivity(Intent(this,HomePageActivity::class.java))
                 } else {
                     Form.isVisible = true
                     ShowProgress.isVisible = false
@@ -146,7 +150,7 @@ class SetProfileActivity : AppCompatActivity() {
                     var Url = ""
                     var Name = TextUserName.text.toString()
                     var Email = user.email
-                    var Login = "No"
+                    var Login = "Yes"
                     Url = it.toString()
                     var map: HashMap<String, String> = HashMap<String, String>()
                     map.put("ID", ID.toString())
@@ -160,7 +164,7 @@ class SetProfileActivity : AppCompatActivity() {
                             Form.isVisible = true
                             ShowProgress.isVisible = false
                             Toast(this).ShowMessage("Setup profile Success",this,R.drawable.tick)
-                            startActivity(Intent(this, SignINActivity::class.java))
+                            startActivity(Intent(this,HomePageActivity::class.java))
                         } else {
                             Form.isVisible = true
                             ShowProgress.isVisible = false
@@ -188,7 +192,7 @@ class SetProfileActivity : AppCompatActivity() {
             var Name="player_"+r.nextInt(1000000000)
             var Email =user.email
             var ID = auth.uid
-            var Login = "No"
+            var Login = "Yes"
             Url = it.toString()
             var map:HashMap<String,String> = HashMap<String,String>()
             map.put("ID",ID.toString())
@@ -202,7 +206,7 @@ class SetProfileActivity : AppCompatActivity() {
                     Form.isVisible = true
                     ShowProgress.isVisible =false
                     Toast(this).ShowMessage("Setup profile Success",this,R.drawable.tick)
-                    startActivity(Intent(this,SignINActivity::class.java))
+                    startActivity(Intent(this,HomePageActivity::class.java))
                 }else{
                     Form.isVisible = true
                     ShowProgress.isVisible =false
