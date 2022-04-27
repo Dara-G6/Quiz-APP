@@ -26,7 +26,7 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-
+        view = findViewById(R.id.Layput_SignUP)
 
         //Text view
         TextAlready = findViewById(R.id.TextAllready)
@@ -41,12 +41,13 @@ class SignUpActivity : AppCompatActivity() {
         BtnSignUp = findViewById(R.id.BtnSingUp)
         BtnSignUp.setOnClickListener {
               CheckInput()
+                hideKeyboard(view)
         }
 
 
         Form = findViewById(R.id.Form)
         ShowProgress = findViewById(R.id.SHOW_PROGRESS)
-        view = findViewById(R.id.Layput_SignUP)
+
         view.setOnClickListener {
             hideKeyboard(view)
         }

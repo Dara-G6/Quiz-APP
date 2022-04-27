@@ -31,7 +31,7 @@ class SignINActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_in)
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
-
+        view = findViewById(R.id.Layout_SignIN)
         // Edit Text
         TextEmail = findViewById(R.id.TextEmail)
         TextPassword = findViewById(R.id.TextPassword)
@@ -39,6 +39,7 @@ class SignINActivity : AppCompatActivity() {
         //Button
         BtnLogin = findViewById(R.id.BtnLogin)
         BtnLogin.setOnClickListener {
+            hideKeyboard(view)
             Login()
         }
 
@@ -50,7 +51,6 @@ class SignINActivity : AppCompatActivity() {
 
         Form = findViewById(R.id.Form)
         ShowProgress = findViewById(R.id.SHOW_PROGRESS)
-        view = findViewById(R.id.Layout_SignIN)
         view.setOnClickListener {
             hideKeyboard(view)
         }

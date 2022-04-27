@@ -97,7 +97,7 @@
                     android:layout_width="match_parent"
                     android:backgroundTint="@color/white"
                     android:textColor="@color/black"
-                    android:text="@string/rank"
+                    android:text="@string/best_score"
                     android:padding="6dp"
                     android:textSize="18dp"
                     style="@style/Widget.AppCompat.Button.Borderless"

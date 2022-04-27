@@ -57,10 +57,15 @@ class EditProfileActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance().getReference("Users")
         storage =FirebaseStorage.getInstance().getReference("Profile")
 
+        view = findViewById(R.id.Layput_EditProfile)
+        view.setOnClickListener {
+            hideKeyboard(view)
+        }
         //Button
         BtnSet = findViewById(R.id.BtnSet)
         BtnSet.setOnClickListener {
             ShowDialog()
+            hideKeyboard(view)
         }
 
         BtnClose = findViewById(R.id.BtnClose)
@@ -71,10 +76,7 @@ class EditProfileActivity : AppCompatActivity() {
         //View
         Form = findViewById(R.id.Form)
         ShowProgress = findViewById(R.id.SHOW_PROGRESS)
-        view = findViewById(R.id.Layput_EditProfile)
-        view.setOnClickListener {
-            hideKeyboard(view)
-        }
+
 
         //Image view
         ProfileImage = findViewById(R.id.ProfileImage)

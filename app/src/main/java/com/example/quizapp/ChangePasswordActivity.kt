@@ -37,7 +37,10 @@ class ChangePasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_password)
-
+        view = findViewById(R.id.Layout_ChangePassword)
+        view.setOnClickListener {
+            hideKeyboard(view)
+        }
 
         //Button
         BtnClose = findViewById(R.id.BtnClose)
@@ -47,16 +50,14 @@ class ChangePasswordActivity : AppCompatActivity() {
 
         BtnSetNewPassword = findViewById(R.id.BtnSetNewPassword)
         BtnSetNewPassword.setOnClickListener {
+            hideKeyboard(view)
             CheckInput()
         }
 
         //View
         Form = findViewById(R.id.Form)
         ShowProgress = findViewById(R.id.SHOW_PROGRESS)
-        view = findViewById(R.id.Layout_ChangePassword)
-        view.setOnClickListener {
-            hideKeyboard(view)
-        }
+
 
         auth = FirebaseAuth.getInstance()
 
