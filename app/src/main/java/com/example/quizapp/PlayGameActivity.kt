@@ -124,6 +124,7 @@ class PlayGameActivity : AppCompatActivity() {
             var s = ScienceQuestion()
             index=r.nextInt(s.getAllQuestions().size-10)
             ListQuestion = s.getAllQuestions()
+            binding.TextQuestion.textSize= 22F
         }else{
             var g = GeneralQuestion()
             ListQuestion = g.getAllQuestions()
@@ -154,7 +155,7 @@ class PlayGameActivity : AppCompatActivity() {
             }
             AfterClick()
         }
-        binding.TextCountPoint.setText("Point :$Newpoint/100")
+        binding.TextCountPoint.setText("ពិន្ទុ :$Newpoint/100")
     }
 
     //set question to text view
@@ -162,7 +163,7 @@ class PlayGameActivity : AppCompatActivity() {
         var random = r.nextInt(6)
 
          Log.d("Random ",random.toString())
-         binding.TextCountQuestion.setText("Question : ${count+1}/10")
+         binding.TextCountQuestion.setText("សំណួរ : ${count+1}/10")
          binding.TextQuestion.setText( currentQuestion.Question)
          if (random==0){
              //C B A
@@ -230,10 +231,10 @@ class PlayGameActivity : AppCompatActivity() {
         }
 
         var TextScore = dialog.findViewById<TextView>(R.id.TextScore)
-        TextScore.setText("Score : $Newpoint/100")
+        TextScore.setText("ពិន្ទុ : $Newpoint/100")
 
         var TextTime = dialog.findViewById<TextView>(R.id.TextTime)
-        TextTime.setText("Time completed : ${(NewTime/1000).toDouble()}sec")
+        TextTime.setText("រយះពេលបញ្ចប់ : ${(NewTime/1000).toDouble()}sec")
 
         dialog.show()
 
@@ -282,7 +283,7 @@ class PlayGameActivity : AppCompatActivity() {
         TimePause=0
         NewTime=0
         Newpoint=0
-        binding.TextCountPoint.setText("Point : $Newpoint/100")
+        binding.TextCountPoint.setText("ពិន្ទុ : $Newpoint/100")
         getQuestion()
         currentQuestion = ListQuestion.get(index)
         ShowQuestion()
@@ -317,7 +318,7 @@ class PlayGameActivity : AppCompatActivity() {
 
     //Start Count Time
     private fun StartCountTime(){
-        binding.TextTime.format="Time : %s"
+        binding.TextTime.format="រយះពេល : %s"
         binding.TextTime.base = SystemClock.elapsedRealtime()-TimePause
         binding.TextTime.start()
     }

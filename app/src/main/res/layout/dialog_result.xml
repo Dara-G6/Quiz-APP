@@ -11,7 +11,8 @@
         android:textStyle="bold"
         android:textSize="28dp"
         android:id="@+id/TextHeader"
-        android:text="@string/result"
+        android:text="លទ្ធផល"
+        android:fontFamily="@font/odormeanchey"
         android:textColor="@color/white"
         android:background="@color/blue"/>
 
@@ -22,15 +23,17 @@
         android:layout_gravity="center"
         android:id="@+id/IconDialog"
         android:src="@drawable/medal"/>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/score"
-        android:textStyle="bold"
-        android:textSize="24dp"
         android:id="@+id/TextScore"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:fontFamily="@font/odormeanchey"
+        android:text="@string/score"
         android:textAlignment="center"
-        android:textColor="@color/blue"/>
+        android:textColor="@color/blue"
+        android:textSize="24dp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
@@ -38,6 +41,7 @@
         android:id="@+id/TextTime"
         android:text="@string/time"
         android:textStyle="bold"
+        android:fontFamily="@font/odormeanchey"
         android:textSize="20dp"
         android:textAlignment="center"
         android:textColor="@color/blue"/>
@@ -47,14 +51,15 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="12dp"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="12dp"
         app:cardBackgroundColor="@color/primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/restart"
+            android:text="លេងម្តងទៀត"
+            android:fontFamily="@font/odormeanchey"
             android:id="@+id/BtnRestart"
             android:textStyle="bold"
             style="@style/Widget.AppCompat.Button.Borderless"
@@ -69,14 +74,15 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="12dp"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="12dp"
         app:cardBackgroundColor="@color/primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/share"
+            android:text="ចែករំលែក"
+            android:fontFamily="@font/odormeanchey"
             android:id="@+id/BtnShare"
             android:textStyle="bold"
             style="@style/Widget.AppCompat.Button.Borderless"
@@ -91,14 +97,15 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="16dp"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="12dp"
         app:cardBackgroundColor="@color/primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/home"
+            android:text="ទំព័រដើម"
+            android:fontFamily="@font/odormeanchey"
             android:textStyle="bold"
             android:id="@+id/BtnHome"
             style="@style/Widget.AppCompat.Button.Borderless"

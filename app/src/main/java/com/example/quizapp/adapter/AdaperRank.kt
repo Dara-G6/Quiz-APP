@@ -21,7 +21,6 @@ class AdaperRank(context: Context, resource: Int, objects:ArrayList<Rank>) :
 
     val List:ArrayList<Rank> = objects
     val C= context
-
     val auth = FirebaseAuth.getInstance()
 
     @SuppressLint("ResourceAsColor")
@@ -41,7 +40,7 @@ class AdaperRank(context: Context, resource: Int, objects:ArrayList<Rank>) :
         TextPoint.setText(List.get(position).Point.toString())
 
         val TextTime = RankView.findViewById<TextView>(R.id.TextTime)
-        TextTime.setText(List.get(position).Time)
+        TextTime.setText(List.get(position).Time.toString())
 
 
         //Image

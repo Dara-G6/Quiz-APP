@@ -11,6 +11,7 @@
         android:textStyle="bold"
         android:textSize="24dp"
         android:id="@+id/TextHeader"
+        android:fontFamily="@font/odormeanchey"
         android:text="@string/text_incorrect"
         android:textColor="@color/white"
         android:background="@color/blue"/>
@@ -27,6 +28,7 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24dp"
+        android:fontFamily="@font/odormeanchey"
         android:layout_height="wrap_content"
         android:text="@string/text_correct"/>
 
@@ -35,6 +37,7 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20dp"
+        android:fontFamily="@font/odormeanchey"
         android:id="@+id/TextAnswer"
         android:layout_height="wrap_content"
        />
@@ -50,7 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:id="@+id/BtnOk"
-            android:text="@string/ok"
+            android:text="យល់ព្រម"
+            android:fontFamily="@font/odormeanchey"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:textSize="20dp"
             android:drawableRight="@drawable/arrow_right_white"

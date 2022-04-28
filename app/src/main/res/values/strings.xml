@@ -39,8 +39,8 @@
     <string name="no">NO</string>
     <string name="yes">Yes</string>
     <string name="do_you_want_to_delete_your_account">Do you want to Delete your account?</string>
-    <string name="text_incorrect">ចម្លើយមិនត្រឹមត្រូវទេ</string>
-    <string name="text_correct">ចម្លើយដែលត្រឹមត្រូវ:</string>
+    <string name="text_incorrect">ចម្លើយមិនត្រឺមត្រូវ:</string>
+    <string name="text_correct">ចម្លើយដែលត្រឺមត្រូវ:</string>
     <string name="ok">OK</string>
     <string name="do_you_want_to_quite_the_game">Do you want to quite the game?</string>
     <string name="restart_game">Restart Game</string>

@@ -14,7 +14,8 @@
      android:textAlignment="center"
      android:gravity="center_vertical"
      android:textColor="@color/white"
-     android:text="@string/do_you_want_to_quite_the_game"
+     android:text="តើអ្នកចង់បញ្ឈប់ការលេងមែនទេ?"
+     android:fontFamily="@font/odormeanchey"
      tools:ignore="RtlCompat" />
 
  <ImageView
@@ -26,13 +27,14 @@
      android:layout_width="match_parent"
      app:cardElevation="12dp"
      android:layout_margin="10dp"
-     app:cardCornerRadius="16dp"
+     app:cardCornerRadius="12dp"
      app:cardBackgroundColor="@color/primary"
      android:layout_height="wrap_content">
   <Button
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:text="@string/restart_game"
+      android:text="ចាប់ផ្តើមសារថ្មី"
+      android:fontFamily="@font/odormeanchey"
       android:drawableLeft="@drawable/restart"
       android:textSize="18dp"
       android:id="@+id/BtnRestart"
@@ -51,14 +53,15 @@
       android:layout_height="wrap_content"
       app:cardElevation="12dp"
       android:layout_margin="10dp"
-      app:cardCornerRadius="16dp"
+      app:cardCornerRadius="12dp"
       android:layout_marginRight="12dp"
       android:layout_weight="1">
    <Button
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:text="@string/no"
+       android:text="ទេ"
        android:id="@+id/BtnNo"
+       android:fontFamily="@font/odormeanchey"
        android:textSize="18dp"
        android:drawableLeft="@drawable/close_red"
        android:textColor="@color/primary"
@@ -70,14 +73,15 @@
       android:layout_height="wrap_content"
       app:cardElevation="12dp"
       android:layout_margin="10dp"
-      app:cardCornerRadius="16dp"
+      app:cardCornerRadius="12dp"
       app:cardBackgroundColor="@color/primary"
       android:layout_weight="1">
    <Button
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:text="@string/yes"
+       android:text="បាទ/ចាស"
        android:textSize="18dp"
+       android:fontFamily="@font/odormeanchey"
        android:id="@+id/BtnYes"
        android:drawableRight="@drawable/arrow_right_white"
        android:textColor="@color/white"
