@@ -79,7 +79,7 @@ class RankFragment : Fragment() {
                             Name,
                             Path,
                             Point.toLong(),
-                            Time.toString()
+                            Time
                         )
                     )
                     }
@@ -124,7 +124,7 @@ class RankFragment : Fragment() {
                                 Name,
                                 Path,
                                 Point.toLong(),
-                                Time.toString()
+                                Time
                             )
                         )
                     }
@@ -168,7 +168,7 @@ class RankFragment : Fragment() {
                                 Name,
                                 Path,
                                 Point.toLong(),
-                                Time.toString()
+                                Time
                             )
                         )
                     }
