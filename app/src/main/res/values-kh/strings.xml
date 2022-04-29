@@ -36,10 +36,10 @@
     <string name="already_have_account">មានគណនីរួចហើយ?</string>
     <string name="do_you_want_to_edit_your_profile">តើអ្នកចង់ កែប្រែព័ត៍មានមែនទេ?</string>
     <string name="no">ទេ</string>
-    <string name="yes">បាត/ចាស</string>
+    <string name="yes">បាទ/ចាស</string>
     <string name="do_you_want_to_delete_your_account">តើអ្នកចង់ លុបគណនីមែនទេ?</string>
-    <string name="text_incorrect">ចម្លើយមិនត្រឺមត្រូវ:</string>
-    <string name="text_correct">ចម្លើយដែលត្រឺមត្រូវ:</string>
+    <string name="text_incorrect">ចម្លើយមិនត្រឹមត្រូវ:</string>
+    <string name="text_correct">ចម្លើយដែលត្រឹមត្រូវ:</string>
     <string name="ok">បាទ/ចាស</string>
     <string name="do_you_want_to_quite_the_game">តើអ្នកចង់បញ្ឈប់ការលេងមែនទេ?</string>
     <string name="restart_game">លេងឡើងវិញ</string>

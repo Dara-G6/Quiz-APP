@@ -95,12 +95,12 @@ class PlayGameActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         StartCountTime()
-        binding.TextType.setText(intent.getStringExtra("TypeGame"))
+        val type = intent.getStringExtra("Type")
         Name = intent.getStringExtra("Name").toString()
         ID   = intent.getStringExtra("ID").toString()
         Path = intent.getStringExtra("Path").toString()
-
-        database = FirebaseDatabase.getInstance().getReference(binding.TextType.text.toString())
+        Log.d("Type ",type.toString())
+        database = FirebaseDatabase.getInstance().getReference(type.toString())
         database.child(ID).get().addOnSuccessListener {
             if (it.exists()){
                 OldPoint = it.child("Point").getValue().toString().toLong()
