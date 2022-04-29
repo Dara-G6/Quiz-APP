@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:textAlignment="center"
             android:gravity="center_vertical"
-            android:text="Success"
+            android:text="@string/success"
             android:fontFamily="@font/odormeanchey"
             android:textSize="12dp"
             android:id="@+id/Text"

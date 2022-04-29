@@ -12,6 +12,7 @@
         android:textStyle="bold"
         android:textSize="24dp"
         android:id="@+id/TextHeader"
+        android:fontFamily="@font/odormeanchey"
         android:text="@string/do_you_want_to_edit_your_profile"
         android:textColor="@color/white"
         android:background="@color/blue"/>
@@ -39,6 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/no"
+                android:fontFamily="@font/odormeanchey"
                 android:textSize="16dp"
                 android:drawableLeft="@drawable/close_red"
                 android:textStyle="bold"
@@ -63,6 +65,7 @@
                 android:textStyle="bold"
                 android:drawableRight="@drawable/arrow_right_white"
                 android:id="@+id/BtnYes"
+                android:fontFamily="@font/odormeanchey"
                 android:textColor="@color/white"
                 style="@style/Widget.AppCompat.Button.Borderless"/>
         </androidx.cardview.widget.CardView>

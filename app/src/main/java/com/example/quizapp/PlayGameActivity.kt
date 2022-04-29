@@ -120,6 +120,7 @@ class PlayGameActivity : AppCompatActivity() {
             var m = MathQuestion()
             index =r.nextInt(m.getAllQuestions().size-10)
             ListQuestion = m.getAllQuestions()
+            binding.TextQuestion.textSize= 22F
         }else if(intent.getStringExtra("TypeGame").toString().equals("Science")){
             var s = ScienceQuestion()
             index=r.nextInt(s.getAllQuestions().size-10)

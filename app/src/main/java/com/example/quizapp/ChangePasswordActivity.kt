@@ -73,7 +73,7 @@ class ChangePasswordActivity : AppCompatActivity() {
 
     //Ask user first
     private fun ShowDialog(){
-        dialog.setContentView(R.layout.dialog_ask)
+        dialog.setContentView(R.layout.dialog_changepassword)
 
         val ip = WindowManager.LayoutParams()
         ip.copyFrom(dialog.window!!.attributes)
@@ -89,7 +89,6 @@ class ChangePasswordActivity : AppCompatActivity() {
         val BtnNo = dialog.findViewById<Button>(R.id.BtnNo)
         val BtnYes = dialog.findViewById<Button>(R.id.BtnYes)
 
-        TextHeader.setText("Do you want to change your password?")
         Icon.setImageResource(R.drawable.warning)
 
         BtnNo.setOnClickListener {

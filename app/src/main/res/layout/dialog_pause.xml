@@ -14,7 +14,7 @@
      android:textAlignment="center"
      android:gravity="center_vertical"
      android:textColor="@color/white"
-     android:text="តើអ្នកចង់បញ្ឈប់ការលេងមែនទេ?"
+     android:text="@string/do_you_want_to_quite_the_game"
      android:fontFamily="@font/odormeanchey"
      tools:ignore="RtlCompat" />
 
@@ -33,7 +33,7 @@
   <Button
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:text="ចាប់ផ្តើមសារថ្មី"
+      android:text="@string/restart"
       android:fontFamily="@font/odormeanchey"
       android:drawableLeft="@drawable/restart"
       android:textSize="18dp"
@@ -59,7 +59,7 @@
    <Button
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:text="ទេ"
+       android:text="@string/no"
        android:id="@+id/BtnNo"
        android:fontFamily="@font/odormeanchey"
        android:textSize="18dp"
@@ -79,7 +79,7 @@
    <Button
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:text="បាទ/ចាស"
+       android:text="@string/yes"
        android:textSize="18dp"
        android:fontFamily="@font/odormeanchey"
        android:id="@+id/BtnYes"

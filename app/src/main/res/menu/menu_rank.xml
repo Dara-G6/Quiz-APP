@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="Math"
+        android:title="@string/math"
         android:id="@+id/TabMath"
         />
 
     <item
-        android:title="Science"
+        android:title="@string/science"
         android:id="@+id/TabScience"
         />
 
     <item
-        android:title="General Knowledge"
+        android:title="@string/general_knowledge"
         android:id="@+id/TabGeneral"
         />
 </menu>

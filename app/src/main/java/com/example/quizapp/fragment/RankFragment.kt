@@ -57,10 +57,11 @@ class RankFragment : Fragment() {
     }
 
     private fun OnSelectMath() {
-       binding.ListScience.isVisible = false
-       binding.ListGeneral.isVisible = false
-       binding.ListMath.isVisible = true
-       binding.TypeRank.setImageResource(R.drawable.math_rank)
+        binding.ListScience.isVisible = false
+        binding.ListGeneral.isVisible = false
+        binding.ListMath.isVisible = true
+        binding.TypeRank.setImageResource(R.drawable.math_rank)
+        binding.TextRank.setText(R.string.math)
         val l = ArrayList<Rank>()
         val database = FirebaseDatabase.getInstance().getReference("Math")
         database.orderByChild("Point").get().addOnSuccessListener {
@@ -102,10 +103,11 @@ class RankFragment : Fragment() {
     }
 
     private fun OnSelectScience() {
-       binding.ListScience.isVisible = true
-       binding.ListGeneral.isVisible = false
-       binding.ListMath.isVisible = false
-       binding.TypeRank.setImageResource(R.drawable.chemist_rank)
+        binding.ListScience.isVisible = true
+        binding.ListGeneral.isVisible = false
+        binding.ListMath.isVisible = false
+        binding.TypeRank.setImageResource(R.drawable.chemist_rank)
+        binding.TextRank.setText(R.string.science)
         val l = ArrayList<Rank>()
         val database = FirebaseDatabase.getInstance().getReference("Science")
         database.get().addOnSuccessListener {
@@ -150,6 +152,7 @@ class RankFragment : Fragment() {
         binding.ListGeneral.isVisible = true
         binding.ListMath.isVisible = false
         binding.TypeRank.setImageResource(R.drawable.general_rank)
+        binding.TextRank.setText(R.string.general_knowledge)
         val l = ArrayList<Rank>()
         val database = FirebaseDatabase.getInstance().getReference("General Knowledge")
         database.get().addOnSuccessListener {

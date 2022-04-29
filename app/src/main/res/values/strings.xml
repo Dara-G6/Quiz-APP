@@ -1,6 +1,6 @@
 <resources>
+    <!--English -->
     <string name="app_name">QuizApp</string>
-
     <string name="tabMath"><u>Math</u></string>
     <string name="tabScience"><u>Science</u></string>
     <string name="tabGeneral"><u>General</u></string>
@@ -39,8 +39,8 @@
     <string name="no">NO</string>
     <string name="yes">Yes</string>
     <string name="do_you_want_to_delete_your_account">Do you want to Delete your account?</string>
-    <string name="text_incorrect">ចម្លើយមិនត្រឺមត្រូវ:</string>
-    <string name="text_correct">ចម្លើយដែលត្រឺមត្រូវ:</string>
+    <string name="text_incorrect">Incorrect Answer:</string>
+    <string name="text_correct">Correct Answer :</string>
     <string name="ok">OK</string>
     <string name="do_you_want_to_quite_the_game">Do you want to quite the game?</string>
     <string name="restart_game">Restart Game</string>
@@ -56,4 +56,13 @@
     <string name="general_knowledge">General Knowledge</string>
     <string name="set_setting">Set Setting</string>
     <string name="best_score">Best Score</string>
+    <string name="checking_your_credential">Checking your credential</string>
+    <string name="number">No</string>
+    <string name="name">Name</string>
+    <string name="success">Success</string>
+    <string name="do_you_want_to_change_password">Do you want to change Password?</string>
+    <string name="profile">Profile</string>
+    <string name="english">English</string>
+    <string name="khmer">Khmer</string>
+
 </resources>

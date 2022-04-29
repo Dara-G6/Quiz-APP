@@ -10,6 +10,8 @@ import com.example.quizapp.databinding.ActivitySettingBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import java.util.*
+import kotlin.collections.HashMap
 
 class SettingActivity : AppCompatActivity() {
 
@@ -75,5 +77,34 @@ class SettingActivity : AppCompatActivity() {
         map.put("Language",Language)
         database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>)
         SetCheckLanguage()
+        getLang()
+    }
+
+    // Set khmer or english
+    private fun setLangToView(lang:String){
+        val r = resources
+        val dm = r.displayMetrics
+        var config = r.configuration
+        config.locale = Locale(lang.toLowerCase())
+
+        r.updateConfiguration(config,dm)
+
+        binding.BtnSetting.setText(R.string.setting)
+        binding.TextHeader.setText(R.string.setting)
+        binding.English.setText(R.string.english)
+        binding.Khmer.setText(R.string.khmer)
+
+    }
+
+    private fun getLang(){
+        database.child(auth.uid.toString()).get().addOnSuccessListener {
+            if (it.exists()){
+                val lang = it.child("Language").value.toString()
+                setLangToView(lang[0].toString()+lang[1].toString())
+            }else{
+
+                setLangToView("en")
+            }
+        }
     }
 }

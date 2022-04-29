@@ -32,6 +32,7 @@
         <TextView
             android:layout_width="match_parent"
             android:text="@string/user_name"
+            android:fontFamily="@font/odormeanchey"
             android:id="@+id/TextDisplayName"
             android:layout_marginTop="12dp"
             android:textColor="@color/black"
@@ -42,6 +43,7 @@
         <TextView
             android:layout_width="match_parent"
             android:text="@string/email"
+            android:fontFamily="@font/odormeanchey"
             android:id="@+id/TextEmail"
             android:layout_marginTop="6dp"
             android:textColor="#707280"
@@ -56,17 +58,19 @@
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content">
+
             <Button
                 android:id="@+id/BtnEdit"
                 style="@android:style/Widget.Holo.Button.Borderless"
-                android:text="@string/edit_profile"
-                android:textSize="20dp"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:drawableEnd="@drawable/arrow_right_white"
-                android:textAllCaps="false"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:drawableEnd="@drawable/arrow_right_white"
+                android:fontFamily="@font/odormeanchey"
+                android:text="@string/edit_profile"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
@@ -87,10 +91,11 @@
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="36dp"
                     android:background="#e6f6f6f6"
                     android:text="@string/personal"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/odormeanchey"
                     android:textColor="#bcbcbc"
                     android:gravity="center_vertical"/>
                 <Button
@@ -99,6 +104,7 @@
                     android:textColor="@color/black"
                     android:text="@string/best_score"
                     android:padding="6dp"
+                    android:fontFamily="@font/odormeanchey"
                     android:textSize="18dp"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:id="@+id/BtnRank"
@@ -113,6 +119,7 @@
                     android:textColor="@color/black"
                     android:text="@string/change_password"
                     android:padding="6dp"
+                    android:fontFamily="@font/odormeanchey"
                     android:textSize="18dp"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:id="@+id/BtnChangePassword"
@@ -129,6 +136,7 @@
                     android:text="@string/delete_account"
                     android:padding="6dp"
                     android:textSize="18dp"
+                    android:fontFamily="@font/odormeanchey"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:id="@+id/BtnDeleteAccount"
                     android:drawableLeft="@drawable/account_32"
@@ -139,10 +147,11 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="36dp"
                     android:background="#e6f6f6f6"
                     android:text="@string/setting"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/odormeanchey"
                     android:textColor="#bcbcbc"
                     android:gravity="center_vertical"/>
 
@@ -150,11 +159,12 @@
                     android:layout_width="match_parent"
                     android:backgroundTint="@color/white"
                     android:textColor="@color/black"
-                    android:text="Setting"
+                    android:text="@string/setting"
                     android:padding="6dp"
                     android:textSize="18dp"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:id="@+id/BtnSetting"
+                    android:fontFamily="@font/odormeanchey"
                     android:drawableLeft="@drawable/setting_32"
                     android:drawableRight="@drawable/arrow_right_black"
                     android:textAlignment="textStart"
@@ -170,6 +180,7 @@
                     android:textSize="18dp"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:id="@+id/BtnLogout"
+                    android:fontFamily="@font/odormeanchey"
                     android:drawableLeft="@drawable/logout_32"
                     android:drawableRight="@drawable/arrow_right_black"
                     android:textAlignment="textStart"

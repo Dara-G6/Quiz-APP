@@ -31,6 +31,7 @@
                 android:layout_weight="4"
                 android:textStyle="bold"
                 android:textSize="28dp"
+                android:fontFamily="@font/odormeanchey"
                 android:id="@+id/TextHeader"
                 android:textColor="@color/white"
                 android:layout_height="match_parent"
@@ -68,6 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/new_name"
+                android:fontFamily="@font/odormeanchey"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
@@ -95,6 +97,7 @@
                         android:drawableEnd="@drawable/arrow_right_white"
                         android:textAllCaps="false"
                         android:textSize="16dp"
+                        android:fontFamily="@font/odormeanchey"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_height="match_parent"
                         android:text="@string/set_new_profile"/>
@@ -119,7 +122,7 @@
                 android:textAlignment="center"
                 android:textColor="#24296a"
                 android:textSize="20dp"
-                android:text="Setup your new profile"/>
+                android:text="@string/set_new_profile"/>
         </LinearLayout>
     </LinearLayout>
 

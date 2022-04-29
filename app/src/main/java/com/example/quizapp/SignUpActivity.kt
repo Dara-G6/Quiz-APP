@@ -89,7 +89,6 @@ class SignUpActivity : AppCompatActivity() {
                        binding.Form.isVisible =true
                        binding.SHOWPROGRESS.isVisible = false
                        Toast(this).ShowMessage("Error : ${it.exception}",this,R.drawable.x_mark)
-
                    }
                }
 

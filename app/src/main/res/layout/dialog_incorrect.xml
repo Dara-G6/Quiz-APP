@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:id="@+id/BtnOk"
-            android:text="យល់ព្រម"
+            android:text="@string/ok"
             android:fontFamily="@font/odormeanchey"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:textSize="20dp"

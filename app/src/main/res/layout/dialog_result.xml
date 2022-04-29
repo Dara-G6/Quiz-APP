@@ -11,7 +11,7 @@
         android:textStyle="bold"
         android:textSize="28dp"
         android:id="@+id/TextHeader"
-        android:text="លទ្ធផល"
+        android:text="@string/result"
         android:fontFamily="@font/odormeanchey"
         android:textColor="@color/white"
         android:background="@color/blue"/>
@@ -58,7 +58,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="លេងម្តងទៀត"
+            android:text="@string/restart"
             android:fontFamily="@font/odormeanchey"
             android:id="@+id/BtnRestart"
             android:textStyle="bold"
@@ -81,7 +81,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ចែករំលែក"
+            android:text="@string/share"
             android:fontFamily="@font/odormeanchey"
             android:id="@+id/BtnShare"
             android:textStyle="bold"
@@ -104,7 +104,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ទំព័រដើម"
+            android:text="@string/home"
             android:fontFamily="@font/odormeanchey"
             android:textStyle="bold"
             android:id="@+id/BtnHome"

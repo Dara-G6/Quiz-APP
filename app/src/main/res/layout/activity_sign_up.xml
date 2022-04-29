@@ -19,7 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
-        android:textSize="32dp"
+        android:textSize="26dp"
+        android:fontFamily="@font/odormeanchey"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
@@ -49,6 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
+                    android:fontFamily="@font/odormeanchey"
                     android:layout_marginTop="10dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -66,6 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
+                    android:fontFamily="@font/odormeanchey"
                     android:layout_marginTop="10dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -84,6 +87,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/confirm_password"
                     android:layout_marginTop="10dp"
+                    android:fontFamily="@font/odormeanchey"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -105,10 +109,12 @@
                         android:layout_width="match_parent"
                         app:cardCornerRadius="12dp"
                         android:layout_weight="2"
+                        android:fontFamily="@font/odormeanchey"
                         android:layout_marginTop="24dp"
                         app:cardBackgroundColor="@color/primary"
                         android:layout_height="48dp">
                         <Button
+                            android:fontFamily="@font/odormeanchey"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/sign_up"
@@ -127,6 +133,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:fontFamily="@font/odormeanchey"
                         android:layout_weight="1"
                         android:textAlignment="textEnd"
                         android:textColor="#24296a"
@@ -137,6 +144,7 @@
                     <TextView
                         android:layout_weight="1"
                         android:textSize="16dp"
+                        android:fontFamily="@font/odormeanchey"
                         android:id="@+id/TextAllready"
                         android:layout_marginLeft="6dp"
                         android:textAlignment="textStart"

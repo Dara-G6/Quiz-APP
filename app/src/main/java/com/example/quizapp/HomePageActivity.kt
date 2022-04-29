@@ -2,12 +2,17 @@ package com.example.quizapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.quizapp.databinding.ActivityHomePageBinding
 import com.example.quizapp.fragment.HomeFragment
 import com.example.quizapp.fragment.ProfileTabFragment
 import com.example.quizapp.fragment.RankFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
+import java.util.*
 
 
 class HomePageActivity : AppCompatActivity() {
@@ -21,8 +26,6 @@ class HomePageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
 
 
        binding.menu.setOnNavigationItemSelectedListener {
@@ -40,7 +43,40 @@ class HomePageActivity : AppCompatActivity() {
             }
             true
         }
+
+        getLang()
     }
 
+    override fun onResume() {
+        super.onResume()
+        getLang()
+    }
+
+
+    // Set khmer or english
+    private fun setLangToView(lang:String){
+        val r = resources
+        val dm = r.displayMetrics
+        var config = r.configuration
+        config.locale = Locale(lang.toLowerCase())
+
+        r.updateConfiguration(config,dm)
+
+
+    }
+
+    private fun getLang(){
+        val database = FirebaseDatabase.getInstance().getReference("Users")
+        val auth = FirebaseAuth.getInstance()
+        database.child(auth.uid.toString()).get().addOnSuccessListener {
+            if (it.exists()){
+                val lang = it.child("Language").value.toString()
+                setLangToView(lang[0].toString()+lang[1].toString())
+            }else{
+
+                setLangToView("en")
+            }
+        }
+    }
 
 }

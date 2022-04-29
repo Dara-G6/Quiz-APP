@@ -10,6 +10,7 @@ import com.example.quizapp.Question.ScienceQuestion
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.util.*
 
 class StartAppActivity : AppCompatActivity() {
 
@@ -48,9 +49,32 @@ class StartAppActivity : AppCompatActivity() {
                 startActivity(Intent(this,SignINActivity::class.java))
             }
         }
+        getLang()
     }
 
+    // Set khmer or english
+    private fun setLangToView(lang:String){
+        val r = resources
+        val dm = r.displayMetrics
+        var config = r.configuration
+        config.locale = Locale(lang.toLowerCase())
 
+        r.updateConfiguration(config,dm)
+
+
+    }
+
+    private fun getLang(){
+        database.child(auth.uid.toString()).get().addOnSuccessListener {
+            if (it.exists()){
+                val lang = it.child("Language").value.toString()
+                setLangToView(lang[0].toString()+lang[1].toString())
+            }else{
+
+                setLangToView("en")
+            }
+        }
+    }
 
 
 }

@@ -3,6 +3,7 @@ package com.example.quizapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
@@ -12,6 +13,7 @@ import com.example.quizapp.toast.ShowMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.util.*
 
 class SignINActivity : AppCompatActivity() {
 
@@ -59,6 +61,7 @@ class SignINActivity : AppCompatActivity() {
                 }
             }
         }
+        getLang()
     }
 
     //Login user
@@ -73,7 +76,8 @@ class SignINActivity : AppCompatActivity() {
         else{
            binding.Form.isVisible = false
             binding.SHOWPROGRESS.isVisible = true
-            auth.signInWithEmailAndPassword(binding.TextEmail.text.toString(),binding.TextPassword.text.toString()).addOnCompleteListener {
+            auth.signInWithEmailAndPassword(binding.TextEmail.text.toString()
+                ,binding.TextPassword.text.toString()).addOnCompleteListener {
                 if (it.isSuccessful){
                     binding.Form.isVisible = true
                     binding.SHOWPROGRESS.isVisible  = false
@@ -85,6 +89,25 @@ class SignINActivity : AppCompatActivity() {
                     binding.SHOWPROGRESS.isVisible = false
                     Toast(this).ShowMessage("Error : ${it.exception}",this,R.drawable.x_mark)
                 }
+            }
+        }
+    }
+
+
+    // Set khmer or english
+    private fun setLangToView(lang:String){
+        if (lang[0].toLowerCase()=='k')
+        binding.TextRegister.setText("ក")
+    }
+
+    private fun getLang(){
+        database.child(auth.uid.toString()).get().addOnSuccessListener {
+            if (it.exists()){
+                val lang = it.child("Language").value.toString()
+                setLangToView(lang)
+            }else{
+                Log.d("HI :","")
+                setLangToView("en")
             }
         }
     }
