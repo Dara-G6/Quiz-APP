@@ -121,15 +121,18 @@ class PlayGameActivity : AppCompatActivity() {
             index =r.nextInt(m.getAllQuestions().size-10)
             ListQuestion = m.getAllQuestions()
             binding.TextQuestion.textSize= 22F
+            binding.TextType.setText(R.string.math)
         }else if(intent.getStringExtra("TypeGame").toString().equals("Science")){
             var s = ScienceQuestion()
             index=r.nextInt(s.getAllQuestions().size-10)
             ListQuestion = s.getAllQuestions()
             binding.TextQuestion.textSize= 22F
+            binding.TextType.setText(R.string.science)
         }else{
             var g = GeneralQuestion()
             ListQuestion = g.getAllQuestions()
-
+            binding.TextType.setText(R.string.general_knowledge)
+            binding.TextQuestion.textSize= 22F
         }
         currentQuestion = ListQuestion.get(index)
     }
