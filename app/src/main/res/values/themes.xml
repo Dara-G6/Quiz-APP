@@ -6,9 +6,11 @@
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
 
-
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">#FF23286B</item>
         <!-- Customize your theme here. -->
     </style>
+
+
+
 </resources>

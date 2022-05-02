@@ -1,5 +1,6 @@
 package com.example.quizapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -59,10 +60,15 @@ class SettingActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        SetCheckLanguage()
+    }
+
     private fun SetCheckLanguage(){
         database.child(auth.uid.toString()).get().addOnSuccessListener {
             if (it.exists()){
-                Language = it.child("Language").getValue().toString()
+                Language = it.child("Language").value.toString()
                 if (Language.equals("English")){
                     binding.Language.check(R.id.English)
                 }else{
@@ -78,6 +84,7 @@ class SettingActivity : AppCompatActivity() {
         database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>)
         SetCheckLanguage()
         getLang()
+        startActivity(Intent(this,StartAppActivity::class.java))
     }
 
     // Set khmer or english

@@ -34,7 +34,8 @@ class RankFragment : Fragment() {
     ): View? {
         binding = FragmentRankBinding.inflate(inflater,container,false)
 
-        binding.menu.selectedItemId = R.id.TabMath
+        binding.menu.selectedItemId=R.id.TabMath
+        OnSelectMath()
         binding.menu.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.TabMath -> {
@@ -51,11 +52,16 @@ class RankFragment : Fragment() {
         }
 
 
-        OnSelectMath()
+            // OnSelectMath()
 
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.menu.selectedItemId=R.id.TabMath
+        OnSelectMath()
+    }
     private fun OnSelectMath() {
         binding.ListScience.isVisible = false
         binding.ListGeneral.isVisible = false
