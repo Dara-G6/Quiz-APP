@@ -1,9 +1,6 @@
 package com.example.quizapp.fragment
 
-import android.annotation.SuppressLint
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +11,8 @@ import androidx.core.view.isVisible
 import com.example.quizapp.Question.MathQuestion
 import com.example.quizapp.R
 import com.example.quizapp.adapter.AdaperRank
-import com.example.quizapp.adapter.Rank
 import com.example.quizapp.databinding.FragmentRankBinding
+import com.example.quizapp.dataclass.Rank
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase

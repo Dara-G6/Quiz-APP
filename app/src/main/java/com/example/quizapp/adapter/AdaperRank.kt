@@ -13,10 +13,12 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import com.example.quizapp.HomePageActivity
 import com.example.quizapp.R
+import com.example.quizapp.dataclass.Rank
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 
-class AdaperRank(context: Context, resource: Int, objects:ArrayList<Rank>) :
+class AdaperRank(context: Context, resource: Int, objects:ArrayList<
+        Rank>) :
     ArrayAdapter<Rank>(context, resource, objects) {
 
     val List:ArrayList<Rank> = objects
