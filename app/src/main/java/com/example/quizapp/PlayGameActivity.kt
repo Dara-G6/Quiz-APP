@@ -230,16 +230,23 @@ class PlayGameActivity : AppCompatActivity() {
             RestartGame()
         }
 
-        var BtnHome = dialog.findViewById<Button>(R.id.BtnHome)
+        val BtnHome = dialog.findViewById<Button>(R.id.BtnHome)
         BtnHome.setOnClickListener {
             finish()
         }
 
-        var TextScore = dialog.findViewById<TextView>(R.id.TextScore)
+        val TextScore = dialog.findViewById<TextView>(R.id.TextScore)
         TextScore.setText("ពិន្ទុ : $Newpoint/100")
 
-        var TextTime = dialog.findViewById<TextView>(R.id.TextTime)
+        val TextTime = dialog.findViewById<TextView>(R.id.TextTime)
         TextTime.setText("រយះពេលបញ្ចប់ : ${(NewTime/1000).toDouble()}sec")
+
+        val TextCongratulation = dialog.findViewById<TextView>(R.id.TextCongratulation)
+        if (Newpoint>OldPoint || NewTime<OldTime){
+            TextCongratulation.visibility = View.VISIBLE
+        }
+
+
 
         dialog.show()
 
