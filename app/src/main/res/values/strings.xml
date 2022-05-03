@@ -54,7 +54,6 @@
     <string name="math">Math</string>
     <string name="science">Science</string>
     <string name="general_knowledge">General Knowledge</string>
-    <string name="set_setting">Set Setting</string>
     <string name="best_score">Best Score</string>
     <string name="checking_your_credential">Checking your credential</string>
     <string name="number">No</string>
@@ -64,5 +63,8 @@
     <string name="profile">Profile</string>
     <string name="english">English</string>
     <string name="khmer">Khmer</string>
+    <string name="save">Save</string>
+    <string name="no_record">No Record</string>
+
 
 </resources>

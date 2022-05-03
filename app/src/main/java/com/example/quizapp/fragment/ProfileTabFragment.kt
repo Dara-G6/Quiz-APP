@@ -87,6 +87,9 @@ class ProfileTabFragment : Fragment() {
             startActivity(Intent(activity,EditProfileActivity::class.java))
         }
 
+        binding.BtnRank.setOnClickListener {
+            startActivity(Intent(activity,BestScoreActivity::class.java))
+        }
         dialog = Dialog(requireContext())
 
         return binding.root

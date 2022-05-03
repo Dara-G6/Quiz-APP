@@ -95,7 +95,7 @@ class PlayGameActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         StartCountTime()
-        val type = intent.getStringExtra("Type")
+        val type = intent.getStringExtra("TypeGame")
         Name = intent.getStringExtra("Name").toString()
         ID   = intent.getStringExtra("ID").toString()
         Path = intent.getStringExtra("Path").toString()
@@ -105,6 +105,7 @@ class PlayGameActivity : AppCompatActivity() {
             if (it.exists()){
                 OldPoint = it.child("Point").getValue().toString().toLong()
                 OldTime  = it.child("Time").getValue().toString().toLong()
+
             }else{
                 OldPoint =0
                 OldTime  =0
