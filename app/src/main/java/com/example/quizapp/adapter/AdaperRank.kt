@@ -36,13 +36,13 @@ class AdaperRank(context: Context, resource: Int, objects:ArrayList<
         TextNo.setText("${position+1}")
 
         val TextName = RankView.findViewById<TextView>(R.id.TextName)
-        TextName.setText(List.get(position).Name)
+        TextName.setText(List[position].Name)
 
         val TextPoint = RankView.findViewById<TextView>(R.id.TextPoint)
-        TextPoint.setText(List.get(position).Point.toString())
+        TextPoint.setText(List[position].Point.toString())
 
         val TextTime = RankView.findViewById<TextView>(R.id.TextTime)
-        TextTime.setText(List.get(position).Time.toString())
+        TextTime.setText(List[position].Time.toString())
 
 
         //Image
@@ -59,11 +59,15 @@ class AdaperRank(context: Context, resource: Int, objects:ArrayList<
         }
 
         val ProfileImage = RankView.findViewById<ImageView>(R.id.ProfileImage)
-        Picasso.get().load(List.get(position).Path).into(ProfileImage)
+        Picasso.get().load(List[position].Path).into(ProfileImage)
 
-        if(List.get(position).ID ==auth.uid.toString()){
+        if(List[position].ID ==auth.uid.toString()){
             TextName.setText(context.getString(R.string.you))
-            TextName.setTextColor(context.getColor(R.color.primary))
+            TextName.setTextColor(context.getColor(R.color.white))
+            TextNo.setTextColor(context.getColor(R.color.white))
+            TextPoint.setTextColor(context.getColor(R.color.white))
+            TextTime.setTextColor(context.getColor(R.color.white))
+            RankView.setBackgroundColor(context.getColor(R.color.primary))
         }
 
         return RankView

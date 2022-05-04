@@ -79,12 +79,9 @@ class PlayGameActivity : AppCompatActivity() {
            ShowDialogPauseGame()
         }
 
-
         r= Random
-
         getQuestion()
         ShowQuestion()
-
 
        binding.BtnNext.setOnClickListener {
             PlayGame()
@@ -251,6 +248,10 @@ class PlayGameActivity : AppCompatActivity() {
             }
         }
 
+        val BtnShare = dialog.findViewById<Button>(R.id.BtnShare)
+        BtnShare.setOnClickListener {
+
+        }
 
 
         dialog.show()
