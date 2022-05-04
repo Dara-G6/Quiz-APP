@@ -236,13 +236,13 @@ class PlayGameActivity : AppCompatActivity() {
         }
 
         val TextScore = dialog.findViewById<TextView>(R.id.TextScore)
-        TextScore.setText("ពិន្ទុ : $Newpoint/100")
+        TextScore.setText("${getString(R.string.score)} : $Newpoint/100")
 
         val TextTime = dialog.findViewById<TextView>(R.id.TextTime)
-        TextTime.setText("រយះពេលបញ្ចប់ : ${(NewTime/1000).toDouble()}sec")
+        TextTime.setText("${getString(R.string.time)} : ${(NewTime.toDouble()/1000).toDouble()}sec")
 
         val TextCongratulation = dialog.findViewById<TextView>(R.id.TextCongratulation)
-        if (Newpoint>OldPoint || NewTime<OldTime){
+        if (Newpoint>=OldPoint && NewTime<OldTime){
             TextCongratulation.visibility = View.VISIBLE
         }
 

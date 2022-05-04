@@ -58,7 +58,6 @@ class StartAppActivity : AppCompatActivity() {
         val dm = r.displayMetrics
         var config = r.configuration
         config.locale = Locale(lang.toLowerCase())
-
         r.updateConfiguration(config,dm)
 
 
