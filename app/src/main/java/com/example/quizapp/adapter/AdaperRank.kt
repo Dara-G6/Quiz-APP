@@ -62,7 +62,8 @@ class AdaperRank(context: Context, resource: Int, objects:ArrayList<
         Picasso.get().load(List.get(position).Path).into(ProfileImage)
 
         if(List.get(position).ID ==auth.uid.toString()){
-            TextName.setText("You")
+            TextName.setText(context.getString(R.string.you))
+            TextName.setTextColor(context.getColor(R.color.red))
         }
 
         return RankView

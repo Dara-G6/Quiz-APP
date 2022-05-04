@@ -64,6 +64,7 @@
             android:text="@string/number"
             android:textColor="@color/blue"
             android:textSize="16dp"
+            android:fontFamily="@font/odormeanchey"
             android:textStyle="bold"/>
         <TextView
             android:layout_width="0dp"
