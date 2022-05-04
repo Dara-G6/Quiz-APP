@@ -63,7 +63,7 @@ class AdaperRank(context: Context, resource: Int, objects:ArrayList<
 
         if(List.get(position).ID ==auth.uid.toString()){
             TextName.setText(context.getString(R.string.you))
-            TextName.setTextColor(context.getColor(R.color.red))
+            TextName.setTextColor(context.getColor(R.color.primary))
         }
 
         return RankView
