@@ -239,7 +239,7 @@ class PlayGameActivity : AppCompatActivity() {
         TextScore.setText("${getString(R.string.score)} : $Newpoint/100")
 
         val TextTime = dialog.findViewById<TextView>(R.id.TextTime)
-        TextTime.setText("${getString(R.string.time)} : ${(NewTime.toDouble()/1000).toDouble()}"+"${getString(R.string.sec)}")
+        TextTime.setText("${getString(R.string.time)} : ${(NewTime.toDouble()/1000)} ${getString(R.string.sec)}")
 
         val TextCongratulation = dialog.findViewById<TextView>(R.id.TextCongratulation)
         if (Newpoint>OldPoint){
