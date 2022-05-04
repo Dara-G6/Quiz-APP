@@ -43,10 +43,10 @@ class BestScoreActivity : AppCompatActivity() {
         database.child(auth.uid.toString()).get().addOnSuccessListener {
             if (it.exists()){
                     val point = it.child("Point").value.toString()
-                    val time  = it.child("Time").value.toString()
-                if (point!="0" && time!="0"){
+                    val time  = it.child("Time").value.toString().toDouble()/1000
+                if (point!="0" && time!=0.0){
                     binding.TextScoreMath.setText("${res.getText(R.string.score)}  : $point")
-                    binding.TextTimeMath.setText("${res.getText(R.string.time)}  : $time ms")
+                    binding.TextTimeMath.setText("${res.getText(R.string.time)}  : $time ${getString(R.string.sec)}")
                 }else{
                     binding.TextScoreMath.visibility = View.GONE
                     binding.TextTimeMath.visibility = View.GONE
@@ -68,10 +68,10 @@ class BestScoreActivity : AppCompatActivity() {
         database.child(auth.uid.toString()).get().addOnSuccessListener {
             if (it.exists()){
                 val point = it.child("Point").value.toString()
-                val time  = it.child("Time").value.toString()
-                if (point!="0" && time!="0"){
+                val time  = it.child("Time").value.toString().toDouble()/1000
+                if (point!="0" && time!=0.0){
                     binding.TextScoreScience.setText("${res.getText(R.string.score)}  : $point")
-                    binding.TextTimeScience.setText("${res.getText(R.string.time)}  : $time ms")
+                    binding.TextTimeScience.setText("${res.getText(R.string.time)}  : $time ${getString(R.string.sec)}")
                 }else{
                     binding.TextScoreScience.visibility = View.GONE
                     binding.TextTimeScience.visibility = View.GONE
@@ -92,10 +92,10 @@ class BestScoreActivity : AppCompatActivity() {
         database.child(auth.uid.toString()).get().addOnSuccessListener {
             if (it.exists()){
                 val point = it.child("Point").value.toString()
-                val time  = it.child("Time").value.toString()
-                if (point!="0" && time!="0"){
+                val time  = it.child("Time").value.toString().toDouble()/1000
+                if (point!="0" && time!=0.0){
                     binding.TextScoreGeneral.setText("${res.getText(R.string.score)}  : $point")
-                    binding.TextTimeGeneral.setText("${res.getText(R.string.time)}  : $time ms")
+                    binding.TextTimeGeneral.setText("${res.getText(R.string.time)}  : $time ${getString(R.string.sec)}")
                 }else{
                     binding.TextScoreGeneral.visibility = View.GONE
                     binding.TextTimeGeneral.visibility = View.GONE
