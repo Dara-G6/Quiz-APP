@@ -242,8 +242,13 @@ class PlayGameActivity : AppCompatActivity() {
         TextTime.setText("${getString(R.string.time)} : ${(NewTime.toDouble()/1000).toDouble()}"+"${getString(R.string.sec)}")
 
         val TextCongratulation = dialog.findViewById<TextView>(R.id.TextCongratulation)
-        if (Newpoint>=OldPoint && NewTime<OldTime){
+        if (Newpoint>OldPoint){
             TextCongratulation.visibility = View.VISIBLE
+        }
+        else if(Newpoint ==OldPoint){
+            if (NewTime<OldTime){
+                TextCongratulation.visibility = View.VISIBLE
+            }
         }
 
 
