@@ -256,7 +256,6 @@ class PlayGameActivity : AppCompatActivity() {
                this.type="text/plain"
 
            }
-            intent.setPackage("com.facebook")
             startActivity(intent)
         }
 
