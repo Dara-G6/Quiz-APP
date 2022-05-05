@@ -252,7 +252,7 @@ class PlayGameActivity : AppCompatActivity() {
         BtnShare.setOnClickListener {
            val intent = Intent().apply {
                this.action = Intent.ACTION_SEND
-               this.putExtra(Intent.EXTRA_TEXT,"Hi")
+               this.putExtra(Intent.EXTRA_TEXT, getString(R.string.message)+"\nhttps://www.youtube.com/watch?v=8CnmI0K4tz4&list=RDGMEM6CZm14o9sc-Q22TIneLI8gVM8CnmI0K4tz4&start_radio=1")
                this.type="text/plain"
 
            }
