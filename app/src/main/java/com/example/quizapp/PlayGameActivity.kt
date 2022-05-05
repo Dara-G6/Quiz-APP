@@ -254,8 +254,10 @@ class PlayGameActivity : AppCompatActivity() {
            val intent = Intent().apply {
                this.action = Intent.ACTION_SEND
                this.putExtra(Intent.EXTRA_TEXT,"Hi")
-               this.type="text/pain link"
+               this.type="text/plain"
+
            }
+            intent.setPackage("com.facebook.orca")
             startActivity(intent)
         }
 
