@@ -10,7 +10,6 @@ import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
-import android.widget.Chronometer
 import android.widget.TextView
 import android.widget.Toast
 import com.example.quizapp.Question.GeneralQuestion
@@ -60,7 +59,7 @@ class PlayGameActivity : AppCompatActivity() {
 
         //card View
        binding.CardA.setOnClickListener{
-           OnClickcardA()
+           onClickcardA()
 
         }
 
@@ -71,28 +70,28 @@ class PlayGameActivity : AppCompatActivity() {
 
 
        binding.CardC.setOnClickListener{
-           OnClickcardC()
+           onClickcardC()
 
         }
 
 
        binding.BtnClose.setOnClickListener{
-           ShowDialogPauseGame()
+           showDialogPauseGame()
         }
 
         r= Random
         getQuestion()
-        ShowQuestion()
+        showQuestion()
 
        binding.BtnNext.setOnClickListener {
-            PlayGame()
+            playGame()
         }
 
     }
 
     override fun onStart() {
         super.onStart()
-        StartCountTime()
+        startCountTime()
         val type = intent.getStringExtra("TypeGame")
         Name = intent.getStringExtra("Name").toString()
         ID   = intent.getStringExtra("ID").toString()
@@ -138,31 +137,31 @@ class PlayGameActivity : AppCompatActivity() {
 
 
     //play game
-    private fun PlayGame(){
+    private fun playGame(){
         if (Answer.equals("")){
             Toast(this).ShowMessage("សូមជ្រើសរើសចម្លើយ",this, R.drawable.close_red)
         }else{
             if (currentQuestion.Answer.equals(Answer)){
                 Newpoint=Newpoint+10
             }else{
-                 ShowIncorrect()
+                 showIncorrect()
             }
 
             if (count<10){
                 currentQuestion = ListQuestion.get(index)
-                ShowQuestion()
+                showQuestion()
             }else{
-                Pause()
-                UpdatePoint(Newpoint,NewTime,OldPoint,OldTime)
-                ShowResult()
+                pause()
+                updatePoint(Newpoint,NewTime,OldPoint,OldTime)
+                showResult()
             }
-            AfterClick()
+            afterClick()
         }
         binding.TextCountPoint.setText("ពិន្ទុ :$Newpoint/100")
     }
 
     //set question to text view
-    private fun ShowQuestion(){
+    private fun showQuestion(){
         var random = r.nextInt(6)
 
          Log.d("Random ",random.toString())
@@ -212,8 +211,8 @@ class PlayGameActivity : AppCompatActivity() {
 
 
     //show result game
-    private fun ShowResult(){
-        Pause()
+    private fun showResult(){
+        pause()
         dialog.setContentView(R.layout.dialog_result)
         val ip = WindowManager.LayoutParams()
         ip.copyFrom(dialog.window!!.attributes)
@@ -225,7 +224,7 @@ class PlayGameActivity : AppCompatActivity() {
         var BtnRestart = dialog.findViewById<Button>(R.id.BtnRestart)
         BtnRestart.setOnClickListener {
             dialog.dismiss()
-            RestartGame()
+            restartGame()
         }
 
         val BtnHome = dialog.findViewById<Button>(R.id.BtnHome)
@@ -257,7 +256,7 @@ class PlayGameActivity : AppCompatActivity() {
                this.type="text/plain"
 
            }
-            intent.setPackage("com.facebook.orca")
+            intent.setPackage("com.facebook")
             startActivity(intent)
         }
 
@@ -269,7 +268,7 @@ class PlayGameActivity : AppCompatActivity() {
 
 
     //dialog pause game
-    private fun ShowDialogPauseGame(){
+    private fun showDialogPauseGame(){
         dialog.setContentView(R.layout.dialog_pause)
 
         val ip = WindowManager.LayoutParams()
@@ -283,10 +282,10 @@ class PlayGameActivity : AppCompatActivity() {
         val BtnYes = dialog.findViewById<Button>(R.id.BtnYes)
         val BtnRestart = dialog.findViewById<Button>(R.id.BtnRestart)
 
-        Pause()
+        pause()
         BtnNo.setOnClickListener{
             dialog.dismiss()
-            StartCountTime()
+            startCountTime()
 
         }
 
@@ -296,7 +295,7 @@ class PlayGameActivity : AppCompatActivity() {
 
         BtnRestart.setOnClickListener {
             dialog.dismiss()
-            RestartGame()
+            restartGame()
         }
 
         dialog.show()
@@ -304,7 +303,7 @@ class PlayGameActivity : AppCompatActivity() {
 
 
     //Restart Game
-    private fun RestartGame(){
+    private fun restartGame(){
         count=0
         TimePause=0
         NewTime=0
@@ -312,14 +311,14 @@ class PlayGameActivity : AppCompatActivity() {
         binding.TextCountPoint.setText("ពិន្ទុ : $Newpoint/100")
         getQuestion()
         currentQuestion = ListQuestion.get(index)
-        ShowQuestion()
-        StartCountTime()
-        AfterClick()
+        showQuestion()
+        startCountTime()
+        afterClick()
     }
 
     //Show correct answer
-    private fun ShowIncorrect(){
-        Pause()
+    private fun showIncorrect(){
+        pause()
         dialog.setContentView(R.layout.dialog_incorrect)
 
         val ip = WindowManager.LayoutParams()
@@ -333,7 +332,7 @@ class PlayGameActivity : AppCompatActivity() {
         val TextAnwser = dialog.findViewById<TextView>(R.id.TextAnswer)
         TextAnwser.setText(currentQuestion.Answer)
         BtnOk.setOnClickListener {
-            StartCountTime()
+            startCountTime()
             dialog.dismiss()
         }
 
@@ -343,14 +342,14 @@ class PlayGameActivity : AppCompatActivity() {
 
 
     //Start Count Time
-    private fun StartCountTime(){
+    private fun startCountTime(){
         binding.TextTime.format="រយះពេល : %s"
         binding.TextTime.base = SystemClock.elapsedRealtime()-TimePause
         binding.TextTime.start()
     }
 
     //Pause count time
-    private fun Pause(){
+    private fun pause(){
         binding.TextTime.stop()
         TimePause = (SystemClock.elapsedRealtime() - binding.TextTime.base.toLong()).toInt()
         NewTime = (SystemClock.elapsedRealtime() - binding.TextTime.base )
@@ -358,7 +357,7 @@ class PlayGameActivity : AppCompatActivity() {
 
 
     //Update point
-    private fun UpdatePoint(newPoint:Long,newTime:Long , oldPoint:Long,oldTime: Long){
+    private fun updatePoint(newPoint:Long, newTime:Long, oldPoint:Long, oldTime: Long){
         val map :HashMap<String,String> = HashMap()
         map.put("Name",Name)
         map.put("ID",ID)
@@ -378,7 +377,7 @@ class PlayGameActivity : AppCompatActivity() {
         }
     }
 
-    private fun OnClickcardA(){
+    private fun onClickcardA(){
         binding.CardA.setBackgroundColor(getColor(R.color.primary))
         binding.CardB.setBackgroundColor(getColor(R.color.white))
         binding.CardC.setBackgroundColor(getColor(R.color.white))
@@ -402,7 +401,7 @@ class PlayGameActivity : AppCompatActivity() {
         Answer = binding.TextOptionB.text.toString()
     }
 
-    private fun OnClickcardC(){
+    private fun onClickcardC(){
         binding.CardC.setBackgroundColor(getColor(R.color.primary))
         binding.CardB.setBackgroundColor(getColor(R.color.white))
         binding.CardA.setBackgroundColor(getColor(R.color.white))
@@ -414,7 +413,7 @@ class PlayGameActivity : AppCompatActivity() {
         Answer = binding.TextOptionC.text.toString()
     }
 
-    private fun AfterClick(){
+    private fun afterClick(){
         binding.CardC.setBackgroundColor(getColor(R.color.white))
         binding.CardB.setBackgroundColor(getColor(R.color.white))
         binding.CardA.setBackgroundColor(getColor(R.color.white))
