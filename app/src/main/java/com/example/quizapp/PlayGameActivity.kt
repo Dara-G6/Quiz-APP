@@ -1,6 +1,7 @@
 package com.example.quizapp
 
 import android.app.Dialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
@@ -250,7 +251,12 @@ class PlayGameActivity : AppCompatActivity() {
 
         val BtnShare = dialog.findViewById<Button>(R.id.BtnShare)
         BtnShare.setOnClickListener {
-
+           val intent = Intent().apply {
+               this.action = Intent.ACTION_SEND
+               this.putExtra(Intent.EXTRA_TEXT,"Hi")
+               this.type="text/pain link"
+           }
+            startActivity(intent)
         }
 
 
