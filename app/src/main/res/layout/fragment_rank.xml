@@ -45,6 +45,7 @@
         android:id="@+id/menu"
         android:layout_height="wrap_content"
         android:elevation="24dp"
+        style="@style/menu"
         app:itemTextAppearanceActive="@style/menu"
         app:menu="@menu/menu_rank"/>
 

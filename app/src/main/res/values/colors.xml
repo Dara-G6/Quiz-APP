@@ -15,6 +15,6 @@
 
     <style name="menu">
         <item name="android:fontFamily">@font/odormeanchey</item>
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">18dp</item>
     </style>
 </resources>
