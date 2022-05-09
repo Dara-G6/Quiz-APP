@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         app:menu="@menu/menu"
         android:id="@+id/menu"
-        app:itemTextAppearanceActive="@style/TextAppearance.AppCompat.Menu"
+        app:itemTextAppearanceActive="@style/menu"
         android:layout_height="wrap_content"
         android:layout_weight="0.5" />
 
