@@ -114,23 +114,25 @@ class PlayGameActivity : AppCompatActivity() {
     // get question
     private fun getQuestion(){
         ListQuestion = ArrayList<Question>()
-        if (intent.getStringExtra("TypeGame").toString().equals("Math")){
-            var m = MathQuestion()
-            index =r.nextInt(m.getAllQuestions().size-10)
-            ListQuestion = m.getAllQuestions()
-            binding.TextQuestion.textSize= 22F
-            binding.TextType.setText(R.string.math)
-        }else if(intent.getStringExtra("TypeGame").toString().equals("Science")){
-            var s = ScienceQuestion()
-            index=r.nextInt(s.getAllQuestions().size-10)
-            ListQuestion = s.getAllQuestions()
-            binding.TextQuestion.textSize= 22F
-            binding.TextType.setText(R.string.science)
-        }else{
-            var g = GeneralQuestion()
-            ListQuestion = g.getAllQuestions()
-            binding.TextType.setText(R.string.general_knowledge)
-            binding.TextQuestion.textSize= 22F
+        when {
+            intent.getStringExtra("TypeGame").toString().equals("Math") -> {
+                val m = MathQuestion()
+                index =r.nextInt(m.getAllQuestions().size-10)
+                ListQuestion = m.getAllQuestions()
+                binding.TextType.setText(R.string.math)
+            }
+            intent.getStringExtra("TypeGame").toString().equals("Science") -> {
+                val s = ScienceQuestion()
+                index=r.nextInt(s.getAllQuestions().size-10)
+                ListQuestion = s.getAllQuestions()
+                binding.TextType.setText(R.string.science)
+            }
+            else -> {
+                val g = GeneralQuestion()
+                index=r.nextInt(g.getAllQuestions().size-10)
+                ListQuestion = g.getAllQuestions()
+                binding.TextType.setText(R.string.general_knowledge)
+            }
         }
         currentQuestion = ListQuestion.get(index)
     }

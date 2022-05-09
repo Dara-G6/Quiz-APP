@@ -5,7 +5,7 @@ import kotlin.random.Random
 class MathQuestion {
 
     public  fun getAllQuestions():ArrayList<Question>{
-        var list = ArrayList<Question>()
+        val list = ArrayList<Question>()
         //
         list.add(Question(
             "ចូរគណនាកន្សោមខាងក្រោម\n" +

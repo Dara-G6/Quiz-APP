@@ -75,6 +75,7 @@
             android:fontFamily="@font/odormeanchey"
             android:textColor="@color/blue"
             android:textSize="16dp"
+            android:layout_marginLeft="24dp"
             android:textStyle="bold" />
         <TextView
             android:layout_width="0dp"

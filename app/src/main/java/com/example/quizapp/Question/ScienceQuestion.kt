@@ -5,7 +5,7 @@ import kotlin.random.Random
 
 class ScienceQuestion {
     public fun getAllQuestions():ArrayList<Question>{
-        var list = ArrayList<Question>()
+        val list = ArrayList<Question>()
 
         //
         list.add(
