@@ -344,7 +344,7 @@ class PlayGameActivity : AppCompatActivity() {
 
     //Start Count Time
     private fun startCountTime(){
-        binding.TextTime.format="រយះពេល : %s"
+        binding.TextTime.format="${getString(R.string.time)} : %s"
         binding.TextTime.base = SystemClock.elapsedRealtime()-TimePause
         binding.TextTime.start()
     }
