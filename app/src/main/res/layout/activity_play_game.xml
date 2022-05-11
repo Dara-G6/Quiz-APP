@@ -64,7 +64,7 @@
             android:textSize="18dp"
             android:layout_marginRight="6dp"
             android:id="@+id/TextCountPoint"
-            android:text="ពិន្ទុ : 0/100"
+            android:text="@string/start_point"
             android:fontFamily="@font/odormeanchey"
             android:textAlignment="textEnd"
             android:textColor="@color/black"
@@ -78,7 +78,7 @@
             android:fontFamily="@font/odormeanchey"
             android:textColor="@color/black"
             android:textAlignment="center"
-            android:text="សំណួរ"/>
+            android:text="@string/question"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -157,7 +157,7 @@
             android:layout_marginRight="20dp"
             android:layout_height="wrap_content"
             android:id="@+id/BtnNext"
-            android:text="បន្ទាប់"
+            android:text="@string/next"
             android:fontFamily="@font/odormeanchey"
             android:textStyle="bold"
             android:textAllCaps="false"

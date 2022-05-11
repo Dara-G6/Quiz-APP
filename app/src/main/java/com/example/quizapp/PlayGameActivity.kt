@@ -159,7 +159,7 @@ class PlayGameActivity : AppCompatActivity() {
             }
             afterClick()
         }
-        binding.TextCountPoint.setText("ពិន្ទុ :$Newpoint/100")
+        binding.TextCountPoint.setText("${getString(R.string.score)}:$Newpoint/100")
     }
 
     //set question to text view
@@ -167,7 +167,7 @@ class PlayGameActivity : AppCompatActivity() {
         var random = r.nextInt(6)
 
          Log.d("Random ",random.toString())
-         binding.TextCountQuestion.setText("សំណួរ : ${count+1}/10")
+         binding.TextCountQuestion.setText("${getString(R.string.question)} : ${count+1}/10")
          binding.TextQuestion.setText( currentQuestion.Question)
          if (random==0){
              //C B A
@@ -309,7 +309,7 @@ class PlayGameActivity : AppCompatActivity() {
         TimePause=0
         NewTime=0
         Newpoint=0
-        binding.TextCountPoint.setText("ពិន្ទុ : $Newpoint/100")
+        binding.TextCountPoint.setText("${getString(R.string.score)} : $Newpoint/100")
         getQuestion()
         currentQuestion = ListQuestion.get(index)
         showQuestion()

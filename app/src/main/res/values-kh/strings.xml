@@ -68,5 +68,6 @@
     <string name="you">អ្នក</string>
     <string name="sec">វិនាទី</string>
     <string name="message">សួរស្តី! សូមជួយតម្លើងកម្មវិធីមួយនេះ។</string>
-
+    <string name="question">សំណួរ</string>
+    <string name="start_point">ពិន្ទុ : 0/100</string>
 </resources>

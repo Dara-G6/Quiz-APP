@@ -69,6 +69,8 @@
     <string name="you">You</string>
     <string name="sec">Sec</string>
     <string name="message">Hi! Please help install this app.</string>
+    <string name="question">Question</string>
+    <string name="start_point">Point : 0/100</string>
 
 
 </resources>
