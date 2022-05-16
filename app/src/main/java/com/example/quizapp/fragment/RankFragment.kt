@@ -1,6 +1,7 @@
 package com.example.quizapp.fragment
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -66,42 +67,47 @@ class RankFragment : Fragment() {
         binding.TypeRank.setImageResource(R.drawable.math_rank)
         binding.TextRank.setText(R.string.math)
         val l = ArrayList<Rank>()
-        val database = FirebaseDatabase.getInstance().getReference("Math")
-        database.orderByChild("Point").get().addOnSuccessListener {
-            if (it.exists()) {
-                for (ds in it.children) {
-                    val ID = ds.child("ID").getValue().toString()
-                    val Name = ds.child("Name").getValue().toString()
-                    val Path = ds.child("Path").getValue().toString()
-                    val Point = ds.child("Point").getValue().toString()
-                    val Time = ds.child("Time").getValue().toString().toDouble() / 1000
+        Handler().postDelayed(
+            {
+                val database = FirebaseDatabase.getInstance().getReference("Math")
+                database.orderByChild("Point").get().addOnSuccessListener {
+                    if (it.exists()) {
+                        for (ds in it.children) {
+                            val ID = ds.child("ID").getValue().toString()
+                            val Name = ds.child("Name").getValue().toString()
+                            val Path = ds.child("Path").getValue().toString()
+                            val Point = ds.child("Point").getValue().toString()
+                            val Time = ds.child("Time").getValue().toString().toDouble() / 1000
 
-                    if (Time !=0.0 && Point.toString().toLong()!= 0L){
-                    l.add(
-                        Rank(
-                            ID,
-                            Name,
-                            Path,
-                            Point.toLong(),
-                            Time
-                        )
-                    )
+                            if (Time !=0.0 && Point.toString().toLong()!= 0L){
+                                l.add(
+                                    Rank(
+                                        ID,
+                                        Name,
+                                        Path,
+                                        Point.toLong(),
+                                        Time
+                                    )
+                                )
+                            }
+
+                        }
+
+                        l.sortBy {
+                            it.Time
+                        }
+                        l.sortByDescending {
+                            it.Point.toLong()
+                        }
+
+
+                        val adapter = AdaperRank(requireContext(), R.layout.adapter_rank, l)
+                        binding.ListMath.adapter = adapter
                     }
+                }}
+            ,0
+        )
 
-                }
-
-                l.sortBy {
-                    it.Time
-                }
-                l.sortByDescending {
-                    it.Point.toLong()
-                }
-
-
-                val adapter = AdaperRank(requireContext(), R.layout.adapter_rank, l)
-               binding.ListMath.adapter = adapter
-            }
-        }
 
     }
 
@@ -112,42 +118,47 @@ class RankFragment : Fragment() {
         binding.TypeRank.setImageResource(R.drawable.chemist_rank)
         binding.TextRank.setText(R.string.science)
         val l = ArrayList<Rank>()
-        val database = FirebaseDatabase.getInstance().getReference("Science")
-        database.get().addOnSuccessListener {
-            if (it.exists()) {
-                for (ds in it.children) {
-                    val ID = ds.child("ID").getValue().toString()
-                    val Name = ds.child("Name").getValue().toString()
-                    val Path = ds.child("Path").getValue().toString()
-                    val Point = ds.child("Point").getValue().toString()
-                    val Time = ds.child("Time").getValue().toString().toDouble() / 1000
+        Handler().postDelayed(
+            {
+                val database = FirebaseDatabase.getInstance().getReference("Science")
+                database.get().addOnSuccessListener {
+                    if (it.exists()) {
+                        for (ds in it.children) {
+                            val ID = ds.child("ID").getValue().toString()
+                            val Name = ds.child("Name").getValue().toString()
+                            val Path = ds.child("Path").getValue().toString()
+                            val Point = ds.child("Point").getValue().toString()
+                            val Time = ds.child("Time").getValue().toString().toDouble() / 1000
 
-                   if (Time != 0.0 && Point.toString().toLong() != 0L) {
-                        l.add(
-                            Rank(
-                                ID,
-                                Name,
-                                Path,
-                                Point.toLong(),
-                                Time
-                            )
-                        )
+                            if (Time != 0.0 && Point.toString().toLong() != 0L) {
+                                l.add(
+                                    Rank(
+                                        ID,
+                                        Name,
+                                        Path,
+                                        Point.toLong(),
+                                        Time
+                                    )
+                                )
+                            }
+
+                        }
+
+                        l.sortBy {
+                            it.Time
+                        }
+                        l.sortByDescending {
+                            it.Point.toLong()
+                        }
+
+
+                        val adapter = AdaperRank(requireContext(), R.layout.adapter_rank, l)
+                        binding.ListScience.adapter = adapter
                     }
+                }}
+        ,0
+        )
 
-               }
-
-                l.sortBy {
-                    it.Time
-                }
-                l.sortByDescending {
-                    it.Point.toLong()
-                }
-
-
-                val adapter = AdaperRank(requireContext(), R.layout.adapter_rank, l)
-                binding.ListScience.adapter = adapter
-            }
-        }
     }
 
     private fun OnSelectGeneral() {
@@ -157,44 +168,49 @@ class RankFragment : Fragment() {
         binding.TypeRank.setImageResource(R.drawable.general_rank)
         binding.TextRank.setText(R.string.general_knowledge)
         val l = ArrayList<Rank>()
-        val database = FirebaseDatabase.getInstance().getReference("General Knowledge")
-        database.get().addOnSuccessListener {
-            if (it.exists()) {
-                for (ds in it.children) {
-                    val ID = ds.child("ID").getValue().toString()
-                    val Name = ds.child("Name").getValue().toString()
-                    val Path = ds.child("Path").getValue().toString()
-                    val Point = ds.child("Point").getValue().toString()
-                    val Time = ds.child("Time").getValue().toString().toDouble() / 1000
+        Handler().postDelayed(
+            {
+                val database = FirebaseDatabase.getInstance().getReference("General Knowledge")
+                database.get().addOnSuccessListener {
+                    if (it.exists()) {
+                        for (ds in it.children) {
+                            val ID = ds.child("ID").getValue().toString()
+                            val Name = ds.child("Name").getValue().toString()
+                            val Path = ds.child("Path").getValue().toString()
+                            val Point = ds.child("Point").getValue().toString()
+                            val Time = ds.child("Time").getValue().toString().toDouble() / 1000
 
-                    if (Time != 0.0 && Point.toString().toLong() != 0L) {
-                        l.add(
-                            Rank(
-                                ID,
-                                Name,
-                                Path,
-                                Point.toLong(),
-                                Time
-                            )
-                        )
+                            if (Time != 0.0 && Point.toString().toLong() != 0L) {
+                                l.add(
+                                    Rank(
+                                        ID,
+                                        Name,
+                                        Path,
+                                        Point.toLong(),
+                                        Time
+                                    )
+                                )
+                            }
+
+                        }
+
+                        l.sortBy {
+                            it.Time
+                        }
+
+                        l.sortByDescending {
+                            it.Point.toLong()
+                        }
+
+
+                        val adapter = AdaperRank(requireContext(), R.layout.adapter_rank, l)
+                        binding.ListGeneral.adapter = adapter
                     }
 
-                }
 
-                l.sortBy {
-                    it.Time
-                }
+                }}
+        ,0
+        )
 
-                l.sortByDescending {
-                    it.Point.toLong()
-                }
-
-
-                val adapter = AdaperRank(requireContext(), R.layout.adapter_rank, l)
-               binding.ListGeneral.adapter = adapter
-            }
-
-
-        }
     }
 }
