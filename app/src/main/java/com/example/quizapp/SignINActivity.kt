@@ -4,16 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
 import com.example.quizapp.databinding.ActivitySignInBinding
 import com.example.quizapp.extensions.hideKeyboard
-import com.example.quizapp.toast.ShowMessage
+import com.example.quizapp.toast.showMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import java.util.*
 
 class SignINActivity : AppCompatActivity() {
 
@@ -35,7 +33,7 @@ class SignINActivity : AppCompatActivity() {
         //Button login
         binding.BtnLogin.setOnClickListener {
             hideKeyboard(binding.root)
-            Login()
+            login()
         }
 
         // Text view
@@ -65,7 +63,7 @@ class SignINActivity : AppCompatActivity() {
     }
 
     //Login user
-    private fun Login(){
+    private fun login(){
         if (!binding.TextEmail.text.toString().contains("@gmail.com")){
             binding.TextEmail.setError("Enter real email")
         }
@@ -83,11 +81,11 @@ class SignINActivity : AppCompatActivity() {
                     binding.SHOWPROGRESS.isVisible  = false
                     database.child(auth.uid.toString()).child("Login").setValue("Yes")
                     startActivity(Intent(this,HomePageActivity::class.java))
-                    Toast(this).ShowMessage("Login Success",this,R.drawable.tick)
+                    Toast(this).showMessage("Login Success",this,R.drawable.tick)
                 }else {
                     binding.Form.isVisible = true
                     binding.SHOWPROGRESS.isVisible = false
-                    Toast(this).ShowMessage("Error : ${it.exception}",this,R.drawable.x_mark)
+                    Toast(this).showMessage("Error : ${it.exception}",this,R.drawable.x_mark)
                 }
             }
         }

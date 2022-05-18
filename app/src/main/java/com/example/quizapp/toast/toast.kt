@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.example.quizapp.R
 import org.w3c.dom.Text
 
-fun Toast.ShowMessage(Message:String,context:Activity,icon:Int){
+fun Toast.showMessage(Message:String, context:Activity, icon:Int){
 
     val layout = context.layoutInflater.inflate(
         R.layout.toast_success,

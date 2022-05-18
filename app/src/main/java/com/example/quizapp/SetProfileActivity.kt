@@ -4,12 +4,11 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
 import com.example.quizapp.databinding.ActivitySetProfileBinding
 import com.example.quizapp.extensions.hideKeyboard
-import com.example.quizapp.toast.ShowMessage
+import com.example.quizapp.toast.showMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -50,17 +49,17 @@ class SetProfileActivity : AppCompatActivity() {
 
        binding.ProfileImage.setOnClickListener {
             hideKeyboard(binding.root)
-          ChooseImage()
+          chooseImage()
         }
 
 
        binding.BtnSet.setOnClickListener {
-            CheckInput()
+            checkInput()
         }
 
 
        binding.TextSkip.setOnClickListener {
-             SkipProfile()
+             skipProfile()
         }
 
 
@@ -78,14 +77,14 @@ class SetProfileActivity : AppCompatActivity() {
     }
 
 
-    private fun ChooseImage(){
-        var i : Intent = Intent(Intent.ACTION_PICK);
-        i.setType("image/*")
+    private fun chooseImage(){
+        val i : Intent = Intent(Intent.ACTION_PICK);
+        i.type = "image/*"
         startActivityForResult(i,PICK_IMAGE)
     }
 
     //Check Input User name
-    private fun CheckInput(){
+    private fun checkInput(){
         if (binding.TextUserName.text.toString().isEmpty()){
             binding.TextUserName.setError("Please Enter your name")
         }
@@ -93,15 +92,15 @@ class SetProfileActivity : AppCompatActivity() {
             binding.TextUserName.setError("Please Enter your full name")
         }
         else if (Path==null){
-              NoPhoto()
+              noPhoto()
         }
         else{
-            WithPhoto()
+            withPhoto()
         }
     }
 
     // case user just set name
-    private fun NoPhoto() {
+    private fun noPhoto() {
         binding.Form.isVisible = false
         binding.SHOWPROGRESS.isVisible = true
         storage.child("avatar.png").downloadUrl.addOnSuccessListener {
@@ -122,7 +121,7 @@ class SetProfileActivity : AppCompatActivity() {
                 if (it.isSuccessful) {
                     binding.Form.isVisible = true
                     binding.SHOWPROGRESS.isVisible = false
-                    Toast(this).ShowMessage("Setup profile Success",this,R.drawable.tick)
+                    Toast(this).showMessage("Setup profile Success",this,R.drawable.tick)
                     startActivity(Intent(this,HomePageActivity::class.java))
                 } else {
                     binding.Form.isVisible = true
@@ -134,7 +133,7 @@ class SetProfileActivity : AppCompatActivity() {
 
     }
     //case user set name and photo
-    private fun WithPhoto(){
+    private fun withPhoto(){
         val ID = auth.uid
        binding.Form.isVisible = false
         binding.SHOWPROGRESS.isVisible = true
@@ -157,19 +156,19 @@ class SetProfileActivity : AppCompatActivity() {
                         if (it.isSuccessful) {
                             binding.Form.isVisible = true
                             binding.SHOWPROGRESS.isVisible = false
-                            Toast(this).ShowMessage("Setup profile Success",this,R.drawable.tick)
+                            Toast(this).showMessage("Setup profile Success",this,R.drawable.tick)
                             startActivity(Intent(this,HomePageActivity::class.java))
                         } else {
                             binding.Form.isVisible = true
                             binding.SHOWPROGRESS.isVisible = false
-                            Toast(this).ShowMessage("Error : ${it.exception}",this,R.drawable.x_mark)
+                            Toast(this).showMessage("Error : ${it.exception}",this,R.drawable.x_mark)
                         }
                     }
                 }
             }else{
                 binding.Form.isVisible = true
                 binding.SHOWPROGRESS.isVisible = false
-                Toast(this).ShowMessage("Error : ${it.exception}",this,R.drawable.x_mark)
+                Toast(this).showMessage("Error : ${it.exception}",this,R.drawable.x_mark)
 
             }
         }
@@ -177,7 +176,7 @@ class SetProfileActivity : AppCompatActivity() {
     }
 
     //Case User skip set up profile
-    private fun SkipProfile(){
+    private fun skipProfile(){
         binding.Form.isVisible = false
         binding.SHOWPROGRESS.isVisible = true
         storage.child("avatar.png").downloadUrl.addOnSuccessListener {
@@ -199,12 +198,12 @@ class SetProfileActivity : AppCompatActivity() {
                 if (it.isSuccessful){
                     binding.Form.isVisible = true
                     binding.SHOWPROGRESS.isVisible =false
-                    Toast(this).ShowMessage("Setup profile Success",this,R.drawable.tick)
+                    Toast(this).showMessage("Setup profile Success",this,R.drawable.tick)
                     startActivity(Intent(this,HomePageActivity::class.java))
                 }else{
                     binding.Form.isVisible = true
                     binding.SHOWPROGRESS.isVisible =false
-                    Toast(this).ShowMessage("Error : ${it.exception}",this,R.drawable.x_mark)
+                    Toast(this).showMessage("Error : ${it.exception}",this,R.drawable.x_mark)
 
                 }
             }

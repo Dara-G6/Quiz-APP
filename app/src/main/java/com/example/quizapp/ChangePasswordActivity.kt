@@ -1,18 +1,16 @@
 package com.example.quizapp
 
-import android.app.Activity
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.core.view.isVisible
 import com.example.quizapp.databinding.ActivityChangePasswordBinding
 import com.example.quizapp.extensions.hideKeyboard
-import com.example.quizapp.toast.ShowMessage
+import com.example.quizapp.toast.showMessage
 import com.google.firebase.auth.*
 
 class ChangePasswordActivity : AppCompatActivity() {
@@ -44,7 +42,7 @@ class ChangePasswordActivity : AppCompatActivity() {
 
        binding.BtnSetNewPassword.setOnClickListener {
             hideKeyboard(binding.root)
-            CheckInput()
+            checkInput()
         }
 
 
@@ -56,23 +54,23 @@ class ChangePasswordActivity : AppCompatActivity() {
 
     }
 
-    private fun CheckInput() {
+    private fun checkInput() {
         if (binding.TextOldPassword.text.toString().isEmpty()
             || binding.TextNewPassword.text.toString().isEmpty()
             ||binding.TextNewConfirmPassword.text.toString().isEmpty()){
-            Toast(this).ShowMessage("Please Enter all the filed",this, R.drawable.close_red)
+            Toast(this).showMessage("Please Enter all the filed",this, R.drawable.close_red)
         }
         else if (!binding.TextNewConfirmPassword.text.toString().equals(binding.TextNewPassword.text.toString())){
            binding.TextNewConfirmPassword.setError("Confirm Password not match New Password")
         }
         else
         {
-            ShowDialog()
+            showDialog()
         }
     }
 
     //Ask user first
-    private fun ShowDialog(){
+    private fun showDialog(){
         dialog.setContentView(R.layout.dialog_changepassword)
 
         val ip = WindowManager.LayoutParams()
@@ -96,7 +94,7 @@ class ChangePasswordActivity : AppCompatActivity() {
         }
 
         BtnYes.setOnClickListener {
-           ChangePassword()
+           changePassword()
             dialog.dismiss()
         }
 
@@ -104,7 +102,7 @@ class ChangePasswordActivity : AppCompatActivity() {
 
     }
 
-    private fun ChangePassword(){
+    private fun changePassword(){
       binding.Form.isVisible = false
       binding.SHOWPROGRESS.isVisible = true
         user = auth.currentUser!!
@@ -119,12 +117,12 @@ class ChangePasswordActivity : AppCompatActivity() {
                 binding.SHOWPROGRESS.isVisible = false
                 user.updatePassword(binding.TextNewConfirmPassword.text.toString()).addOnCompleteListener {
                     if (it.isSuccessful){
-                        Toast(this).ShowMessage("Change Password success",this, R.drawable.tick)
+                        Toast(this).showMessage("Change Password success",this, R.drawable.tick)
 
                        binding.Form.isVisible = true
                        binding.SHOWPROGRESS.isVisible = false
                     }else{
-                        Toast(this).ShowMessage("Error :${it.exception}",this, R.drawable.close_red)
+                        Toast(this).showMessage("Error :${it.exception}",this, R.drawable.close_red)
                         binding.Form.isVisible = true
                         binding.SHOWPROGRESS.isVisible = false
                     }
@@ -132,7 +130,7 @@ class ChangePasswordActivity : AppCompatActivity() {
             }else{
                 binding.Form.isVisible = true
                 binding.SHOWPROGRESS.isVisible = false
-                Toast(this).ShowMessage("Error :${it.exception}",this, R.drawable.close_red)
+                Toast(this).showMessage("Error :${it.exception}",this, R.drawable.close_red)
             }
 
         }

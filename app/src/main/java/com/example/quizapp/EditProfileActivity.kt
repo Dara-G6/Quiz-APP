@@ -1,19 +1,17 @@
 package com.example.quizapp
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
-import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.core.view.isVisible
 import com.example.quizapp.databinding.ActivityEditProfileBinding
 import com.example.quizapp.extensions.hideKeyboard
-import com.example.quizapp.toast.ShowMessage
+import com.example.quizapp.toast.showMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -52,7 +50,7 @@ class EditProfileActivity : AppCompatActivity() {
 
 
        binding.BtnSet.setOnClickListener {
-            ShowDialog()
+            showDialog()
             hideKeyboard(binding.root)
         }
 
@@ -66,20 +64,20 @@ class EditProfileActivity : AppCompatActivity() {
 
 
        binding.ProfileImage.setOnClickListener {
-            ChooseImage()
+            chooseImage()
         }
 
 
 
         dialog = Dialog(this)
 
-        SetProfile()
+        setProfile()
     }
 
 
 
 
-    private fun CheckInput(){
+    private fun checkInput(){
         when {
             binding.TextUserName.text.toString().isEmpty() -> {
                 binding.TextUserName.setError("Please enter name")
@@ -90,19 +88,19 @@ class EditProfileActivity : AppCompatActivity() {
             Path==null -> {
                 binding.Form.isVisible = false
                 binding.SHOWPROGRESS.isVisible =true
-                NoPhoto()
+                noPhoto()
             }
             else -> {
                 binding.Form.isVisible = false
                 binding.SHOWPROGRESS.isVisible=true
-                WithPhoto()
+                withPhoto()
             }
         }
     }
 
 
     //Set profile
-    private fun SetProfile(){
+    private fun setProfile(){
         database.child(auth.uid.toString()).get().addOnSuccessListener {
             if (it.exists()){
                 val name = it.child("Name").value.toString()
@@ -114,7 +112,7 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     //No update photo
-    private fun NoPhoto(){
+    private fun noPhoto(){
         database.child(auth.uid.toString()).get().addOnSuccessListener {
             if (it.exists()){
                 binding.Form.isVisible = false
@@ -126,15 +124,15 @@ class EditProfileActivity : AppCompatActivity() {
                 map.put("Profile",path.toString())
                 database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>).addOnCompleteListener {
                     if (it.isSuccessful){
-                        UpdatePointMath(name,path)
-                        UpdatePointScience(name,path)
-                        UpdatePointGeneral(name,path)
+                        updatePointMath(name,path)
+                        updatePointScience(name,path)
+                        updatePointGeneral(name,path)
                         binding.Form.isVisible = true
                         binding.SHOWPROGRESS.isVisible =false
-                        Toast(this).ShowMessage("Setup new profile success",this, R.drawable.tick)
+                        Toast(this).showMessage("Setup new profile success",this, R.drawable.tick)
 
                     }else{
-                        Toast(this).ShowMessage("Error : ${it.exception}",this,R.drawable.x_mark)
+                        Toast(this).showMessage("Error : ${it.exception}",this,R.drawable.x_mark)
                         binding.Form.isVisible = true
                         binding.SHOWPROGRESS.isVisible =false
                     }
@@ -143,7 +141,7 @@ class EditProfileActivity : AppCompatActivity() {
         }
     }
     //Update Photo
-    private fun WithPhoto(){
+    private fun withPhoto(){
         storage.child(auth.uid.toString()).putFile(Path!!).addOnCompleteListener {
             binding.Form.isVisible = false
             binding.SHOWPROGRESS.isVisible =true
@@ -160,10 +158,10 @@ class EditProfileActivity : AppCompatActivity() {
                         if (it.isSuccessful){
                             binding.Form.isVisible = true
                             binding.SHOWPROGRESS.isVisible =false
-                            UpdatePointMath(name,path)
-                            UpdatePointScience(name,path)
-                            UpdatePointGeneral(name,path)
-                            Toast(this).ShowMessage("Setup new profile success",this, R.drawable.tick)
+                            updatePointMath(name,path)
+                            updatePointScience(name,path)
+                            updatePointGeneral(name,path)
+                            Toast(this).showMessage("Setup new profile success",this, R.drawable.tick)
                         }else{
                             Toast.makeText(this,"Error : ${it.exception}",Toast.LENGTH_LONG).show()
                             binding.Form.isVisible = true
@@ -172,7 +170,7 @@ class EditProfileActivity : AppCompatActivity() {
                     }
                 }
             }else{
-                Toast(this).ShowMessage("Error : ${it.exception}",this,R.drawable.x_mark)
+                Toast(this).showMessage("Error : ${it.exception}",this,R.drawable.x_mark)
                     binding.Form.isVisible = true
                     binding.SHOWPROGRESS.isVisible =false
             }
@@ -180,7 +178,7 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     //Update Username and picture in rank math
-    private fun UpdatePointMath(Name:String, Path:String){
+    private fun updatePointMath(Name:String, Path:String){
         val map = HashMap<String,String>()
         map.put("Name",Name)
         map.put("Path",Path)
@@ -214,7 +212,7 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     //Update Username and picture in rank science
-    private fun UpdatePointScience(Name:String, Path:String){
+    private fun updatePointScience(Name:String, Path:String){
         val map = HashMap<String,String>()
         map.put("Name",Name)
         map.put("Path",Path)
@@ -246,7 +244,7 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     //Update Username and picture in rank general
-    private fun UpdatePointGeneral(Name:String, Path:String){
+    private fun updatePointGeneral(Name:String, Path:String){
         val map = HashMap<String,String>()
         map.put("Name",Name)
         map.put("Path",Path)
@@ -277,17 +275,17 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
 
-    //Select photo from gellery
-    private fun ChooseImage(){
+    //Select photo from gallery
+    private fun chooseImage(){
         var i : Intent = Intent(Intent.ACTION_PICK);
-        i.setType("image/*")
+        i.type = "image/*"
         startActivityForResult(i,PICK_IMAGE)
     }
 
 
 
     //Ask user first
-    private fun ShowDialog(){
+    private fun showDialog(){
         dialog.setContentView(R.layout.dialog_ask)
         val ip = WindowManager.LayoutParams()
         ip.copyFrom(dialog.window!!.attributes)
@@ -309,7 +307,7 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
         BtnYes.setOnClickListener {
-            CheckInput()
+            checkInput()
             dialog.dismiss()
         }
 

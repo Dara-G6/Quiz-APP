@@ -3,14 +3,9 @@ package com.example.quizapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import com.example.quizapp.databinding.ActivitySettingBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -52,20 +47,20 @@ class SettingActivity : AppCompatActivity() {
 
 
        binding.BtnSetting.setOnClickListener {
-          SetSetting()
+          setSetting()
         }
 
-        SetCheckLanguage()
+        setCheckLanguage()
 
 
     }
 
     override fun onResume() {
         super.onResume()
-        SetCheckLanguage()
+        setCheckLanguage()
     }
 
-    private fun SetCheckLanguage(){
+    private fun setCheckLanguage(){
         database.child(auth.uid.toString()).get().addOnSuccessListener {
             if (it.exists()){
                 Language = it.child("Language").value.toString()
@@ -78,11 +73,11 @@ class SettingActivity : AppCompatActivity() {
         }
     }
 
-    private fun SetSetting(){
+    private fun setSetting(){
         val map = HashMap<String,String>()
         map.put("Language",Language)
         database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>)
-        SetCheckLanguage()
+        setCheckLanguage()
         getLang()
         startActivity(Intent(this,StartAppActivity::class.java))
     }

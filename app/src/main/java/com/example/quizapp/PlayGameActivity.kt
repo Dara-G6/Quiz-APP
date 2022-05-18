@@ -17,7 +17,7 @@ import com.example.quizapp.Question.MathQuestion
 import com.example.quizapp.Question.Question
 import com.example.quizapp.Question.ScienceQuestion
 import com.example.quizapp.databinding.ActivityPlayGameBinding
-import com.example.quizapp.toast.ShowMessage
+import com.example.quizapp.toast.showMessage
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlin.properties.Delegates
@@ -141,7 +141,7 @@ class PlayGameActivity : AppCompatActivity() {
     //play game
     private fun playGame(){
         if (Answer.equals("")){
-            Toast(this).ShowMessage("សូមជ្រើសរើសចម្លើយ",this, R.drawable.close_red)
+            Toast(this).showMessage("សូមជ្រើសរើសចម្លើយ",this, R.drawable.close_red)
         }else{
             if (currentQuestion.Answer.equals(Answer)){
                 Newpoint=Newpoint+10

@@ -12,7 +12,7 @@ import android.widget.*
 import androidx.core.view.isVisible
 import com.example.quizapp.*
 import com.example.quizapp.databinding.FragmentProfileTabBinding
-import com.example.quizapp.toast.ShowMessage
+import com.example.quizapp.toast.showMessage
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -163,7 +163,7 @@ class ProfileTabFragment : Fragment() {
 
         BtnYes.setOnClickListener {
             if (TextEmail.text.isEmpty()||TextPassword.text.isEmpty()){
-                Toast(activity).ShowMessage("Please Enter all the the filed", requireActivity()!!,R.drawable.close_red)
+                Toast(activity).showMessage("Please Enter all the the filed", requireActivity()!!,R.drawable.close_red)
             }else{
                 dialog.dismiss()
                 deleteUser(TextEmail.text.toString(),TextPassword.text.toString())
@@ -201,7 +201,7 @@ class ProfileTabFragment : Fragment() {
                 auth.currentUser!!.delete()
                 binding.Form.isVisible = true
                 binding.SHOWPROGRESS.isVisible = false
-                Toast(activity).ShowMessage("Delete account success", requireActivity()!!,
+                Toast(activity).showMessage("Delete account success", requireActivity()!!,
                     R.drawable.tick
                 )
                 Handler().postDelayed({
@@ -210,7 +210,7 @@ class ProfileTabFragment : Fragment() {
             }else{
                 binding.Form.isVisible = true
                 binding.SHOWPROGRESS.isVisible = false
-                Toast(activity).ShowMessage("Error : ${it.exception}", requireActivity()!!,R.drawable.close_red)
+                Toast(activity).showMessage("Error : ${it.exception}", requireActivity()!!,R.drawable.close_red)
             }
         }
 
