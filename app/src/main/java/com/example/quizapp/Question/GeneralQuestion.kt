@@ -6,7 +6,14 @@ import kotlin.random.Random
 class GeneralQuestion {
     public fun getAllQuestions():ArrayList<Question>{
         val list = ArrayList<Question>()
-
+        //
+        list.add(Question(
+            "តើប្រទេសប៉ូឡូញ  ស្ថិតនៅក្នុងទ្វីបអ្វី?"
+            ,"ទ្វីបអឺរ៉ុប"
+            ,"ទ្វីបអាស៊ី"
+            ,"ទ្វីបអាហ្វ្រិក"
+            ,"ទ្វីបអឺរ៉ុប"
+        ))
         //
         list.add(Question(
             "តើក្នុងចំណោម មហាសមុទ្រខាងក្រោមមួយណាដែលមានទំហំធំជាងគេ?"
