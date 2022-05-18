@@ -545,7 +545,7 @@ class ScienceQuestion {
         if (random ==0){
             list.reverse()
         }
-
+        Log.d("Size ",list.size.toString())
 
         return list
     }

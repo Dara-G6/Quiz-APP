@@ -28,9 +28,6 @@ import java.util.*
 class ProfileTabFragment : Fragment() {
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     // Fire base
     private lateinit var auth : FirebaseAuth
@@ -63,7 +60,7 @@ class ProfileTabFragment : Fragment() {
 
 
        binding.BtnLogout.setOnClickListener {
-                 Logout()
+                 logout()
         }
 
 
@@ -74,7 +71,7 @@ class ProfileTabFragment : Fragment() {
 
 
        binding.BtnDeleteAccount.setOnClickListener {
-          ShowDialog()
+          showDialog()
         }
 
 
@@ -125,7 +122,7 @@ class ProfileTabFragment : Fragment() {
     }
 
     //Logout user
-    private fun Logout(){
+    private fun logout(){
         database.child(auth.uid.toString()).child("Login").setValue("No")
         auth.signOut()
         binding.Form.isVisible = false
@@ -142,7 +139,7 @@ class ProfileTabFragment : Fragment() {
 
 
     //Show dialog delete account
-    private fun ShowDialog(){
+    private fun showDialog(){
         dialog.setContentView(R.layout.dialog_delete_account)
 
         val ip = WindowManager.LayoutParams()
@@ -169,7 +166,7 @@ class ProfileTabFragment : Fragment() {
                 Toast(activity).ShowMessage("Please Enter all the the filed", requireActivity()!!,R.drawable.close_red)
             }else{
                 dialog.dismiss()
-                DeleteUser(TextEmail.text.toString(),TextPassword.text.toString())
+                deleteUser(TextEmail.text.toString(),TextPassword.text.toString())
             }
         }
 
@@ -187,7 +184,7 @@ class ProfileTabFragment : Fragment() {
 
 
 
-    private fun DeleteUser(email:String,password:String){
+    private fun deleteUser(email:String, password:String){
         val user:FirebaseUser= auth.currentUser!!
         val credential:AuthCredential = EmailAuthProvider.
         getCredential(email,password)

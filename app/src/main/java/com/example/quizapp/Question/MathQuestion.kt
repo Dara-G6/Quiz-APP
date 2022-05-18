@@ -1,5 +1,6 @@
 package com.example.quizapp.Question
 
+import android.util.Log
 import kotlin.random.Random
 
 class MathQuestion {
@@ -492,7 +493,7 @@ class MathQuestion {
         }
 
 
-
+        Log.d("Size ",list.size.toString())
 
         return list
     }

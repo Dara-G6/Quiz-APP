@@ -67,8 +67,6 @@ class RankFragment : Fragment() {
         binding.TypeRank.setImageResource(R.drawable.math_rank)
         binding.TextRank.setText(R.string.math)
         val l = ArrayList<Rank>()
-        Handler().postDelayed(
-            {
                 val database = FirebaseDatabase.getInstance().getReference("Math")
                 database.orderByChild("Point").get().addOnSuccessListener {
                     if (it.exists()) {
@@ -104,9 +102,8 @@ class RankFragment : Fragment() {
                         val adapter = AdaperRank(requireContext(), R.layout.adapter_rank, l)
                         binding.ListMath.adapter = adapter
                     }
-                }}
-            ,0
-        )
+                }
+
 
 
     }
@@ -118,8 +115,7 @@ class RankFragment : Fragment() {
         binding.TypeRank.setImageResource(R.drawable.chemist_rank)
         binding.TextRank.setText(R.string.science)
         val l = ArrayList<Rank>()
-        Handler().postDelayed(
-            {
+
                 val database = FirebaseDatabase.getInstance().getReference("Science")
                 database.get().addOnSuccessListener {
                     if (it.exists()) {
@@ -155,9 +151,7 @@ class RankFragment : Fragment() {
                         val adapter = AdaperRank(requireContext(), R.layout.adapter_rank, l)
                         binding.ListScience.adapter = adapter
                     }
-                }}
-        ,0
-        )
+                }
 
     }
 
@@ -168,8 +162,7 @@ class RankFragment : Fragment() {
         binding.TypeRank.setImageResource(R.drawable.general_rank)
         binding.TextRank.setText(R.string.general_knowledge)
         val l = ArrayList<Rank>()
-        Handler().postDelayed(
-            {
+
                 val database = FirebaseDatabase.getInstance().getReference("General Knowledge")
                 database.get().addOnSuccessListener {
                     if (it.exists()) {
@@ -208,9 +201,6 @@ class RankFragment : Fragment() {
                     }
 
 
-                }}
-        ,0
-        )
-
+                }
     }
 }

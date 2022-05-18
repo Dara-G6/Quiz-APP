@@ -16,13 +16,13 @@
             android:exported="false" />
         <activity
             android:name=".SettingActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".PlayGameActivity"
-            android:exported="false" />
-        <activity
-            android:name=".test"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".ChangePasswordActivity"
             android:exported="false" />
