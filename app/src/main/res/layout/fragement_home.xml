@@ -9,7 +9,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -68,6 +69,7 @@
                 android:text="@string/math"
                 android:elevation="24dp"
                 android:padding="6dp"
+                android:tooltipText="@string/tip_math"
                 android:fontFamily="@font/odormeanchey"
                 android:id="@+id/BtnMath"
                 android:textSize="24dp"
@@ -84,6 +86,7 @@
                 android:elevation="24dp"
                 android:padding="6dp"
                 android:textSize="24dp"
+                android:tooltipText="@string/tip_science"
                 android:fontFamily="@font/odormeanchey"
                 android:id="@+id/BtnScience"
                 android:textAllCaps="false"
@@ -99,6 +102,7 @@
                 android:elevation="24dp"
                 android:textSize="24dp"
                 android:padding="6dp"
+                android:tooltipText="@string/tip_general"
                 android:fontFamily="@font/odormeanchey"
                 android:id="@+id/BtnGeneral"
                 android:textAllCaps="false"

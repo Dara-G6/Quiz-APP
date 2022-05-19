@@ -70,4 +70,7 @@
     <string name="message">សួរស្តី! សូមជួយតម្លើងកម្មវិធីមួយនេះ។</string>
     <string name="question">សំណួរ</string>
     <string name="start_point">ពិន្ទុ : 0/100</string>
+    <string name="tip_general">សំណួរទូទៅ</string>
+    <string name="tip_science">សំណួរវិទ្យាសាស្ត្រ</string>
+    <string name="tip_math">សំណួរគណនា</string>
 </resources>

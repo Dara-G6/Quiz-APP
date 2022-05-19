@@ -71,6 +71,9 @@
     <string name="message">Hi! Please help install this app.</string>
     <string name="question">Question</string>
     <string name="start_point">Point : 0/100</string>
+    <string name="tip_general">General Questions</string>
+    <string name="tip_science">Science Questions</string>
+    <string name="tip_math">Math Questions</string>
 
 
 </resources>

@@ -12,7 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.quizapp.PlayGameActivity
 import com.example.quizapp.R
-import com.example.quizapp.databinding.FragmentHomeBinding
+import com.example.quizapp.databinding.FragementHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -41,14 +41,14 @@ class HomeFragment : Fragment() {
     private lateinit var intent:Intent
 
     //binding
-    private lateinit var binding:FragmentHomeBinding
+    private lateinit var binding:FragementHomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragementHomeBinding.inflate(inflater, container, false)
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
@@ -105,7 +105,7 @@ class HomeFragment : Fragment() {
                     Name = name
                     ID = auth.uid.toString()
                     this.Path = Path
-                   binding.TextDisplayName.setText(name)
+                    binding.TextDisplayName.setText(name)
                     Picasso.get().load(Path).into(binding.ProfileImage)
                 }
             }
