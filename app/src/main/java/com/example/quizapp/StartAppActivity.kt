@@ -7,6 +7,7 @@ import android.os.Handler
 import android.util.Log
 import com.example.quizapp.Question.MathQuestion
 import com.example.quizapp.Question.ScienceQuestion
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -26,6 +27,8 @@ class StartAppActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
         startApp()
+
+
 
     }
 
@@ -69,7 +72,6 @@ class StartAppActivity : AppCompatActivity() {
                 val lang = it.child("Language").value.toString()
                 setLangToView(lang[0].toString()+lang[1].toString())
             }else{
-
                 setLangToView("en")
             }
         }

@@ -1,6 +1,7 @@
 <resources>
     <!--English -->
-    <string name="app_name">QuizApp</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="app_name" translatable="false">QuizApp</string>
     <string name="tabMath"><u>Math</u></string>
     <string name="tabScience"><u>Science</u></string>
     <string name="tabGeneral"><u>General</u></string>

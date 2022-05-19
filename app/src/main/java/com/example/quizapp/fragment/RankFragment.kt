@@ -14,6 +14,8 @@ import com.example.quizapp.R
 import com.example.quizapp.adapter.AdaperRank
 import com.example.quizapp.databinding.FragmentRankBinding
 import com.example.quizapp.dataclass.Rank
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
@@ -49,8 +51,7 @@ class RankFragment : Fragment() {
             true
         }
 
-
-            // OnSelectMath()
+        MobileAds.initialize(context)
 
         return binding.root
     }
@@ -61,6 +62,9 @@ class RankFragment : Fragment() {
         OnSelectMath()
     }
     private fun OnSelectMath() {
+
+        val request = AdRequest.Builder().build()
+        binding.AdView.loadAd(request)
         binding.ListScience.isVisible = false
         binding.ListGeneral.isVisible = false
         binding.ListMath.isVisible = true
@@ -109,6 +113,9 @@ class RankFragment : Fragment() {
     }
 
     private fun OnSelectScience() {
+
+        val request = AdRequest.Builder().build()
+        binding.AdView.loadAd(request)
         binding.ListScience.isVisible = true
         binding.ListGeneral.isVisible = false
         binding.ListMath.isVisible = false
@@ -156,6 +163,10 @@ class RankFragment : Fragment() {
     }
 
     private fun OnSelectGeneral() {
+
+        val request = AdRequest.Builder().build()
+        binding.AdView.loadAd(request)
+
         binding.ListScience.isVisible = false
         binding.ListGeneral.isVisible = true
         binding.ListMath.isVisible = false

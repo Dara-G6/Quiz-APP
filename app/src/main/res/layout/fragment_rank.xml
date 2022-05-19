@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:weightSum="10"
     tools:context=".fragment.RankFragment">
 
     <!--   Top bar     -->
@@ -48,7 +49,6 @@
         style="@style/menu"
         app:itemTextAppearanceActive="@style/menu"
         app:menu="@menu/menu_rank"/>
-
 
 
     <LinearLayout
@@ -97,15 +97,18 @@
             android:textSize="16dp"
             android:textStyle="bold"/>
     </LinearLayout>
+
     <ListView
+        android:id="@+id/ListMath"
+        android:layout_weight="9.5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ListMath" />
+        android:layout_height="0dp" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ListScience"
+        android:layout_weight="9.5"
         android:visibility="gone"
         />
 
@@ -113,8 +116,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ListGeneral"
+        android:layout_weight="9.5"
         android:visibility="gone"
         />
 
+    <com.google.android.gms.ads.AdView
+        android:layout_width="match_parent"
+        android:id="@+id/AdView"
+        app:adSize="SMART_BANNER"
+        android:layout_weight="0.5"
+        app:adUnitId="@string/banner_ad_unit_id"
+        android:layout_height="0dp"/>
 
 </LinearLayout>
