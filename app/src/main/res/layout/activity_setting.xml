@@ -53,7 +53,6 @@
               android:layout_margin="12dp"
               android:padding="12dp"
               android:fontFamily="@font/odormeanchey"
-              android:background="@color/brown"
               android:textSize="18dp"
               android:textStyle="bold"
               android:drawableLeft="@drawable/language_32"

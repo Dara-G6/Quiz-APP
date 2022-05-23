@@ -14,7 +14,7 @@ class SettingActivity : AppCompatActivity() {
 
 
     //
-    private  var Language :String=""
+    private  var language :String=""
     val auth = FirebaseAuth.getInstance()
     val database = FirebaseDatabase.getInstance().getReference("Users")
 
@@ -28,12 +28,12 @@ class SettingActivity : AppCompatActivity() {
 
        binding.English
            .setOnClickListener {
-            Language = binding.English.text.toString()
+            language = "Khmer"
         }
 
 
         binding.Khmer.setOnClickListener {
-            Language = binding.Khmer.text.toString()
+            language = "Khmer"
         }
 
 
@@ -63,8 +63,8 @@ class SettingActivity : AppCompatActivity() {
     private fun setCheckLanguage(){
         database.child(auth.uid.toString()).get().addOnSuccessListener {
             if (it.exists()){
-                Language = it.child("Language").value.toString()
-                if (Language.equals("English")){
+                language = it.child("Language").value.toString()
+                if (language.equals("English")){
                     binding.Language.check(R.id.English)
                 }else{
                     binding.Language.check(R.id.Khmer)
@@ -75,7 +75,7 @@ class SettingActivity : AppCompatActivity() {
 
     private fun setSetting(){
         val map = HashMap<String,String>()
-        map.put("Language",Language)
+        map.put("Language",language)
         database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>)
         setCheckLanguage()
         getLang()
@@ -86,7 +86,7 @@ class SettingActivity : AppCompatActivity() {
     private fun setLangToView(lang:String){
         val r = resources
         val dm = r.displayMetrics
-        var config = r.configuration
+        val config = r.configuration
         config.locale = Locale(lang.toLowerCase())
 
         r.updateConfiguration(config,dm)
