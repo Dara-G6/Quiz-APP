@@ -1,11 +1,22 @@
-package com.example.quizapp.Question
+package com.example.quizapp.question
 
 import android.util.Log
 import kotlin.random.Random
 
 class GeneralQuestion {
-    public fun getAllQuestions():ArrayList<Question>{
+    fun getAllQuestions():ArrayList<Question>{
         val list = ArrayList<Question>()
+
+        //
+        list.add(Question(
+            "តើក្នុងចំណោម ប្រទេសខាងក្រោមមួយណាដែលមិនមែនស្ថិតនៅក្នងទ្វីបអាសុី?"
+            ,"ប្រទេសនេប៉ាល់"
+            ,"ប្រទេសបង់ក្លាដែស"
+            ,"ប្រទេសអេស្ប៉ាញ"
+            ,"ប្រទេសអេស្ប៉ាញ"
+        ))
+
+
         //
         list.add(Question(
             "តើប្រទេសកេនយ៉ា  ស្ថិតនៅក្នុងទ្វីបអ្វី?"

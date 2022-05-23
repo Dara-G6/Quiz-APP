@@ -12,10 +12,10 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import com.example.quizapp.Question.GeneralQuestion
-import com.example.quizapp.Question.MathQuestion
-import com.example.quizapp.Question.Question
-import com.example.quizapp.Question.ScienceQuestion
+import com.example.quizapp.question.GeneralQuestion
+import com.example.quizapp.question.MathQuestion
+import com.example.quizapp.question.Question
+import com.example.quizapp.question.ScienceQuestion
 import com.example.quizapp.databinding.ActivityPlayGameBinding
 import com.example.quizapp.toast.showMessage
 import com.google.firebase.database.DatabaseReference
@@ -159,53 +159,53 @@ class PlayGameActivity : AppCompatActivity() {
             }
             afterClick()
         }
-        binding.TextCountPoint.setText("${getString(R.string.score)}:$Newpoint/100")
+        binding.TextCountPoint.text = "${getString(R.string.score)}:$Newpoint/100"
     }
 
     //set question to text view
     private fun showQuestion(){
-        var random = r.nextInt(6)
+        val random = r.nextInt(6)
 
          Log.d("Random ",random.toString())
-         binding.TextCountQuestion.setText("${getString(R.string.question)} : ${count+1}/10")
-         binding.TextQuestion.setText( currentQuestion.Question)
+        binding.TextCountQuestion.text = "${getString(R.string.question)} : ${count+1}/10"
+        binding.TextQuestion.text = currentQuestion.Question
          if (random==0){
              //C B A
-             binding.TextOptionA.setText( currentQuestion.OptionC)
-             binding.TextOptionB.setText( currentQuestion.OptionB)
-             binding.TextOptionC.setText( currentQuestion.OptionA)
+             binding.TextOptionA.text = currentQuestion.OptionC
+             binding.TextOptionB.text = currentQuestion.OptionB
+             binding.TextOptionC.text = currentQuestion.OptionA
          }
          if (random==1){
              //A C B
-             binding.TextOptionA.setText( currentQuestion.OptionA)
-             binding.TextOptionB.setText( currentQuestion.OptionC)
-             binding.TextOptionC.setText( currentQuestion.OptionB)
+             binding.TextOptionA.text = currentQuestion.OptionA
+             binding.TextOptionB.text = currentQuestion.OptionC
+             binding.TextOptionC.text = currentQuestion.OptionB
         }
          if (random==2){
              //A B C
-             binding.TextOptionA.setText( currentQuestion.OptionA)
-             binding.TextOptionB.setText( currentQuestion.OptionB)
-             binding.TextOptionC.setText( currentQuestion.OptionC)
+             binding.TextOptionA.text = currentQuestion.OptionA
+             binding.TextOptionB.text = currentQuestion.OptionB
+             binding.TextOptionC.text = currentQuestion.OptionC
         }
 
         if (random ==3){
             //C A B
-            binding.TextOptionA.setText( currentQuestion.OptionC)
-            binding.TextOptionB.setText( currentQuestion.OptionA)
-            binding.TextOptionC.setText( currentQuestion.OptionB)
+            binding.TextOptionA.text = currentQuestion.OptionC
+            binding.TextOptionB.text = currentQuestion.OptionA
+            binding.TextOptionC.text = currentQuestion.OptionB
         }
         if (random == 4){
             // B C A
-            binding.TextOptionA.setText( currentQuestion.OptionB)
-            binding.TextOptionB.setText( currentQuestion.OptionC)
-            binding.TextOptionC.setText( currentQuestion.OptionA)
+            binding.TextOptionA.text = currentQuestion.OptionB
+            binding.TextOptionB.text = currentQuestion.OptionC
+            binding.TextOptionC.text = currentQuestion.OptionA
         }
 
         if (random == 5){
             // B A C
-            binding.TextOptionA.setText( currentQuestion.OptionB)
-            binding.TextOptionB.setText( currentQuestion.OptionA)
-            binding.TextOptionC.setText( currentQuestion.OptionC)
+            binding.TextOptionA.text = currentQuestion.OptionB
+            binding.TextOptionB.text = currentQuestion.OptionA
+            binding.TextOptionC.text = currentQuestion.OptionC
         }
         count++
         index++
@@ -223,7 +223,7 @@ class PlayGameActivity : AppCompatActivity() {
         ip.gravity = Gravity.CENTER
         dialog.window!!.attributes=ip
 
-        var BtnRestart = dialog.findViewById<Button>(R.id.BtnRestart)
+        val BtnRestart = dialog.findViewById<Button>(R.id.BtnRestart)
         BtnRestart.setOnClickListener {
             dialog.dismiss()
             restartGame()
@@ -309,7 +309,7 @@ class PlayGameActivity : AppCompatActivity() {
         TimePause=0
         NewTime=0
         Newpoint=0
-        binding.TextCountPoint.setText("${getString(R.string.score)} : $Newpoint/100")
+        binding.TextCountPoint.text = "${getString(R.string.score)} : $Newpoint/100"
         getQuestion()
         currentQuestion = ListQuestion.get(index)
         showQuestion()

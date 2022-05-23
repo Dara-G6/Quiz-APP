@@ -1,24 +1,18 @@
 package com.example.quizapp.fragment
 
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import androidx.core.content.ContextCompat.getDrawable
 import androidx.core.view.isVisible
-import com.example.quizapp.Question.MathQuestion
 import com.example.quizapp.R
 import com.example.quizapp.adapter.AdaperRank
 import com.example.quizapp.databinding.FragmentRankBinding
 import com.example.quizapp.dataclass.Rank
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 
 
 class RankFragment : Fragment() {
@@ -51,7 +45,7 @@ class RankFragment : Fragment() {
             true
         }
 
-        MobileAds.initialize(context)
+        context?.let { MobileAds.initialize(it) }
 
         return binding.root
     }

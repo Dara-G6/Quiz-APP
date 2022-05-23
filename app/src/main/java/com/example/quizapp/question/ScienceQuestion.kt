@@ -1,10 +1,10 @@
-package com.example.quizapp.Question
+package com.example.quizapp.question
 
 import android.util.Log
 import kotlin.random.Random
 
 class ScienceQuestion {
-    public fun getAllQuestions():ArrayList<Question>{
+    fun getAllQuestions():ArrayList<Question>{
         val list = ArrayList<Question>()
 
         //

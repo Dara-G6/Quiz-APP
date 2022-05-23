@@ -3,11 +3,6 @@ package com.example.quizapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
-import com.example.quizapp.Question.MathQuestion
-import com.example.quizapp.Question.ScienceQuestion
-import com.google.android.gms.ads.MobileAds
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -59,7 +54,7 @@ class StartAppActivity : AppCompatActivity() {
     private fun setLangToView(lang:String){
         val r = resources
         val dm = r.displayMetrics
-        var config = r.configuration
+        val config = r.configuration
         config.locale = Locale(lang.toLowerCase())
         r.updateConfiguration(config,dm)
 
