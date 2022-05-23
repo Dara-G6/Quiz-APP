@@ -26,9 +26,8 @@ class SettingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-       binding.English
-           .setOnClickListener {
-            language = "Khmer"
+       binding.English.setOnClickListener {
+            language = "English"
         }
 
 

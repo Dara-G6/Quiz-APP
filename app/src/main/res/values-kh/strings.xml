@@ -26,12 +26,12 @@
     <string name="skip_for_now">ចាំពេលក្រោយ?</string>
     <string name="set_profile">កំណត់ព័ត៍មាន</string>
     <string name="sign_in">ចូលទៅ កាន់គណនី</string>
-    <string name="password">លេខសំងាត់</string>
-    <string name="forgot_password">ភ្លេច លេខសំងាត់?</string>
+    <string name="password">ពាក្យសំងាត់</string>
+    <string name="forgot_password">ភ្លេច ពាក្យសំងាត់?</string>
     <string name="register_here">ចុះឈ្មោះ នៅទីនេះ</string>
     <string name="don_t_have_account">មិនទាន់មាន គណនី?</string>
     <string name="sign_up">បង្កើត គណនី</string>
-    <string name="confirm_password">បញ្ជាក់ លេខសំងាត់</string>
+    <string name="confirm_password">បញ្ជាក់ ពាក្យសំងាត់</string>
     <string name="click_here">សូមចុចទីនេះ</string>
     <string name="already_have_account">មានគណនីរួចហើយ?</string>
     <string name="do_you_want_to_edit_your_profile">តើអ្នកចង់ កែប្រែព័ត៍មានមែនទេ?</string>
@@ -73,4 +73,5 @@
     <string name="tip_general">សំណួរទូទៅ</string>
     <string name="tip_science">សំណួរវិទ្យាសាស្ត្រ</string>
     <string name="tip_math">សំណួរគណនា</string>
+    <string name="for_everyone">សម្រាប់ទាំងអស់គ្នា!!</string>
 </resources>
