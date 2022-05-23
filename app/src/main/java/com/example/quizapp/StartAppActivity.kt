@@ -3,6 +3,7 @@ package com.example.quizapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -58,6 +59,8 @@ class StartAppActivity : AppCompatActivity() {
         config.locale = Locale(lang.toLowerCase())
         r.updateConfiguration(config,dm)
 
+        val textStart = findViewById<TextView>(R.id.TextStart)
+        textStart.text = getString(R.string.for_everyone)
 
     }
 

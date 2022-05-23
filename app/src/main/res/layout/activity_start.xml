@@ -23,6 +23,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:text="@string/for_everyone"
+        android:id="@+id/TextStart"
         android:textStyle="bold"
         android:textAlignment="center"
         android:textSize="24dp"

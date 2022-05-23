@@ -96,12 +96,12 @@ class ProfileTabFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         setProfile()
-        getLang()
+
     }
 
     override fun onResume() {
         super.onResume()
-        getLang()
+
     }
 
 
@@ -118,7 +118,7 @@ class ProfileTabFragment : Fragment() {
                 binding.TextDisplayName.setText(name)
             }
         }
-        getLang()
+
     }
 
     //Logout user
@@ -216,29 +216,7 @@ class ProfileTabFragment : Fragment() {
 
     }
 
-    // Set khmer or english
-    private fun setLangToView(lang:String){
-        val r = resources
-        val dm = r.displayMetrics
-        var config = r.configuration
-        config.locale = Locale(lang.toLowerCase())
 
-        r.updateConfiguration(config,dm)
-
-
-    }
-
-    private fun getLang(){
-        database.child(auth.uid.toString()).get().addOnSuccessListener {
-            if (it.exists()){
-                val lang = it.child("Language").value.toString()
-                setLangToView(lang[0].toString()+lang[1].toString())
-            }else{
-
-                setLangToView("en")
-            }
-        }
-    }
 
 
 
