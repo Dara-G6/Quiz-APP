@@ -47,27 +47,26 @@ class AdaperRank(context: Context, resource: Int, objects:ArrayList<
 
         //Image
         val ImageMedal = RankView.findViewById<ImageView>(R.id.ImageMedal)
-        if (position==0){
-            ImageMedal.setImageResource(R.drawable.medal1)
-        }
-        else if (position==1){
-            ImageMedal.setImageResource(R.drawable.medal2)
-        }else if (position==2){
-            ImageMedal.setImageResource(R.drawable.medal3)
-        }else{
-            ImageMedal.isVisible=false
+        when (position) {
+            0 -> {
+                ImageMedal.setImageResource(R.drawable.medal1)
+            }
+            1 -> {
+                ImageMedal.setImageResource(R.drawable.medal2)
+            }
+            2 -> {
+                ImageMedal.setImageResource(R.drawable.medal3)
+            }
+            else -> {
+                ImageMedal.isVisible=false
+            }
         }
 
         val ProfileImage = RankView.findViewById<ImageView>(R.id.ProfileImage)
         Picasso.get().load(List[position].Path).into(ProfileImage)
 
         if(List[position].ID ==auth.uid.toString()){
-            TextName.setText(context.getString(R.string.you))
-            TextName.setTextColor(context.getColor(R.color.white))
-            TextNo.setTextColor(context.getColor(R.color.white))
-            TextPoint.setTextColor(context.getColor(R.color.white))
-            TextTime.setTextColor(context.getColor(R.color.white))
-            RankView.setBackgroundColor(context.getColor(R.color.primary))
+            TextName.text = context.getString(R.string.you)
         }
 
         return RankView
