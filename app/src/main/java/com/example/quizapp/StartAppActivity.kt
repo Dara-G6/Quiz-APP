@@ -3,6 +3,7 @@ package com.example.quizapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -68,7 +69,11 @@ class StartAppActivity : AppCompatActivity() {
         database.child(auth.uid.toString()).get().addOnSuccessListener {
             if (it.exists()){
                 val lang = it.child("Language").value.toString()
-                setLangToView(lang[0].toString()+lang[1].toString())
+                if (lang=="Khmer"){
+                    setLangToView("kh")
+                }else{
+                    setLangToView("en")
+                }
             }else{
                 setLangToView("en")
             }

@@ -190,7 +190,7 @@ class ProfileTabFragment : Fragment() {
         getCredential(email,password)
         binding.Form.isVisible = false
         binding.SHOWPROGRESS.isVisible = true
-        binding.TextLoading.setText("Delete account..")
+        binding.TextLoading.text = "${getString(R.string.delete_account)}"
         user.reauthenticate(credential).addOnCompleteListener {
             if (it.isSuccessful){
                 database.child(auth.uid.toString()).removeValue()
@@ -201,7 +201,7 @@ class ProfileTabFragment : Fragment() {
                 auth.currentUser!!.delete()
                 binding.Form.isVisible = true
                 binding.SHOWPROGRESS.isVisible = false
-                Toast(activity).showMessage("Delete account success", requireActivity()!!,
+                Toast(activity).showMessage("${getString(R.string.delete_account_succeeded)}", requireActivity()!!,
                     R.drawable.tick
                 )
                 Handler().postDelayed({

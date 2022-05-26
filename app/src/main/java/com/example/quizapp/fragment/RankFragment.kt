@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.view.isVisible
 import com.example.quizapp.R
 import com.example.quizapp.adapter.AdaperRank
@@ -12,7 +13,10 @@ import com.example.quizapp.databinding.FragmentRankBinding
 import com.example.quizapp.dataclass.Rank
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class RankFragment : Fragment() {
@@ -46,7 +50,7 @@ class RankFragment : Fragment() {
         }
 
         context?.let { MobileAds.initialize(it) }
-
+        getLang()
         return binding.root
     }
 
@@ -103,12 +107,12 @@ class RankFragment : Fragment() {
                     }
                 }
 
+        getLang()
 
 
     }
 
     private fun OnSelectScience() {
-
         val request = AdRequest.Builder().build()
         binding.AdView.loadAd(request)
         binding.ListScience.isVisible = true
@@ -154,6 +158,7 @@ class RankFragment : Fragment() {
                         binding.ListScience.adapter = adapter
                     }
                 }
+        getLang()
 
     }
 
@@ -209,5 +214,33 @@ class RankFragment : Fragment() {
 
 
                 }
+        getLang()
+    }
+
+    // Set khmer or english
+    private fun setLangToView(lang:String){
+        val r = resources
+        val dm = r.displayMetrics
+        val config = r.configuration
+        config.locale = Locale(lang.toLowerCase())
+        r.updateConfiguration(config,dm)
+
+    }
+
+    private fun getLang(){
+        val auth = FirebaseAuth.getInstance()
+        val database = FirebaseDatabase.getInstance().getReference("Users")
+        database.child(auth.uid.toString()).get().addOnSuccessListener {
+            if (it.exists()){
+                val lang = it.child("Language").value.toString()
+                if (lang=="Khmer"){
+                    setLangToView("kh")
+                }else{
+                    setLangToView("en")
+                }
+            }else{
+                setLangToView("en")
+            }
+        }
     }
 }

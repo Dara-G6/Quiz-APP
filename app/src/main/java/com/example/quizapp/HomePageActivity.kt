@@ -47,21 +47,16 @@ class HomePageActivity : AppCompatActivity() {
         getLang()
     }
 
-    override fun onResume() {
-        super.onResume()
-        getLang()
-    }
+
 
 
     // Set khmer or english
     private fun setLangToView(lang:String){
         val r = resources
         val dm = r.displayMetrics
-        var config = r.configuration
+        val config = r.configuration
         config.locale = Locale(lang.toLowerCase())
-
         r.updateConfiguration(config,dm)
-
 
     }
 
@@ -71,9 +66,12 @@ class HomePageActivity : AppCompatActivity() {
         database.child(auth.uid.toString()).get().addOnSuccessListener {
             if (it.exists()){
                 val lang = it.child("Language").value.toString()
-                setLangToView(lang[0].toString()+lang[1].toString())
+                if (lang=="Khmer"){
+                    setLangToView("kh")
+                }else{
+                    setLangToView("en")
+                }
             }else{
-
                 setLangToView("en")
             }
         }

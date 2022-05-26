@@ -79,4 +79,5 @@
     <string name="edit_profile_succeeded">កែប្រែ ព័ត៍មានបានជោគជ័យ</string>
     <string name="change_password_succeeded">ប្តូរពាក្យសម្ងាត់បានជោគជ័យ</string>
     <string name="create_account">បង្កើតគណនី</string>
+    <string name="delete_account_succeeded">លុបគណនីបានជោគជ័យ</string>
 </resources>

@@ -81,6 +81,7 @@
     <string name="edit_profile_succeeded">Edit Profile Succeeded</string>
     <string name="change_password_succeeded">Change Password Succeeded</string>
     <string name="create_account">Create Account</string>
+    <string name="delete_account_succeeded">Delete Account Succeeded</string>
 
 
 </resources>
