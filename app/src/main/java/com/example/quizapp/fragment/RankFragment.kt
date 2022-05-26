@@ -75,7 +75,7 @@ class RankFragment : Fragment() {
                             val Point = ds.child("Point").getValue().toString()
                             val Time = ds.child("Time").getValue().toString().toDouble() / 1000
 
-                            if (Time !=0.0 && Point.toString().toLong()!= 0L){
+                            if (Time != 0.0 && Point.toString().toLong() != 0L) {
                                 l.add(
                                     Rank(
                                         ID,
@@ -97,7 +97,8 @@ class RankFragment : Fragment() {
                         }
 
 
-                        val adapter =AdaperRank(requireContext(),R.layout.adapter_rank,l)
+
+                        val adapter =AdaperRank(requireContext(),R.layout.adapter_rank, l)
                         binding.ListMath.adapter = adapter
                     }
                 }
@@ -149,7 +150,7 @@ class RankFragment : Fragment() {
                         }
 
 
-                        val adapter = AdaperRank(requireContext(),R.layout.adapter_rank,l)
+                        val adapter =AdaperRank(requireContext(),R.layout.adapter_rank, l)
                         binding.ListScience.adapter = adapter
                     }
                 }
@@ -201,7 +202,8 @@ class RankFragment : Fragment() {
                         }
 
 
-                        val adapter = AdaperRank(requireContext(),R.layout.adapter_rank,l)
+
+                        val adapter =AdaperRank(requireContext(),R.layout.adapter_rank, l)
                         binding.ListGeneral.adapter = adapter
                     }
 
