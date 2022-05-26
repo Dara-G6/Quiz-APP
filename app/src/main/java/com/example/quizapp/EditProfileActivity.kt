@@ -129,7 +129,7 @@ class EditProfileActivity : AppCompatActivity() {
                         updatePointGeneral(name,path)
                         binding.Form.isVisible = true
                         binding.SHOWPROGRESS.isVisible =false
-                        Toast(this).showMessage("Setup new profile success",this, R.drawable.tick)
+                        Toast(this).showMessage("${getString(R.string.edit_profile_succeeded)}",this, R.drawable.tick)
 
                     }else{
                         Toast(this).showMessage("Error : ${it.exception}",this,R.drawable.x_mark)

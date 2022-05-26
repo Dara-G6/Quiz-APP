@@ -65,11 +65,11 @@ class SignINActivity : AppCompatActivity() {
     //Login user
     private fun login(){
         if (!binding.TextEmail.text.toString().contains("@gmail.com")){
-            binding.TextEmail.setError("Enter real email")
+            binding.TextEmail.error = "Enter real email"
         }
         if (binding.TextEmail.text.toString().isEmpty() || binding.TextPassword.text.toString().isEmpty()){
-            binding.TextEmail.setError("Please Enter email")
-            binding.TextPassword.setError("Please Enter Password")
+            binding.TextEmail.error = "Please Enter email"
+            binding.TextPassword.error = "Please Enter Password"
         }
         else{
            binding.Form.isVisible = false
@@ -81,7 +81,7 @@ class SignINActivity : AppCompatActivity() {
                     binding.SHOWPROGRESS.isVisible  = false
                     database.child(auth.uid.toString()).child("Login").setValue("Yes")
                     startActivity(Intent(this,HomePageActivity::class.java))
-                    Toast(this).showMessage("Login Success",this,R.drawable.tick)
+                    Toast(this).showMessage("${getString(R.string.loginSucceeded)}",this,R.drawable.tick)
                 }else {
                     binding.Form.isVisible = true
                     binding.SHOWPROGRESS.isVisible = false
@@ -95,7 +95,7 @@ class SignINActivity : AppCompatActivity() {
     // Set khmer or english
     private fun setLangToView(lang:String){
         if (lang[0].toLowerCase()=='k')
-        binding.TextRegister.setText("ក")
+            binding.TextRegister.text = getString(R.string.register_here)
     }
 
     private fun getLang(){

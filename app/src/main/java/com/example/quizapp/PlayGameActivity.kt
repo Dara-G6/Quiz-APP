@@ -110,6 +110,10 @@ class PlayGameActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        showDialogPauseGame()
+    }
 
     // get question
     private fun getQuestion(){

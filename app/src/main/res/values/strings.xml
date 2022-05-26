@@ -76,6 +76,11 @@
     <string name="tip_science">Science Questions</string>
     <string name="tip_math">Math Questions</string>
     <string name="for_everyone">For Everyone!!</string>
+    <string name="createAccount">Create Account Succeeded</string>
+    <string name="loginSucceeded">Login Succeeded</string>
+    <string name="edit_profile_succeeded">Edit Profile Succeeded</string>
+    <string name="change_password_succeeded">Change Password Succeeded</string>
+    <string name="create_account">Create Account</string>
 
 
 </resources>

@@ -80,7 +80,7 @@ class SignUpActivity : AppCompatActivity() {
                    if (it.isSuccessful){
                       binding.Form.isVisible =true
                        binding.SHOWPROGRESS.isVisible = false
-                       Toast(this).showMessage("Create account success",this, R.drawable.tick)
+                       Toast(this).showMessage("${getString(R.string.createAccount)}",this, R.drawable.tick)
                        var i : Intent = Intent(this,SetProfileActivity::class.java)
                        i.putExtra("Email",email)
                        startActivity(i)

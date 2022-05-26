@@ -117,7 +117,7 @@ class ChangePasswordActivity : AppCompatActivity() {
                 binding.SHOWPROGRESS.isVisible = false
                 user.updatePassword(binding.TextNewConfirmPassword.text.toString()).addOnCompleteListener {
                     if (it.isSuccessful){
-                        Toast(this).showMessage("Change Password success",this, R.drawable.tick)
+                        Toast(this).showMessage("${getString(R.string.change_password_succeeded)}",this, R.drawable.tick)
 
                        binding.Form.isVisible = true
                        binding.SHOWPROGRESS.isVisible = false
