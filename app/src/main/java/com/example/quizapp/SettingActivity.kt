@@ -73,12 +73,15 @@ class SettingActivity : AppCompatActivity() {
     }
 
     private fun setSetting(){
-        val map = HashMap<String,String>()
-        map.put("Language",language)
-        database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>)
-        setCheckLanguage()
-        getLang()
-        startActivity(Intent(this,StartAppActivity::class.java))
+        if (language.isNotEmpty()){
+            val map = HashMap<String,String>()
+            map["Language"] = language
+            database.child(auth.uid.toString()).updateChildren(map as Map<String, Any>)
+            setCheckLanguage()
+            getLang()
+            startActivity(Intent(this,StartAppActivity::class.java))
+        }
+
     }
 
     // Set khmer or english

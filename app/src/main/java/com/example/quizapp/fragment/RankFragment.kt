@@ -224,6 +224,7 @@ class RankFragment : Fragment() {
         val config = r.configuration
         config.locale = Locale(lang.toLowerCase())
         r.updateConfiguration(config,dm)
+        binding.TextRank.text = getText(R.string.math)
 
     }
 
