@@ -138,7 +138,7 @@ class PlayGameActivity : AppCompatActivity() {
                 binding.TextType.setText(R.string.general_knowledge)
             }
         }
-        currentQuestion = ListQuestion.get(index)
+        currentQuestion = ListQuestion[index]
     }
 
 
