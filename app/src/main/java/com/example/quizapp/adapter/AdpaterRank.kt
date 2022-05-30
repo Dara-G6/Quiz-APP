@@ -63,6 +63,11 @@ class AdaperRank(context: Context, resource: Int, objects:ArrayList<
         Picasso.get().load(List[position].Path).into(ProfileImage)
 
         if(List[position].ID ==auth.uid.toString()){
+            rankView.setBackgroundColor(context.getColor(R.color.primary))
+            TextName.setTextColor(context.getColor(R.color.white))
+            TextNo.setTextColor(context.getColor(R.color.white))
+            TextPoint.setTextColor(context.getColor(R.color.white))
+            TextTime.setTextColor(context.getColor(R.color.white))
             TextName.text = context.getString(R.string.you)
         }
 
