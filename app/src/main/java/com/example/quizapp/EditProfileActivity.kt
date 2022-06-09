@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.WindowManager
 import android.widget.*
@@ -18,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
+import java.io.File
+import java.nio.file.FileSystems
 
 class EditProfileActivity : AppCompatActivity() {
 
@@ -86,6 +89,7 @@ class EditProfileActivity : AppCompatActivity() {
                 binding.TextUserName.setError("Please enter full name at least have 4 alphabets")
             }
             Path==null -> {
+
                 binding.Form.isVisible = false
                 binding.SHOWPROGRESS.isVisible =true
                 noPhoto()
@@ -322,6 +326,8 @@ class EditProfileActivity : AppCompatActivity() {
         if (data != null) {
             if (requestCode == PICK_IMAGE && resultCode == AppCompatActivity.RESULT_OK){
                 Path = data.data
+                val t = data.type.toString()
+                Log.d("Type ",Path.toString())
                 binding.ProfileImage.setImageURI(Path)
             }
         }
