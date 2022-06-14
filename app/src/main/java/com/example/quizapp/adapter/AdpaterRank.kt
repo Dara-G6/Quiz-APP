@@ -22,7 +22,6 @@ class AdaperRank(context: Context, resource: Int, objects:ArrayList<
     val C= context
     val auth = FirebaseAuth.getInstance()
 
-    @SuppressLint("ResourceAsColor")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
         val layoutInflater = C.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -55,7 +54,7 @@ class AdaperRank(context: Context, resource: Int, objects:ArrayList<
                 ImageMedal.setImageResource(R.drawable.medal3)
             }
             else -> {
-                ImageMedal.isVisible=false
+                Picasso.get().load("https").into(ImageMedal)
             }
         }
 
