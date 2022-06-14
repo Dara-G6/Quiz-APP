@@ -45,8 +45,8 @@ class BestScoreActivity : AppCompatActivity() {
                     val point = it.child("Point").value.toString()
                     val time  = it.child("Time").value.toString().toDouble()/1000
                 if (point!="0" && time!=0.0){
-                    binding.TextScoreMath.setText("${res.getText(R.string.score)}  : $point")
-                    binding.TextTimeMath.setText("${res.getText(R.string.time)}  : $time ${getString(R.string.sec)}")
+                    binding.TextScoreMath.text = "${res.getText(R.string.score)}  : $point"
+                    binding.TextTimeMath.text = "${res.getText(R.string.time)}  : $time ${getString(R.string.sec)}"
                 }else{
                     binding.TextScoreMath.visibility = View.GONE
                     binding.TextTimeMath.visibility = View.GONE
@@ -70,8 +70,8 @@ class BestScoreActivity : AppCompatActivity() {
                 val point = it.child("Point").value.toString()
                 val time  = it.child("Time").value.toString().toDouble()/1000
                 if (point!="0" && time!=0.0){
-                    binding.TextScoreScience.setText("${res.getText(R.string.score)}  : $point")
-                    binding.TextTimeScience.setText("${res.getText(R.string.time)}  : $time ${getString(R.string.sec)}")
+                    binding.TextScoreScience.text = "${res.getText(R.string.score)}  : $point"
+                    binding.TextTimeScience.text = "${res.getText(R.string.time)}  : $time ${getString(R.string.sec)}"
                 }else{
                     binding.TextScoreScience.visibility = View.GONE
                     binding.TextTimeScience.visibility = View.GONE
@@ -94,8 +94,8 @@ class BestScoreActivity : AppCompatActivity() {
                 val point = it.child("Point").value.toString()
                 val time  = it.child("Time").value.toString().toDouble()/1000
                 if (point!="0" && time!=0.0){
-                    binding.TextScoreGeneral.setText("${res.getText(R.string.score)}  : $point")
-                    binding.TextTimeGeneral.setText("${res.getText(R.string.time)}  : $time ${getString(R.string.sec)}")
+                    binding.TextScoreGeneral.text = "${res.getText(R.string.score)}  : $point"
+                    binding.TextTimeGeneral.text = "${res.getText(R.string.time)}  : $time ${getString(R.string.sec)}"
                 }else{
                     binding.TextScoreGeneral.visibility = View.GONE
                     binding.TextTimeGeneral.visibility = View.GONE

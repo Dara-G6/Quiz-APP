@@ -53,7 +53,7 @@ class SignINActivity : AppCompatActivity() {
         super.onStart()
         database.child(auth.uid.toString()).get().addOnSuccessListener {
             if (it.exists()) {
-                val l = it.child("Login").getValue().toString()
+                val l = it.child("Login").value.toString()
                 if (l == "Yes"){
                     startActivity(Intent(this,HomePageActivity::class.java))
                 }
