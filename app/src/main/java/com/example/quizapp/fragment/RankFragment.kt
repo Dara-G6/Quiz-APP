@@ -54,11 +54,11 @@ class RankFragment : Fragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.menu.selectedItemId=R.id.TabMath
-        OnSelectMath()
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        binding.menu.selectedItemId=R.id.TabMath
+//        OnSelectMath()
+//    }
     private fun OnSelectMath() {
 
         val request = AdRequest.Builder().build()
@@ -107,7 +107,7 @@ class RankFragment : Fragment() {
                     }
                 }
 
-        getLang()
+        //getLang()
 
 
     }
@@ -158,7 +158,7 @@ class RankFragment : Fragment() {
                         binding.ListScience.adapter = adapter
                     }
                 }
-        getLang()
+        //getLang()
 
     }
 
@@ -214,7 +214,7 @@ class RankFragment : Fragment() {
 
 
                 }
-        getLang()
+        //getLang()
     }
 
     // Set khmer or english
